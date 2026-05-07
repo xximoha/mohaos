@@ -2889,10 +2889,10 @@ body::before {
       <button class="modal-tab active" data-pane="content" onclick="switchPane('content')">Content</button>
       <button class="modal-tab" data-pane="schedule" onclick="switchPane('schedule')">Schedule</button>
       <button class="modal-tab" data-pane="production" onclick="switchPane('production')">Production</button>
-      <button class="modal-tab" data-pane="caption" onclick="switchPane('caption')">Caption</button>
-      <button class="modal-tab" data-pane="brand" onclick="switchPane('brand')">Brand</button>
-      <button class="modal-tab" data-pane="analytics" onclick="switchPane('analytics')">Stats</button>
-      <button class="modal-tab" data-pane="refs" onclick="switchPane('refs')">Refs</button>
+      <button class="modal-tab" data-pane="caption" onclick="switchPane('caption')" style="display:none">Caption</button>
+      <button class="modal-tab" data-pane="brand" onclick="switchPane('brand')" style="display:none">Brand</button>
+      <button class="modal-tab" data-pane="analytics" onclick="switchPane('analytics')" style="display:none">Stats</button>
+      <button class="modal-tab" data-pane="refs" onclick="switchPane('refs')" style="display:none">Refs</button>
       <button class="modal-tab" data-pane="notes" onclick="switchPane('notes')">Notes</button>
     </div>
 
@@ -2901,7 +2901,7 @@ body::before {
 
       <!-- PANE: Content -->
       <div class="modal-pane active" data-pane="content">
-        <div class="ai-panel">
+        <div class="ai-panel" style="display:none">
           <div class="ai-panel-title">✦ AI ASSISTANT</div>
           <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
             <button class="ai-btn" onclick="aiGenerateHooks()">
@@ -2945,10 +2945,10 @@ body::before {
           <div class="field-label">// DESCRIPTION</div>
           <div class="field-input-wrap">
             <button class="voice-btn" onclick="startVoiceInput('f-desc', this)" title="إملاء صوتي">🎤</button>
-            <textarea class="field-textarea" id="f-desc" placeholder="وش يصير في الفيديو من البداية للنهاية"></textarea>
+            <textarea class="field-textarea" id="f-desc" placeholder="وش يصير في الفيديو + النص اللي راح تقوله" style="min-height:140px"></textarea>
           </div>
         </div>
-        <div class="field-group">
+        <div class="field-group" style="display:none">
           <div class="field-label">// SCRIPT / النص</div>
           <textarea class="field-textarea" id="f-script" placeholder="النص اللي راح تقوله أو يطلع على الشاشة"></textarea>
         </div>
@@ -4254,8 +4254,11 @@ function openIdeaModal(id, defaultPlatform) {
   document.getElementById('f-id').value = idea.id;
   document.getElementById('f-title').value = idea.title || '';
   document.getElementById('f-hook').value = idea.hook || '';
-  document.getElementById('f-desc').value = idea.desc || '';
-  document.getElementById('f-script').value = idea.script || '';
+  // Merge desc + script visually (Script field is hidden)
+  const _d = (idea.desc || '').trim();
+  const _s = (idea.script || '').trim();
+  document.getElementById('f-desc').value = _d && _s ? (_d + '\n\n---\n\n' + _s) : (_d || _s);
+  document.getElementById('f-script').value = '';
   document.getElementById('f-shoot').value = idea.shoot || '';
   document.getElementById('f-shoot-date').value = idea.shootDate || '';
   document.getElementById('f-shoot-time').value = idea.shootTime || '';
@@ -4393,7 +4396,7 @@ function saveIdea() {
     title,
     hook: document.getElementById('f-hook').value.trim(),
     desc: document.getElementById('f-desc').value.trim(),
-    script: document.getElementById('f-script').value.trim(),
+    script: '',
     shoot: document.getElementById('f-shoot').value.trim(),
     location: getActiveTag('location'),
     difficulty: getActiveTag('difficulty'),
