@@ -1201,106 +1201,357 @@ body::before {
 }
 
 /* ================================================================
-   PRODUCTION VIEW
+   PRODUCTION SECTION — PREMIUM EDITORIAL
 ================================================================ */
-.prod-week-nav {
+.prod-section {
+  padding: 32px 20px 32px;
+  position: relative;
+  /* subtle border-top with gradient feel */
+  background: linear-gradient(180deg, transparent 0%, var(--bg) 8%, var(--bg) 100%);
+}
+.prod-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 20px;
+  right: 20px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--line2), transparent);
+}
+
+/* ─── HERO HEADER ─── */
+.prod-hero {
+  margin-bottom: 22px;
+}
+.prod-hero-top {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 16px 20px 12px;
+  margin-bottom: 14px;
   gap: 12px;
 }
-.prod-week-label {
+.prod-hero-tag {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.28em;
+  color: var(--muted);
+  text-transform: uppercase;
+  font-weight: 600;
+  direction: ltr;
+}
+.prod-week-toggle {
+  display: flex;
+  gap: 0;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 3px;
+}
+.prod-toggle-btn {
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  padding: 7px 13px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.prod-toggle-btn.active {
+  background: var(--ink);
+  color: var(--bg);
+}
+.prod-hero-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 14px;
+}
+.prod-hero-title {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 22px;
+  font-size: 56px;
+  letter-spacing: 0.01em;
+  line-height: 0.92;
+  color: var(--ink);
+  margin: 0;
+  font-weight: 400;
+}
+.prod-hero-title-accent {
+  background: linear-gradient(135deg, var(--ink) 0%, var(--muted) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-style: italic;
+  font-family: 'Fraunces', 'Bebas Neue', serif;
+  font-weight: 300;
+}
+.prod-week-nav-cluster {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 4px;
+}
+.prod-nav-btn {
+  width: 32px; height: 32px;
+  background: transparent;
+  border: none;
+  color: var(--ink);
+  font-size: 14px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.prod-nav-btn:hover {
+  background: var(--ink);
+  color: var(--bg);
+  transform: scale(1.08);
+}
+.prod-nav-btn:active { transform: scale(0.92); }
+.prod-week-display {
+  text-align: center;
+  padding: 0 6px;
+  min-width: 90px;
+}
+.prod-week-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 18px;
   letter-spacing: 0.04em;
   color: var(--ink);
+  line-height: 1;
+}
+.prod-week-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 0.18em;
+  color: var(--muted);
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+/* ─── STATS STRIP ─── */
+.prod-stats-strip {
+  display: flex;
+  align-items: stretch;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 14px 8px;
+  margin-bottom: 22px;
+  overflow: hidden;
+  position: relative;
+}
+.prod-stats-strip::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent 0%, rgba(255,255,255,0.02) 100%);
+  pointer-events: none;
+}
+.prod-stat {
   flex: 1;
   text-align: center;
+  padding: 0 8px;
+  position: relative;
+  z-index: 1;
+}
+.prod-stat-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 32px;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.prod-stat-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: var(--muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.prod-stat-bar {
+  height: 3px;
+  background: var(--surface2);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.prod-stat-bar-fill {
+  height: 100%;
+  background: var(--success);
+  border-radius: 999px;
+  transition: width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+  width: 0%;
+}
+.prod-stat-bar-fill.warn { background: #d68b3a; }
+.prod-stat-bar-fill.mute { background: var(--muted); opacity: 0.5; }
+.prod-stat-divider {
+  width: 1px;
+  background: var(--line);
+  margin: 4px 0;
+  position: relative;
+  z-index: 1;
+}
+
+/* ─── DAYS LIST ─── */
+.prod-days-wrap {
+  animation: fadeUp 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 .prod-days {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  padding: 8px 20px 24px;
+  margin-bottom: 24px;
 }
+
+/* Day Card — Premium Editorial */
 .prod-day {
+  position: relative;
   background: var(--surface);
   border: 1px solid var(--line);
-  border-radius: 18px;
-  padding: 16px;
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  border-radius: 20px;
+  padding: 18px 18px 16px;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
-.prod-day:hover {
-  border-color: var(--line2);
-  transform: translateY(-1px);
+.prod-day::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  background: linear-gradient(135deg, transparent 0%, transparent 50%, rgba(255,255,255,0.015) 100%);
+  pointer-events: none;
 }
-.prod-day.empty-day {
-  opacity: 0.55;
+.prod-day::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--accent-line, var(--line));
+  border-radius: 0 3px 3px 0;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
+[dir="rtl"] .prod-day::after { right: 0; border-radius: 3px 0 0 3px; }
+[dir="ltr"] .prod-day::after { left: 0; }
+
+/* Pillar accent colors via CSS var */
+.prod-day.c-maroon { --accent-line: #b87090; }
+.prod-day.c-green { --accent-line: #6b8a4a; }
+.prod-day.c-orange { --accent-line: #d68b3a; }
+.prod-day.c-lavender { --accent-line: #9886b8; }
+
 .prod-day.full-day {
-  border-color: var(--success);
-  background: linear-gradient(145deg, var(--surface), var(--surface2));
+  border-color: var(--accent-line);
+  box-shadow: 0 4px 24px -8px var(--accent-line);
 }
+.prod-day.full-day::after { width: 4px; }
 .prod-day.empty-pillar {
   border-style: dashed;
-  opacity: 0.65;
+  opacity: 0.92;
 }
+.prod-day.empty-day {
+  background: transparent;
+  border-style: dashed;
+  border-color: var(--line);
+  opacity: 0.55;
+}
+.prod-day.empty-day::after { display: none; }
+.prod-day:not(.empty-day):hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px -12px rgba(0,0,0,0.4);
+}
+
 .prod-day-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 12px;
-  gap: 10px;
+  margin-bottom: 14px;
+  gap: 12px;
+  position: relative;
+  z-index: 1;
 }
 .prod-day-left {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
 }
 .prod-day-num {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 36px;
+  font-size: 44px;
   letter-spacing: 0.02em;
-  line-height: 1;
+  line-height: 0.85;
   color: var(--ink);
-  min-width: 50px;
+  min-width: 52px;
+  position: relative;
 }
+.prod-day-num::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 18px;
+  height: 2px;
+  background: var(--accent-line, var(--ink));
+  border-radius: 1px;
+}
+[dir="rtl"] .prod-day-num::after { right: 0; left: auto; }
 .prod-day-info {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 3px;
 }
 .prod-day-name {
   font-family: 'IBM Plex Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 0.2em;
+  font-size: 9px;
+  letter-spacing: 0.22em;
   color: var(--muted);
   font-weight: 600;
+  text-transform: uppercase;
 }
 .prod-day-pillar {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 18px;
+  font-size: 20px;
   letter-spacing: 0.06em;
   color: var(--ink);
+  line-height: 1;
 }
 .prod-day-status {
   font-family: 'IBM Plex Mono', monospace;
   font-size: 9px;
   letter-spacing: 0.18em;
   font-weight: 600;
-  padding: 4px 8px;
+  padding: 5px 10px;
   border-radius: 999px;
   text-transform: uppercase;
+  border: 1px solid transparent;
 }
 .prod-day-status.ready {
-  background: rgba(102, 187, 106, 0.18);
+  background: rgba(102, 187, 106, 0.14);
   color: var(--success);
+  border-color: rgba(102, 187, 106, 0.3);
 }
 .prod-day-status.partial {
-  background: rgba(255, 167, 38, 0.18);
-  color: var(--c-orange, #ffa726);
+  background: rgba(214, 139, 58, 0.14);
+  color: #d68b3a;
+  border-color: rgba(214, 139, 58, 0.3);
 }
 .prod-day-status.empty {
   background: var(--surface2);
@@ -1310,148 +1561,304 @@ body::before {
   background: var(--surface2);
   color: var(--muted);
 }
+
+/* Collapse/Expand */
+.prod-day-header {
+  cursor: pointer;
+  user-select: none;
+}
+.prod-day-header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.prod-day-chevron {
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--surface2);
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  flex-shrink: 0;
+}
+.prod-day.expanded .prod-day-chevron {
+  transform: rotate(180deg);
+}
+.prod-day-summary {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  position: relative;
+  z-index: 1;
+  margin-top: 6px;
+}
+.prod-day-summary-text {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.prod-day.expanded .prod-day-summary {
+  display: none;
+}
+.prod-day-body {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.3s ease,
+              margin-top 0.4s ease;
+  margin-top: 0;
+}
+.prod-day.expanded .prod-day-body {
+  max-height: 2000px;
+  opacity: 1;
+  margin-top: 12px;
+}
+.prod-day.empty-day .prod-day-chevron,
+.prod-day.empty-day .prod-day-summary { display: none; }
+
+/* Progress bar with gradient */
 .prod-progress-bar {
-  height: 6px;
+  height: 4px;
   background: var(--surface2);
   border-radius: 999px;
   overflow: hidden;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
+  position: relative;
+  z-index: 1;
 }
 .prod-progress-fill {
   height: 100%;
-  background: var(--ink);
+  background: var(--accent-line, var(--ink));
   border-radius: 999px;
-  transition: width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  overflow: hidden;
 }
-.prod-day.c-maroon .prod-progress-fill { background: var(--c-maroon, #8b3a4a); }
-.prod-day.c-green .prod-progress-fill { background: var(--c-green, #6b8a4a); }
-.prod-day.c-orange .prod-progress-fill { background: var(--c-orange, #d68b3a); }
-.prod-day.c-lavender .prod-progress-fill { background: var(--c-lavender, #9886b8); }
+.prod-progress-fill::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  animation: shimmer 2.5s infinite;
+}
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
 .prod-progress-text {
   font-family: 'IBM Plex Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 0.12em;
+  font-size: 9px;
+  letter-spacing: 0.16em;
   color: var(--muted);
   font-weight: 600;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  position: relative;
+  z-index: 1;
 }
+
+/* Idea cards inside day */
 .prod-day-ideas {
   display: flex;
   flex-direction: column;
   gap: 6px;
-  margin-top: 10px;
+  position: relative;
+  z-index: 1;
 }
 .prod-mini-card {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   background: var(--bg);
   border: 1px solid var(--line);
-  border-radius: 10px;
-  padding: 8px 10px;
+  border-radius: 12px;
+  padding: 10px 12px;
   font-size: 12px;
   color: var(--ink);
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  overflow: hidden;
 }
+.prod-mini-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--accent-line, var(--line2));
+  opacity: 0.6;
+}
+[dir="rtl"] .prod-mini-card::before { right: 0; }
+[dir="ltr"] .prod-mini-card::before { left: 0; }
 .prod-mini-card:hover {
-  background: var(--surface2);
-  border-color: var(--line2);
+  background: var(--surface);
+  border-color: var(--accent-line, var(--line2));
+  transform: translateX(-2px);
 }
+[dir="ltr"] .prod-mini-card:hover { transform: translateX(2px); }
 .prod-mini-card.backup {
-  opacity: 0.7;
+  opacity: 0.72;
   border-style: dashed;
 }
 .prod-mini-card-num {
   font-family: 'IBM Plex Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 0.1em;
+  font-size: 9px;
+  letter-spacing: 0.12em;
   color: var(--muted);
-  font-weight: 600;
+  font-weight: 700;
   min-width: 22px;
+  text-transform: uppercase;
 }
 .prod-mini-card-title {
   flex: 1;
-  font-size: 12px;
-  line-height: 1.3;
+  font-size: 12.5px;
+  font-weight: 500;
+  line-height: 1.35;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  color: var(--ink);
 }
 .prod-empty-slot {
   background: transparent;
   border: 1px dashed var(--line2);
-  border-radius: 10px;
-  padding: 8px 10px;
-  font-size: 11px;
+  border-radius: 12px;
+  padding: 9px 12px;
+  font-size: 10px;
   color: var(--muted);
   text-align: center;
   font-family: 'IBM Plex Mono', monospace;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.18em;
+  font-weight: 600;
+  text-transform: uppercase;
+  opacity: 0.7;
 }
+
+/* Backup section divider */
+.prod-backup-divider {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 12px 0 8px;
+  position: relative;
+  z-index: 1;
+}
+.prod-backup-divider-line {
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+}
+.prod-backup-divider-text {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 0.2em;
+  color: var(--muted);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+/* Rest day decoration */
 .prod-day-rest {
   text-align: center;
   font-family: 'IBM Plex Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 0.18em;
+  font-size: 9px;
+  letter-spacing: 0.22em;
   color: var(--muted);
-  padding: 14px 0 4px;
+  padding: 10px 0 2px;
   font-weight: 600;
+  text-transform: uppercase;
+  position: relative;
+  z-index: 1;
 }
+
+/* ─── BACKLOG ─── */
 .prod-backlog-section {
-  border-top: 1px solid var(--line);
-  padding: 24px 20px 40px;
-  margin-top: 12px;
+  margin-top: 28px;
 }
 .prod-backlog-header {
-  margin-bottom: 16px;
-}
-.prod-backlog-title {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 32px;
-  letter-spacing: 0.04em;
-  color: var(--ink);
-  margin-bottom: 4px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 14px;
 }
 .prod-backlog-sub {
   font-family: 'IBM Plex Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 0.18em;
+  font-size: 9px;
+  letter-spacing: 0.22em;
   color: var(--muted);
   font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+  direction: ltr;
+}
+.prod-backlog-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 36px;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  line-height: 0.95;
+}
+.prod-backlog-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, var(--line2), transparent);
+  margin-bottom: 8px;
+  max-width: 80px;
 }
 .prod-backlog-tabs {
   display: flex;
   gap: 6px;
-  margin-bottom: 14px;
+  margin-bottom: 16px;
   flex-wrap: wrap;
 }
 .prod-pillar-group {
-  margin-bottom: 18px;
+  margin-bottom: 22px;
 }
 .prod-pillar-group-title {
   font-family: 'IBM Plex Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 0.2em;
+  font-size: 9px;
+  letter-spacing: 0.22em;
   color: var(--muted);
   font-weight: 600;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
   text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.prod-pillar-group-title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--line);
 }
 .prod-backlog-card {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   background: var(--surface);
   border: 1px solid var(--line);
-  border-radius: 12px;
-  padding: 12px 14px;
+  border-radius: 14px;
+  padding: 13px 14px;
   margin-bottom: 8px;
-  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 .prod-backlog-card:hover {
   background: var(--surface2);
   border-color: var(--line2);
+  transform: translateY(-1px);
 }
 .prod-backlog-card-content {
   flex: 1;
@@ -1478,7 +1885,7 @@ body::before {
   color: var(--bg);
   border: none;
   border-radius: 999px;
-  padding: 8px 14px;
+  padding: 9px 16px;
   font-family: 'Cairo', sans-serif;
   font-size: 12px;
   font-weight: 600;
@@ -1486,18 +1893,160 @@ body::before {
   transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
   white-space: nowrap;
   flex-shrink: 0;
+  letter-spacing: 0.02em;
 }
-.prod-schedule-btn:hover {
-  transform: scale(1.05);
-}
-.prod-schedule-btn:active {
-  transform: scale(0.95);
-}
+.prod-schedule-btn:hover { transform: scale(1.06); box-shadow: 0 4px 16px -4px var(--ink); }
+.prod-schedule-btn:active { transform: scale(0.95); }
 .prod-empty-state {
-  padding: 40px 20px;
+  padding: 36px 20px;
   text-align: center;
   color: var(--muted);
-  font-size: 13px;
+  font-size: 12px;
+  font-family: 'IBM Plex Mono', monospace;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-weight: 600;
+  border: 1px dashed var(--line);
+  border-radius: 16px;
+}
+
+/* When CAL view is active, hide the days list */
+body.prod-view-cal .prod-days-wrap {
+  display: none;
+}
+body.prod-view-cal .cal-section {
+  animation: fadeUp 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+body.prod-view-week .cal-section {
+  display: none;
+}
+
+
+/* ================================================================
+   SCHEDULE PICKER MODAL
+================================================================ */
+.schedule-picker-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 1000;
+  display: none;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 20px;
+}
+.schedule-picker-overlay.show {
+  display: flex;
+  animation: fadeIn 0.25s ease-out;
+}
+.schedule-picker {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 24px 24px 16px 16px;
+  width: 100%;
+  max-width: 460px;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  animation: spSlideUp 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+@keyframes spSlideUp {
+  from { transform: translateY(40px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+.sp-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 20px 22px 14px;
+  border-bottom: 1px solid var(--line);
+  gap: 12px;
+}
+.sp-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px;
+  letter-spacing: 0.03em;
+  color: var(--ink);
+  margin-bottom: 4px;
+  line-height: 1.2;
+}
+.sp-sub {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  color: var(--muted);
+  font-weight: 600;
+}
+.sp-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 14px 18px 22px;
+  overflow-y: auto;
+}
+.sp-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 14px 16px;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  gap: 12px;
+}
+.sp-option:hover:not(.disabled) {
+  background: var(--surface2);
+  border-color: var(--ink);
+  transform: translateY(-1px);
+}
+.sp-option:active:not(.disabled) { transform: scale(0.98); }
+.sp-option.disabled { opacity: 0.4; cursor: not-allowed; }
+.sp-option-left {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.sp-option-day {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px;
+  letter-spacing: 0.03em;
+  color: var(--ink);
+  line-height: 1.1;
+}
+.sp-option-date {
+  font-size: 12px;
+  color: var(--muted);
+  font-family: 'Cairo', sans-serif;
+}
+.sp-option-status {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  font-weight: 600;
+  padding: 6px 10px;
+  border-radius: 999px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.sp-option-status.empty {
+  background: rgba(102, 187, 106, 0.18);
+  color: var(--success);
+}
+.sp-option-status.partial {
+  background: rgba(255, 167, 38, 0.18);
+  color: #ffa726;
+}
+.sp-option-status.backup {
+  background: rgba(184, 112, 144, 0.18);
+  color: #b87090;
+}
+.sp-option-status.full {
+  background: var(--surface2);
+  color: var(--muted);
 }
 
 /* Modal tabs */
@@ -1510,11 +2059,6 @@ body::before {
   border-bottom: 1px solid var(--line);
 }
 .modal-tabs::-webkit-scrollbar { display: none; }
-
-/* Advanced mode toggle — when body lacks .advanced-on, hide everything tagged .advanced-only */
-body:not(.advanced-on) .advanced-only {
-  display: none !important;
-}
 .modal-tab {
   background: transparent;
   border: none;
@@ -2962,18 +3506,9 @@ body:not(.advanced-on) .advanced-only {
   </div>
 
   <div class="settings-menu" id="settingsMenu">
-    <div class="menu-item" onclick="openProductionView()" style="font-weight:700">⚿ Production · جدول التصوير</div>
+    <div class="menu-item" onclick="openSettingsPanel()" style="font-weight:700">⚙ الإعدادات</div>
     <div class="menu-divider"></div>
-    <div class="menu-item" onclick="openSettingsPanel()" style="font-weight:700">⚙ الإعدادات + AI</div>
-    <div class="menu-divider"></div>
-    <div class="menu-item advanced-only" onclick="openAIBatch()">✦ AI · أنشئ ٤ أفكار للأسبوع</div>
-    <div class="menu-item advanced-only" onclick="openBrandPipeline()">⚏ Brand Pipeline</div>
-    <div class="menu-divider advanced-only"></div>
     <div class="menu-item" onclick="toggleBulkMode()">☷ Bulk Mode (تحديد متعدد)</div>
-    <div class="menu-item advanced-only" onclick="openTemplatesBank()">⊕ مكتبة التمبلتات</div>
-    <div class="menu-item advanced-only" onclick="openCaptionLib()">✎ مكتبة الكابشنز</div>
-    <div class="menu-item advanced-only" onclick="openHashtagSets()"># مجموعات الهاشتاقات</div>
-    <div class="menu-item advanced-only" onclick="openBrandsLib()">★ البراندات</div>
     <div class="menu-divider"></div>
     <div class="menu-item" onclick="exportData()">↓ تصدير البيانات</div>
     <div class="menu-item" onclick="document.getElementById('importFile').click()">↑ استيراد</div>
@@ -3039,8 +3574,82 @@ body:not(.advanced-on) .advanced-only {
 
   <div class="home-cards-section" id="homeCards"></div>
 
-  <!-- Calendar -->
-  <div class="cal-section">
+  <!-- ════════════════════════════════════════════════════════
+       PRODUCTION SECTION — Premium Editorial
+       ════════════════════════════════════════════════════════ -->
+  <div class="prod-section">
+    <!-- Hero Header -->
+    <div class="prod-hero reveal">
+      <div class="prod-hero-top">
+        <div class="prod-hero-tag" id="prodHeroTag">// PRODUCTION · WEEKLY SHOOT</div>
+        <div class="prod-week-toggle">
+          <button class="prod-toggle-btn active" data-prod-view="week" onclick="setProdView('week')">PROD</button>
+          <button class="prod-toggle-btn" data-prod-view="month" onclick="setProdView('month')">CAL</button>
+        </div>
+      </div>
+      <div class="prod-hero-title-row">
+        <h2 class="prod-hero-title">SHOOT<br><span class="prod-hero-title-accent">SCHEDULE</span></h2>
+        <div class="prod-week-nav-cluster">
+          <button class="prod-nav-btn" onclick="changeProdWeek(-1)">‹</button>
+          <div class="prod-week-display">
+            <div class="prod-week-num" id="prodWeekNum">W19</div>
+            <div class="prod-week-label" id="prodWeekLabel">هذا الأسبوع</div>
+          </div>
+          <button class="prod-nav-btn" onclick="changeProdWeek(1)">›</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats Strip -->
+    <div class="prod-stats-strip reveal d1">
+      <div class="prod-stat">
+        <div class="prod-stat-num" id="prodReady">0</div>
+        <div class="prod-stat-label">جاهز</div>
+        <div class="prod-stat-bar"><div class="prod-stat-bar-fill" id="prodReadyBar"></div></div>
+      </div>
+      <div class="prod-stat-divider"></div>
+      <div class="prod-stat">
+        <div class="prod-stat-num" id="prodPending">0</div>
+        <div class="prod-stat-label">ناقص</div>
+        <div class="prod-stat-bar"><div class="prod-stat-bar-fill warn" id="prodPendingBar"></div></div>
+      </div>
+      <div class="prod-stat-divider"></div>
+      <div class="prod-stat">
+        <div class="prod-stat-num" id="prodBacklog">0</div>
+        <div class="prod-stat-label">backlog</div>
+        <div class="prod-stat-bar"><div class="prod-stat-bar-fill mute" style="width:100%"></div></div>
+      </div>
+    </div>
+
+    <!-- Days List (Production view) -->
+    <div class="prod-days-wrap" id="prodDaysWrap">
+      <div class="prod-days reveal d2" id="prodDays"></div>
+
+      <!-- Backlog -->
+      <div class="prod-backlog-section reveal d3">
+        <div class="prod-backlog-header">
+          <div>
+            <div class="prod-backlog-sub">// IDEAS · UNSCHEDULED</div>
+            <div class="prod-backlog-title">BACKLOG</div>
+          </div>
+          <div class="prod-backlog-line"></div>
+        </div>
+        <div class="prod-backlog-tabs">
+          <div class="filter-pill active" data-prod-pillar="all" onclick="setProdBacklogFilter('all')">All</div>
+          <div class="filter-pill" data-prod-pillar="style" onclick="setProdBacklogFilter('style')">Style</div>
+          <div class="filter-pill" data-prod-pillar="food" onclick="setProdBacklogFilter('food')">Food</div>
+          <div class="filter-pill" data-prod-pillar="fitness" onclick="setProdBacklogFilter('fitness')">Fitness</div>
+          <div class="filter-pill" data-prod-pillar="skincare" onclick="setProdBacklogFilter('skincare')">Skincare</div>
+        </div>
+        <div id="prodBacklogList"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════════
+       CALENDAR SECTION
+       ════════════════════════════════════════════════════════ -->
+  <div class="cal-section" id="calSectionWrap">
     <div class="cal-section-sub reveal">// MONTHLY OVERVIEW</div>
     <div class="cal-section-title reveal d1">CALENDAR</div>
 
@@ -3148,45 +3757,6 @@ body:not(.advanced-on) .advanced-only {
 </div>
 
 <!-- ============ ANALYTICS VIEW ============ -->
-<!-- ============ PRODUCTION VIEW ============ -->
-<div class="view" id="view-production">
-  <div class="platform-hero">
-    <div class="ph-left">
-      <div class="ph-tag">// PRODUCTION CALENDAR</div>
-      <h2 class="ph-title">PRODUCTION</h2>
-      <div class="ph-stats">
-        <span><span class="num" id="prodReady">0</span> جاهز</span>
-        <span><span class="num" id="prodPending">0</span> ناقص</span>
-        <span><span class="num" id="prodBacklog">0</span> BACKLOG</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="prod-week-nav">
-    <button class="cal-nav-btn" onclick="changeProdWeek(-1)">‹</button>
-    <div class="prod-week-label" id="prodWeekLabel">هذا الأسبوع</div>
-    <button class="cal-nav-btn" onclick="changeProdWeek(1)">›</button>
-  </div>
-
-  <div class="prod-days" id="prodDays"></div>
-
-  <div class="prod-backlog-section">
-    <div class="prod-backlog-header">
-      <div class="prod-backlog-title">BACKLOG</div>
-      <div class="prod-backlog-sub">// أفكار بلا يوم تصوير — اضغط لجدولتها</div>
-    </div>
-    <div class="prod-backlog-tabs">
-      <div class="filter-pill active" data-pillar="all" onclick="setProdBacklogFilter('all')">All</div>
-      <div class="filter-pill" data-pillar="style" onclick="setProdBacklogFilter('style')">Style</div>
-      <div class="filter-pill" data-pillar="food" onclick="setProdBacklogFilter('food')">Food</div>
-      <div class="filter-pill" data-pillar="fitness" onclick="setProdBacklogFilter('fitness')">Fitness</div>
-      <div class="filter-pill" data-pillar="skincare" onclick="setProdBacklogFilter('skincare')">Skincare</div>
-    </div>
-    <div id="prodBacklogList"></div>
-  </div>
-</div>
-
-<!-- ============ ANALYTICS VIEW ============ -->
 <div class="view" id="view-analytics">
   <div class="platform-hero">
     <div class="ph-left">
@@ -3217,44 +3787,29 @@ body:not(.advanced-on) .advanced-only {
       <button class="modal-tab active" data-pane="content" onclick="switchPane('content')">Content</button>
       <button class="modal-tab" data-pane="schedule" onclick="switchPane('schedule')">Schedule</button>
       <button class="modal-tab" data-pane="production" onclick="switchPane('production')">Production</button>
-      <button class="modal-tab advanced-only" data-pane="caption" onclick="switchPane('caption')">Caption</button>
-      <button class="modal-tab advanced-only" data-pane="brand" onclick="switchPane('brand')">Brand</button>
-      <button class="modal-tab advanced-only" data-pane="analytics" onclick="switchPane('analytics')">Stats</button>
-      <button class="modal-tab advanced-only" data-pane="refs" onclick="switchPane('refs')">Refs</button>
       <button class="modal-tab" data-pane="notes" onclick="switchPane('notes')">Notes</button>
     </div>
 
     <div class="modal-body">
       <input type="hidden" id="f-id">
+      <!-- Hidden fields kept for backwards data compatibility -->
+      <input type="hidden" id="f-script" value="">
+      <input type="hidden" id="f-caption" value="">
+      <input type="hidden" id="f-hashtags" value="">
+      <input type="hidden" id="f-brand" value="">
+      <input type="hidden" id="f-revenue" value="0">
+      <input type="hidden" id="f-deadline" value="">
+      <input type="hidden" id="f-brand-notes" value="">
+      <input type="hidden" id="f-views" value="0">
+      <input type="hidden" id="f-likes" value="0">
+      <input type="hidden" id="f-saves" value="0">
+      <input type="hidden" id="f-shares" value="0">
+      <input type="hidden" id="f-comments" value="0">
+      <input type="hidden" id="f-followers" value="0">
+      <input type="hidden" id="f-learnings" value="">
 
       <!-- PANE: Content -->
       <div class="modal-pane active" data-pane="content">
-        <div class="ai-panel advanced-only">
-          <div class="ai-panel-title">✦ AI ASSISTANT</div>
-          <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
-            <button class="ai-btn" onclick="aiGenerateHooks()">
-              <span class="spark">✦</span>
-              <span>اقترح Hooks</span>
-            </button>
-            <button class="ai-btn" onclick="aiGenerateScript()">
-              <span class="spark">✦</span>
-              <span>اكتب Script</span>
-            </button>
-            <button class="ai-btn" onclick="aiGenerateCaption()">
-              <span class="spark">✦</span>
-              <span>اكتب Caption</span>
-            </button>
-            <button class="ai-btn" onclick="aiSmartHashtags()">
-              <span class="spark">✦</span>
-              <span>اقترح Hashtags</span>
-            </button>
-            <div class="ai-loading" id="aiLoading" style="display:none">
-              <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-              <span>جاري التفكير...</span>
-            </div>
-          </div>
-          <div class="ai-results" id="aiResults"></div>
-        </div>
         <div class="field-group">
           <div class="field-label">// TITLE</div>
           <div class="field-input-wrap">
@@ -3275,10 +3830,6 @@ body:not(.advanced-on) .advanced-only {
             <button class="voice-btn" onclick="startVoiceInput('f-desc', this)" title="إملاء صوتي">🎤</button>
             <textarea class="field-textarea" id="f-desc" placeholder="وش يصير في الفيديو من البداية للنهاية"></textarea>
           </div>
-        </div>
-        <div class="field-group advanced-only">
-          <div class="field-label">// SCRIPT / النص</div>
-          <textarea class="field-textarea" id="f-script" placeholder="النص اللي راح تقوله أو يطلع على الشاشة"></textarea>
         </div>
         <div class="field-group">
           <div class="field-label">// SHOOT DETAILS</div>
@@ -3390,123 +3941,6 @@ body:not(.advanced-on) .advanced-only {
         </div>
       </div>
 
-      <!-- PANE: Caption -->
-      <div class="modal-pane" data-pane="caption">
-        <div class="field-group">
-          <div class="field-label">// CAPTION · الكابشن</div>
-          <textarea class="field-textarea" id="f-caption" placeholder="الكابشن النهائي للنشر"></textarea>
-        </div>
-        <div class="field-group">
-          <div class="field-label">// FROM CAPTION LIBRARY</div>
-          <div class="lib-section" style="padding: 10px 12px">
-            <div class="lib-items" id="captionLibQuick"></div>
-          </div>
-        </div>
-        <div class="field-group">
-          <div class="field-label">// HASHTAGS</div>
-          <textarea class="field-textarea" id="f-hashtags" placeholder="#fitness #abudhabi #lifestyle..." style="min-height: 60px"></textarea>
-        </div>
-        <div class="field-group">
-          <div class="field-label">// FROM HASHTAG SETS</div>
-          <div class="lib-section" style="padding: 10px 12px">
-            <div class="lib-items" id="hashtagSetsQuick"></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- PANE: Brand -->
-      <div class="modal-pane" data-pane="brand">
-        <div class="field-group">
-          <div class="field-label">// BRAND DEAL · براند</div>
-          <input type="text" class="field-input" id="f-brand" placeholder="مثلاً: Eyezel, Earth Roots, adidas...">
-        </div>
-        <div class="field-row">
-          <div class="field-group">
-            <div class="field-label">// REVENUE (AED)</div>
-            <input type="number" class="field-input" id="f-revenue" placeholder="0" style="text-align:left;direction:ltr">
-          </div>
-          <div class="field-group">
-            <div class="field-label">// DEADLINE</div>
-            <input type="date" class="sched-input" id="f-deadline" style="width:100%">
-          </div>
-        </div>
-        <div class="field-group">
-          <div class="field-label">// STAGE · مرحلة الديل</div>
-          <div class="tag-picker" id="tp-brandStage">
-            <div class="tag-pick" data-val="inquiry" onclick="pickTag('brandStage','inquiry')">تواصل أولي</div>
-            <div class="tag-pick" data-val="negotiating" onclick="pickTag('brandStage','negotiating')">تفاوض</div>
-            <div class="tag-pick" data-val="production" onclick="pickTag('brandStage','production')">إنتاج</div>
-            <div class="tag-pick" data-val="review" onclick="pickTag('brandStage','review')">مراجعة</div>
-            <div class="tag-pick" data-val="paid" onclick="pickTag('brandStage','paid')">مدفوع</div>
-          </div>
-        </div>
-        <div class="field-group">
-          <div class="field-label">// TIER · التصنيف</div>
-          <div class="tag-picker" id="tp-tier">
-            <div class="tag-pick" data-val="personal" onclick="pickTag('tier','personal')">شخصي</div>
-            <div class="tag-pick" data-val="tier2" onclick="pickTag('tier','tier2')">Tier 2 إقليمي</div>
-            <div class="tag-pick" data-val="tier1" onclick="pickTag('tier','tier1')">Tier 1 عالمي</div>
-          </div>
-        </div>
-        <div class="field-group">
-          <div class="field-label">// BRAND NOTES</div>
-          <textarea class="field-textarea" id="f-brand-notes" placeholder="متطلبات البراند، النقاط المهمة..."></textarea>
-        </div>
-      </div>
-
-      <!-- PANE: Analytics -->
-      <div class="modal-pane" data-pane="analytics">
-        <div class="metric-card">
-          <div class="metric-label">// PERFORMANCE METRICS</div>
-          <div class="metric-grid">
-            <div>
-              <div class="field-label" style="margin-bottom:4px">VIEWS</div>
-              <input type="number" class="field-input" id="f-views" placeholder="0" style="text-align:left;direction:ltr">
-            </div>
-            <div>
-              <div class="field-label" style="margin-bottom:4px">LIKES</div>
-              <input type="number" class="field-input" id="f-likes" placeholder="0" style="text-align:left;direction:ltr">
-            </div>
-            <div>
-              <div class="field-label" style="margin-bottom:4px">SAVES</div>
-              <input type="number" class="field-input" id="f-saves" placeholder="0" style="text-align:left;direction:ltr">
-            </div>
-            <div>
-              <div class="field-label" style="margin-bottom:4px">SHARES</div>
-              <input type="number" class="field-input" id="f-shares" placeholder="0" style="text-align:left;direction:ltr">
-            </div>
-            <div>
-              <div class="field-label" style="margin-bottom:4px">COMMENTS</div>
-              <input type="number" class="field-input" id="f-comments" placeholder="0" style="text-align:left;direction:ltr">
-            </div>
-            <div>
-              <div class="field-label" style="margin-bottom:4px">FOLLOWERS GAINED</div>
-              <input type="number" class="field-input" id="f-followers" placeholder="0" style="text-align:left;direction:ltr">
-            </div>
-          </div>
-        </div>
-        <div class="field-group">
-          <div class="field-label">// LEARNINGS · الدروس</div>
-          <textarea class="field-textarea" id="f-learnings" placeholder="وش تعلمت من هذا المحتوى؟ ليش نجح أو فشل؟"></textarea>
-        </div>
-      </div>
-
-      <!-- PANE: Refs -->
-      <div class="modal-pane" data-pane="refs">
-        <div class="field-group">
-          <div class="field-label">// REFERENCES</div>
-          <div class="refs-list" id="refsList"></div>
-          <div class="btn-row" style="margin-top:0">
-            <input type="text" class="field-input" id="f-ref-url" placeholder="رابط مرجع (Pinterest, TikTok...)">
-            <button class="btn secondary" style="width:auto;padding:12px 18px" onclick="addRefUrl()">+ رابط</button>
-          </div>
-          <div style="margin-top:8px">
-            <input type="file" id="refImage" accept="image/*" style="display:none" onchange="addRefImage(event)">
-            <button class="btn secondary" onclick="document.getElementById('refImage').click()">+ صورة</button>
-          </div>
-        </div>
-      </div>
-
       <!-- PANE: Notes -->
       <div class="modal-pane" data-pane="notes">
         <div class="field-group">
@@ -3548,119 +3982,15 @@ body:not(.advanced-on) .advanced-only {
       <div class="modal-title">SETTINGS</div>
       <div class="modal-close" onclick="closeSettingsPanel()">✕</div>
     </div>
-    <div class="modal-tabs">
-      <button class="modal-tab active" data-spane="ai" onclick="switchSettingsPane('ai')">AI</button>
-      <button class="modal-tab" data-spane="identity" onclick="switchSettingsPane('identity')">Identity</button>
-      <button class="modal-tab" data-spane="general" onclick="switchSettingsPane('general')">General</button>
-    </div>
     <div class="modal-body">
 
-      <!-- AI Settings Pane -->
-      <div class="modal-pane active" data-spane="ai">
-        <div class="ai-panel">
-          <div class="ai-panel-title">✦ ANTHROPIC API CONNECTION</div>
-          <div style="font-size:13px;color:var(--ink2);line-height:1.7;margin-bottom:12px">
-            عشان تشغل الـ AI على الجوال، تحتاج تربط البرنامج بـ Anthropic API.
-            <br><br>
-            <strong>الخطوات:</strong>
-            <br>١. روح <a href="https://console.anthropic.com" target="_blank" style="color:var(--accent);font-weight:600">console.anthropic.com</a>
-            <br>٢. سجل + اشحن رصيد ($5 يكفيك أشهر)
-            <br>٣. Settings → API Keys → Create Key
-            <br>٤. الصق الـ Key هنا
-          </div>
-        </div>
-        <div class="field-group">
-          <div class="field-label">// API KEY</div>
-          <input type="password" class="field-input" id="settings-apikey" placeholder="sk-ant-..." style="font-family:'IBM Plex Mono',monospace;direction:ltr;text-align:left;font-size:12px">
-          <div style="font-size:11px;color:var(--muted);margin-top:6px;line-height:1.5">
-            ⚠️ الـ Key يحفظ في جوالك فقط. لا تشاركه مع أحد.
-          </div>
-        </div>
-        <div class="field-group">
-          <div class="field-label">// MODEL</div>
-          <div class="tag-picker">
-            <div class="tag-pick" data-val="claude-haiku-4-5" onclick="pickModel('claude-haiku-4-5')">Haiku (سريع، رخيص)</div>
-            <div class="tag-pick active" data-val="claude-sonnet-4-5" onclick="pickModel('claude-sonnet-4-5')">Sonnet (متوازن)</div>
-            <div class="tag-pick" data-val="claude-opus-4-7" onclick="pickModel('claude-opus-4-7')">Opus (أقوى، أغلى)</div>
-          </div>
-          <div style="font-size:11px;color:var(--muted);margin-top:6px;line-height:1.5">
-            Sonnet هو الأنسب لأغلب الاستخدامات. Opus للحالات اللي تحتاج جودة قصوى.
-          </div>
-        </div>
-        <button class="btn" onclick="saveAISettings()">حفظ + اختبار الاتصال</button>
-        <div id="apiTestResult" style="margin-top:12px"></div>
-      </div>
-
-      <!-- Identity Settings Pane -->
-      <div class="modal-pane" data-spane="identity">
-        <div class="ai-panel" style="margin-bottom:14px">
-          <div class="ai-panel-title">✦ هويتك في الـ AI</div>
-          <div style="font-size:13px;color:var(--ink2);line-height:1.7">
-            هذي المعلومات تنحقن في كل طلب AI، عشان النصوص تطلع مخصصة لك. عدّل أي حقل وقت ما تبي.
-          </div>
-        </div>
-        <div class="field-group">
-          <div class="field-label">// من أنت</div>
-          <input type="text" class="field-input" id="id-bio" placeholder="موها، سعودي، عايش في أبوظبي">
-        </div>
-        <div class="field-group">
-          <div class="field-label">// الموقع</div>
-          <input type="text" class="field-input" id="id-location" placeholder="أبوظبي، الإمارات">
-        </div>
-        <div class="field-group">
-          <div class="field-label">// الهدف من المحتوى</div>
-          <textarea class="field-textarea" id="id-goal" placeholder="مثلاً: Operator يبني lifestyle commerce، يستهدف ١٠ مليون درهم من الإعلانات سنوياً"></textarea>
-        </div>
-        <div class="field-group">
-          <div class="field-label">// الجمهور المستهدف</div>
-          <input type="text" class="field-input" id="id-audience" placeholder="مثلاً: ٢٥-٣٥ سنة، خليجي، يهتم بالستايل والصحة">
-        </div>
-        <div class="field-group">
-          <div class="field-label">// اللهجة المفضلة</div>
-          <input type="text" class="field-input" id="id-tone" placeholder="خليجية طبيعية، مو فصحى، مو مبالغ فيها">
-        </div>
-        <div class="field-group">
-          <div class="field-label">// الأسلوب</div>
-          <input type="text" class="field-input" id="id-style" placeholder="سينمائي، ناضج، صادق، صريح">
-        </div>
-        <div class="field-group">
-          <div class="field-label">// محاور المحتوى</div>
-          <input type="text" class="field-input" id="id-pillars" placeholder="Style 30%, Food 30%, Fitness 20%, Skincare 20%">
-        </div>
-        <div class="field-group">
-          <div class="field-label">// البراندات النشطة</div>
-          <input type="text" class="field-input" id="id-brands" placeholder="Eyezel، إيرث روتس، Bynama، adidas، Trendyol">
-        </div>
-        <div class="field-group">
-          <div class="field-label">// ممنوعات (لا تستخدم)</div>
-          <textarea class="field-textarea" id="id-dontuse" placeholder='مثلاً: لا تستخدم "بدون فلسفة"، اكتب "إيرث روتس" بالعربي دائماً'></textarea>
-        </div>
-        <div class="field-group">
-          <div class="field-label">// ملاحظات إضافية</div>
-          <textarea class="field-textarea" id="id-extra" placeholder="أي تفاصيل تبي الـ AI يعرفها عنك"></textarea>
-        </div>
-        <button class="btn" onclick="saveIdentity()">حفظ الهوية</button>
-      </div>
-
       <!-- General Settings Pane -->
-      <div class="modal-pane" data-spane="general">
+      <div class="modal-pane active" data-spane="general">
         <div class="field-group">
           <div class="field-label">// THEME</div>
           <div class="tag-picker">
             <div class="tag-pick" data-val="dark" onclick="setTheme('dark')" id="theme-dark">Dark</div>
             <div class="tag-pick" data-val="light" onclick="setTheme('light')" id="theme-light">Light</div>
-          </div>
-        </div>
-        <div class="field-group">
-          <div class="field-label">// ADVANCED MODE · الوضع المتقدم</div>
-          <div class="recurring-row">
-            <div class="toggle-row">
-              <div>
-                <div style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 2px;">إظهار AI و التابات الإضافية</div>
-                <div style="font-size: 12px; color: var(--muted); line-height: 1.5">يفعّل: AI Assistant، Caption، Brand، Stats، Refs، Templates، Hashtag Sets</div>
-              </div>
-              <div class="toggle-switch" id="advancedToggle" onclick="toggleAdvancedMode()"></div>
-            </div>
           </div>
         </div>
         <div class="field-group">
@@ -3687,6 +4017,20 @@ body:not(.advanced-on) .advanced-only {
   </div>
 </div>
 
+<!-- Schedule Picker Modal -->
+<div class="schedule-picker-overlay" id="schedulePickerOverlay" onclick="if(event.target===this)closeSchedulePicker()">
+  <div class="schedule-picker">
+    <div class="sp-header">
+      <div>
+        <div class="sp-title" id="schedulePickerTitle">اختر يوم التصوير</div>
+        <div class="sp-sub" id="schedulePickerSub">// SCHEDULE</div>
+      </div>
+      <div class="modal-close" onclick="closeSchedulePicker()">✕</div>
+    </div>
+    <div class="sp-list" id="schedulePickerList"></div>
+  </div>
+</div>
+
 <!-- Toast -->
 <div class="toast" id="toast"></div>
 
@@ -3696,6 +4040,15 @@ body:not(.advanced-on) .advanced-only {
 // ================================================================
 const STORAGE_KEY = 'moha_os_v6';
 const PREFS_KEY = 'moha_os_prefs_v6';
+
+// Production Schedule — Theme Days (Sun=0, Mon=1, Tue=2, Wed=3, Thu=4, Fri=5, Sat=6)
+const DEFAULT_PROD_SCHEDULE = {
+  food:     { day: 1, capacity: 4, backup: 2, label: 'FOOD',     ar: 'طبخ',      color: 'green'    },
+  style:    { day: 2, capacity: 5, backup: 2, label: 'STYLE',    ar: 'ملابس',    color: 'maroon'   },
+  skincare: { day: 3, capacity: 6, backup: 2, label: 'SKINCARE', ar: 'سكن كير',  color: 'lavender' },
+  fitness:  { day: 4, capacity: 5, backup: 2, label: 'FITNESS',  ar: 'فتنس',     color: 'orange'   }
+};
+
 const PROD_STEPS = [
   { key: 'idea', label: 'الفكرة جاهزة' },
   { key: 'script', label: 'النص مكتوب' },
@@ -3704,16 +4057,6 @@ const PROD_STEPS = [
   { key: 'caption', label: 'الكابشن جاهز' },
   { key: 'published', label: 'منشور' }
 ];
-
-// Default Production Schedule — Theme Days
-// Each pillar has a fixed weekday + capacity (main + backup)
-// Day numbers: 0=Sunday, 1=Monday, 2=Tuesday, 3=Wednesday, 4=Thursday, 5=Friday, 6=Saturday
-const DEFAULT_PROD_SCHEDULE = {
-  food:     { day: 1, capacity: 4, backup: 2, label: 'FOOD',     ar: 'طبخ',      color: 'green'    }, // Monday
-  style:    { day: 2, capacity: 5, backup: 2, label: 'STYLE',    ar: 'ملابس',    color: 'maroon'   }, // Tuesday
-  skincare: { day: 3, capacity: 6, backup: 2, label: 'SKINCARE', ar: 'سكن كير',  color: 'lavender' }, // Wednesday
-  fitness:  { day: 4, capacity: 5, backup: 2, label: 'FITNESS',  ar: 'فتنس',     color: 'orange'   }  // Thursday
-};
 
 let state = {
   ideas: [],
@@ -3733,9 +4076,11 @@ let state = {
   bulkMode: false,
   bulkSelected: new Set(),
   modal: { editing: null, refs: [], notes: [], checklist: {} },
-  prodWeekOffset: 0  // 0 = current week, 1 = next week, -1 = previous
+  prodWeekOffset: 0,
+  prodBacklogFilter: 'all',
+  prodExpandedDay: null  // which pillar is currently expanded
 };
-let prefs = { theme: 'dark', advancedMode: false };
+let prefs = { theme: 'dark' };
 let currentPlatform = 'tiktok';
 
 const PILLAR_COLOR = { style:'maroon', food:'green', fitness:'orange', skincare:'lavender' };
@@ -3904,7 +4249,6 @@ function load() {
       };
     }
     if (!prefs.weeklyGoal) prefs.weeklyGoal = 10;
-    if (typeof prefs.advancedMode === 'undefined') prefs.advancedMode = false;
     if (!prefs.prodSchedule) prefs.prodSchedule = JSON.parse(JSON.stringify(DEFAULT_PROD_SCHEDULE));
   } catch(e) { console.error(e); }
 }
@@ -3976,20 +4320,6 @@ function toggleTheme() {
   applyTheme();
   savePrefs();
   haptic('light');
-}
-
-function applyAdvancedMode() {
-  document.body.classList.toggle('advanced-on', !!prefs.advancedMode);
-}
-function toggleAdvancedMode() {
-  prefs.advancedMode = !prefs.advancedMode;
-  applyAdvancedMode();
-  savePrefs();
-  // Update toggle UI if open
-  const t = document.getElementById('advancedToggle');
-  if (t) t.classList.toggle('on', prefs.advancedMode);
-  haptic('success');
-  showToast(prefs.advancedMode ? '✓ الوضع المتقدم مفعّل' : '✓ الوضع المبسط');
 }
 
 // ================================================================
@@ -4657,13 +4987,13 @@ function openIdeaModal(id, defaultPlatform) {
   state.modal.refs = [...(idea.refs || [])];
   state.modal.notes = [...(idea.notes || [])];
   state.modal.checklist = { ...(idea.checklist || {}) };
-  renderRefs(); renderNotes(); renderChecklist();
-  renderCaptionLibQuick(); renderHashtagSetsQuick();
-  clearAIResults();
+  renderNotes(); renderChecklist();
   updateBestTimeHint();
 
-  document.getElementById('deleteBtn').style.display = isNew ? 'none' : 'block';
-  document.getElementById('duplicateBtn').style.display = isNew ? 'none' : 'block';
+  const delBtn = document.getElementById('deleteBtn');
+  const dupBtn = document.getElementById('duplicateBtn');
+  if (delBtn) delBtn.style.display = isNew ? 'none' : 'block';
+  if (dupBtn) dupBtn.style.display = isNew ? 'none' : 'block';
 
   // Reset to first pane
   switchPane('content');
@@ -4711,39 +5041,6 @@ function toggleCheck(key) {
   haptic('light');
 }
 
-function renderCaptionLibQuick() {
-  const list = document.getElementById('captionLibQuick');
-  list.innerHTML = state.captions.slice(0, 5).map(c => `
-    <div class="lib-item">
-      <div class="lib-item-text">${escapeHtml(c.text)}</div>
-      <button class="lib-copy-btn" onclick="useCaptionInModal('${c.id}')">USE</button>
-    </div>
-  `).join('') || '<div style="color:var(--muted);font-size:12px">ما فيه كابشنز محفوظة</div>';
-}
-function useCaptionInModal(id) {
-  const c = state.captions.find(x => x.id === id);
-  if (!c) return;
-  const ta = document.getElementById('f-caption');
-  ta.value = (ta.value ? ta.value + '\n\n' : '') + c.text;
-  haptic('success');
-}
-
-function renderHashtagSetsQuick() {
-  const list = document.getElementById('hashtagSetsQuick');
-  list.innerHTML = state.hashtagSets.map(s => `
-    <div class="lib-item">
-      <div class="lib-item-text"><strong>${escapeHtml(s.name)}</strong><br><span style="color:var(--muted);font-size:10px">${escapeHtml(s.tags.slice(0, 50))}...</span></div>
-      <button class="lib-copy-btn" onclick="useHashtagsInModal('${s.id}')">USE</button>
-    </div>
-  `).join('') || '<div style="color:var(--muted);font-size:12px">ما فيه مجموعات</div>';
-}
-function useHashtagsInModal(id) {
-  const s = state.hashtagSets.find(x => x.id === id);
-  if (!s) return;
-  const ta = document.getElementById('f-hashtags');
-  ta.value = (ta.value ? ta.value + ' ' : '') + s.tags;
-  haptic('success');
-}
 
 function saveIdea() {
   const id = document.getElementById('f-id').value;
@@ -4792,18 +5089,23 @@ function saveIdea() {
   else { data.createdAt = Date.now(); state.ideas.push(data); }
   save(); closeModal();
 
-  // If idea has a shoot date, jump to Production view to show it in its day
+  // If idea has a shoot date, set the production week to show the idea's day
   if (data.shootDate) {
-    // Jump to the week containing the shoot date
     const today = new Date();
     today.setHours(0, 0, 0, 0);
     const sunday = new Date(today.getTime() - today.getDay() * 86400000);
     const [y, m, d] = data.shootDate.split('-').map(Number);
     const shootDateObj = new Date(y, m - 1, d);
     const shootSunday = new Date(shootDateObj.getTime() - shootDateObj.getDay() * 86400000);
-    const diffWeeks = Math.round((shootSunday - sunday) / (7 * 86400000));
-    state.prodWeekOffset = diffWeeks;
-    navigate('production');
+    state.prodWeekOffset = Math.round((shootSunday - sunday) / (7 * 86400000));
+    // Make sure we're on home view
+    if (state.view.name !== 'home') navigate('home');
+    else render();
+    // Scroll to production section
+    setTimeout(() => {
+      const prodSection = document.querySelector('.prod-section');
+      if (prodSection) prodSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
   } else {
     render();
   }
@@ -4896,395 +5198,14 @@ function openLibModal(title, body) {
 }
 function closeLibModal() { document.getElementById('libModalOverlay').classList.remove('show'); }
 
-function openTemplatesBank() {
-  let html = '<div class="field-label">// CHOOSE A TEMPLATE TO START</div>';
-  state.templates.forEach(t => {
-    html += `<div class="lib-item" style="margin-bottom:8px" onclick="useTemplate('${t.id}')">
-      <div class="lib-item-text"><strong>${escapeHtml(t.name)}</strong> <span style="color:var(--muted);font-size:10px">[${t.platform.toUpperCase()}]</span><br><span style="color:var(--muted);font-size:11px">${escapeHtml(t.desc.slice(0,80))}...</span></div>
-      <button class="lib-copy-btn">USE</button>
-    </div>`;
-  });
-  openLibModal('TEMPLATES BANK', html);
-}
-function useTemplate(id) {
-  const t = state.templates.find(x => x.id === id);
-  if (!t) return;
-  closeLibModal();
-  openIdeaModal(null, t.platform);
-  setTimeout(() => {
-    document.getElementById('f-title').value = t.title || '';
-    document.getElementById('f-hook').value = t.hook || '';
-    document.getElementById('f-desc').value = t.desc || '';
-    document.getElementById('f-script').value = t.script || '';
-    document.getElementById('f-shoot').value = t.shoot || '';
-    setTagPicker('platform', t.platform);
-    if (t.pillar) setTagPicker('pillar', t.pillar);
-  }, 100);
-}
-
-function openCaptionLib() {
-  let html = `<div class="field-label">// SAVED CAPTIONS</div>`;
-  state.captions.forEach(c => {
-    html += `<div class="lib-item" style="margin-bottom:6px">
-      <div class="lib-item-text">${escapeHtml(c.text)}</div>
-      <button class="lib-copy-btn" onclick="copyText(\`${c.text.replace(/`/g,'')}\`)">COPY</button>
-      <button class="lib-copy-btn" style="background:transparent;color:var(--danger);border:1px solid var(--danger);margin-right:4px" onclick="delCaption('${c.id}')">✕</button>
-    </div>`;
-  });
-  html += `<div class="field-label" style="margin-top:16px">// ADD NEW</div>
-    <textarea class="field-textarea" id="newCaption" placeholder="كابشن جديد..."></textarea>
-    <button class="btn" style="margin-top:10px" onclick="addCaption()">إضافة</button>`;
-  openLibModal('CAPTION LIBRARY', html);
-}
-function addCaption() {
-  const text = document.getElementById('newCaption').value.trim();
-  if (!text) return;
-  state.captions.push({ id:'cap_'+Date.now(), text });
-  save();
-  openCaptionLib();
-  haptic('success');
-}
-function delCaption(id) {
-  state.captions = state.captions.filter(c => c.id !== id);
-  save(); openCaptionLib(); haptic('light');
-}
-function copyText(t) {
-  navigator.clipboard.writeText(t).then(() => showToast('Copied'));
-  haptic('success');
-}
-
-function openHashtagSets() {
-  let html = '<div class="field-label">// HASHTAG SETS</div>';
-  state.hashtagSets.forEach(s => {
-    html += `<div class="lib-item" style="margin-bottom:6px;flex-direction:column;align-items:stretch;gap:6px">
-      <div style="display:flex;justify-content:space-between;align-items:center;width:100%">
-        <strong>${escapeHtml(s.name)}</strong>
-        <div style="display:flex;gap:4px">
-          <button class="lib-copy-btn" onclick="copyText(\`${s.tags.replace(/`/g,'')}\`)">COPY</button>
-          <button class="lib-copy-btn" style="background:transparent;color:var(--danger);border:1px solid var(--danger)" onclick="delHashtagSet('${s.id}')">✕</button>
-        </div>
-      </div>
-      <div style="font-size:11px;color:var(--muted);line-height:1.5">${escapeHtml(s.tags)}</div>
-    </div>`;
-  });
-  html += `<div class="field-label" style="margin-top:16px">// ADD NEW SET</div>
-    <input type="text" class="field-input" id="newHashtagName" placeholder="اسم المجموعة" style="margin-bottom:8px">
-    <textarea class="field-textarea" id="newHashtagTags" placeholder="#tag1 #tag2 #tag3..."></textarea>
-    <button class="btn" style="margin-top:10px" onclick="addHashtagSet()">إضافة</button>`;
-  openLibModal('HASHTAG SETS', html);
-}
-function addHashtagSet() {
-  const name = document.getElementById('newHashtagName').value.trim();
-  const tags = document.getElementById('newHashtagTags').value.trim();
-  if (!name || !tags) return;
-  state.hashtagSets.push({ id:'hs_'+Date.now(), name, tags });
-  save(); openHashtagSets(); haptic('success');
-}
-function delHashtagSet(id) {
-  state.hashtagSets = state.hashtagSets.filter(s => s.id !== id);
-  save(); openHashtagSets(); haptic('light');
-}
-
-function openBrandsLib() {
-  const tierLabel = { tier1:'TIER 1', tier2:'TIER 2', personal:'PERSONAL' };
-  let html = '<div class="field-label">// BRANDS</div>';
-  state.brands.forEach(b => {
-    const ideas = state.ideas.filter(i => i.brand && i.brand.toLowerCase().includes(b.name.toLowerCase().split(' ')[0]));
-    const revenue = ideas.reduce((s, i) => s + (i.revenue || 0), 0);
-    html += `<div class="lib-item" style="margin-bottom:6px;flex-direction:column;align-items:stretch;gap:6px">
-      <div style="display:flex;justify-content:space-between;align-items:center;width:100%">
-        <div><strong>${escapeHtml(b.name)}</strong> <span style="color:var(--muted);font-size:10px">${tierLabel[b.tier] || ''}</span></div>
-        <button class="lib-copy-btn" style="background:transparent;color:var(--danger);border:1px solid var(--danger)" onclick="delBrand('${b.id}')">✕</button>
-      </div>
-      <div style="font-size:11px;color:var(--muted);line-height:1.5">${escapeHtml(b.notes || '')}</div>
-      <div style="display:flex;gap:8px;font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted2);letter-spacing:0.1em">
-        <span>${ideas.length} IDEAS</span>
-        <span>·</span>
-        <span>${revenue.toLocaleString()} AED</span>
-      </div>
-    </div>`;
-  });
-  html += `<div class="field-label" style="margin-top:16px">// ADD NEW BRAND</div>
-    <input type="text" class="field-input" id="newBrandName" placeholder="اسم البراند" style="margin-bottom:8px">
-    <select class="field-input" id="newBrandTier" style="margin-bottom:8px">
-      <option value="personal">شخصي</option>
-      <option value="tier2">Tier 2 إقليمي</option>
-      <option value="tier1">Tier 1 عالمي</option>
-    </select>
-    <textarea class="field-textarea" id="newBrandNotes" placeholder="ملاحظات عن البراند..."></textarea>
-    <button class="btn" style="margin-top:10px" onclick="addBrand()">إضافة</button>`;
-  openLibModal('BRANDS LIBRARY', html);
-}
-function addBrand() {
-  const name = document.getElementById('newBrandName').value.trim();
-  const tier = document.getElementById('newBrandTier').value;
-  const notes = document.getElementById('newBrandNotes').value.trim();
-  if (!name) return;
-  state.brands.push({ id:'br_'+Date.now(), name, tier, notes });
-  save(); openBrandsLib(); haptic('success');
-}
-function delBrand(id) {
-  state.brands = state.brands.filter(b => b.id !== id);
-  save(); openBrandsLib(); haptic('light');
-}
 
 // ================================================================
-// PRODUCTION VIEW
+// ANALYTICS
 // ================================================================
-function openProductionView() {
-  closeSettings();
-  state.prodWeekOffset = 0;
-  navigate('production');
+function openAnalytics() {
+  navigate('analytics');
+  renderAnalytics();
 }
-
-function changeProdWeek(delta) {
-  state.prodWeekOffset += delta;
-  renderProductionView();
-  haptic('light');
-}
-
-// Get the start of the week (Sunday) for current prodWeekOffset
-function getProdWeekStart() {
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-  const dayOfWeek = today.getDay(); // 0 = Sunday
-  const sunday = new Date(today.getTime() - dayOfWeek * 86400000);
-  sunday.setDate(sunday.getDate() + state.prodWeekOffset * 7);
-  return sunday;
-}
-
-// Find which pillar is scheduled on a given day (0-6)
-function getPillarForDay(dayOfWeek) {
-  const sched = prefs.prodSchedule || DEFAULT_PROD_SCHEDULE;
-  for (const pillar of Object.keys(sched)) {
-    if (sched[pillar].day === dayOfWeek) return pillar;
-  }
-  return null;
-}
-
-// Get ideas scheduled to shoot on a specific date
-function getIdeasForShootDate(dateStr) {
-  return state.ideas.filter(i => i.shootDate === dateStr && i.status !== 'published');
-}
-
-function renderProductionView() {
-  const sched = prefs.prodSchedule || DEFAULT_PROD_SCHEDULE;
-  const weekStart = getProdWeekStart();
-  const labels = ['SUN','MON','TUE','WED','THU','FRI','SAT'];
-  const labelsAr = ['الأحد','الإثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
-  const pillarColors = { style:'maroon', food:'green', fitness:'orange', skincare:'lavender' };
-
-  // Week label
-  let weekLabel;
-  if (state.prodWeekOffset === 0) weekLabel = 'هذا الأسبوع';
-  else if (state.prodWeekOffset === 1) weekLabel = 'الأسبوع الجاي';
-  else if (state.prodWeekOffset === -1) weekLabel = 'الأسبوع اللي راح';
-  else if (state.prodWeekOffset > 0) weekLabel = `بعد ${state.prodWeekOffset} أسابيع`;
-  else weekLabel = `قبل ${Math.abs(state.prodWeekOffset)} أسابيع`;
-  document.getElementById('prodWeekLabel').textContent = weekLabel;
-
-  // Stats
-  let totalReady = 0, totalPending = 0;
-  Object.keys(sched).forEach(pillar => {
-    const cap = sched[pillar].capacity;
-    // Count for this week
-    const dayOfPillar = sched[pillar].day;
-    const date = new Date(weekStart.getTime() + dayOfPillar * 86400000);
-    const dateStr = formatDate(date.getFullYear(), date.getMonth(), date.getDate());
-    const ideas = getIdeasForShootDate(dateStr).filter(i => i.pillar === pillar);
-    if (ideas.length >= cap) totalReady += cap;
-    else { totalReady += ideas.length; totalPending += (cap - ideas.length); }
-  });
-  const backlogCount = state.ideas.filter(i => !i.shootDate && i.status !== 'published').length;
-  document.getElementById('prodReady').textContent = totalReady;
-  document.getElementById('prodPending').textContent = totalPending;
-  document.getElementById('prodBacklog').textContent = backlogCount;
-
-  // Render days
-  const container = document.getElementById('prodDays');
-  container.innerHTML = '';
-
-  for (let i = 0; i < 7; i++) {
-    const date = new Date(weekStart.getTime() + i * 86400000);
-    const dateStr = formatDate(date.getFullYear(), date.getMonth(), date.getDate());
-    const dayOfWeek = date.getDay();
-    const pillar = getPillarForDay(dayOfWeek);
-    const dayIdeas = getIdeasForShootDate(dateStr).filter(idea => !pillar || idea.pillar === pillar);
-
-    const dayEl = document.createElement('div');
-    dayEl.className = 'prod-day';
-
-    if (!pillar) {
-      // Rest day
-      dayEl.classList.add('empty-day');
-      dayEl.innerHTML = `
-        <div class="prod-day-header">
-          <div class="prod-day-left">
-            <div class="prod-day-num">${date.getDate()}</div>
-            <div class="prod-day-info">
-              <div class="prod-day-name">${labels[dayOfWeek]} · ${labelsAr[dayOfWeek]}</div>
-              <div class="prod-day-pillar">REST DAY</div>
-            </div>
-          </div>
-          <div class="prod-day-status rest">راحة</div>
-        </div>
-        <div class="prod-day-rest">// يوم راحة أو احتياط</div>
-      `;
-      container.appendChild(dayEl);
-      continue;
-    }
-
-    const conf = sched[pillar];
-    const cap = conf.capacity;
-    const backupCap = conf.backup;
-    const total = cap + backupCap;
-    const filled = dayIdeas.length;
-    const mainFilled = Math.min(filled, cap);
-    const backupFilled = Math.max(0, filled - cap);
-    const pctMain = Math.min(100, (mainFilled / cap) * 100);
-    const color = pillarColors[pillar];
-    dayEl.classList.add('c-' + color);
-
-    let statusClass = 'empty';
-    let statusText = 'فاضي';
-    if (mainFilled >= cap) { statusClass = 'ready'; statusText = '✓ جاهز'; dayEl.classList.add('full-day'); }
-    else if (mainFilled > 0) { statusClass = 'partial'; statusText = `${mainFilled}/${cap}`; }
-    else { dayEl.classList.add('empty-pillar'); }
-
-    let mainHtml = '';
-    for (let s = 0; s < cap; s++) {
-      if (s < mainFilled) {
-        const idea = dayIdeas[s];
-        mainHtml += `<div class="prod-mini-card" onclick="event.stopPropagation();openIdeaModal('${idea.id}')">
-          <div class="prod-mini-card-num">${s + 1}</div>
-          <div class="prod-mini-card-title">${escapeHtml(idea.title)}</div>
-        </div>`;
-      } else {
-        mainHtml += `<div class="prod-empty-slot">SLOT ${s + 1} · فاضي</div>`;
-      }
-    }
-
-    let backupHtml = '';
-    if (backupCap > 0) {
-      backupHtml = `<div class="prod-progress-text" style="margin-top:14px">// احتياط · ${backupFilled}/${backupCap}</div>`;
-      for (let s = 0; s < backupCap; s++) {
-        if (s < backupFilled) {
-          const idea = dayIdeas[cap + s];
-          backupHtml += `<div class="prod-mini-card backup" onclick="event.stopPropagation();openIdeaModal('${idea.id}')">
-            <div class="prod-mini-card-num">B${s + 1}</div>
-            <div class="prod-mini-card-title">${escapeHtml(idea.title)}</div>
-          </div>`;
-        } else {
-          backupHtml += `<div class="prod-empty-slot">BACKUP ${s + 1} · فاضي</div>`;
-        }
-      }
-    }
-
-    dayEl.innerHTML = `
-      <div class="prod-day-header">
-        <div class="prod-day-left">
-          <div class="prod-day-num">${date.getDate()}</div>
-          <div class="prod-day-info">
-            <div class="prod-day-name">${labels[dayOfWeek]} · ${labelsAr[dayOfWeek]}</div>
-            <div class="prod-day-pillar">${conf.label} · ${conf.ar}</div>
-          </div>
-        </div>
-        <div class="prod-day-status ${statusClass}">${statusText}</div>
-      </div>
-      <div class="prod-progress-bar"><div class="prod-progress-fill" style="width:${pctMain}%"></div></div>
-      <div class="prod-progress-text">// أساسي · ${mainFilled}/${cap}</div>
-      <div class="prod-day-ideas">${mainHtml}${backupHtml}</div>
-    `;
-
-    container.appendChild(dayEl);
-  }
-
-  renderProdBacklog();
-}
-
-function setProdBacklogFilter(p) {
-  state.prodBacklogFilter = p;
-  document.querySelectorAll('.prod-backlog-tabs .filter-pill').forEach(el => el.classList.toggle('active', el.dataset.pillar === p));
-  renderProdBacklog();
-}
-
-function renderProdBacklog() {
-  const list = document.getElementById('prodBacklogList');
-  const filter = state.prodBacklogFilter || 'all';
-  let backlog = state.ideas.filter(i => !i.shootDate && i.status !== 'published');
-  if (filter !== 'all') backlog = backlog.filter(i => i.pillar === filter);
-
-  if (backlog.length === 0) {
-    list.innerHTML = `<div class="prod-empty-state">∅ ما فيه أفكار بدون يوم تصوير</div>`;
-    return;
-  }
-
-  // Group by pillar
-  const pillarLabels = { style:'STYLE · ملابس', food:'FOOD · طبخ', fitness:'FITNESS · فتنس', skincare:'SKINCARE · سكن كير' };
-  const groups = { style: [], food: [], fitness: [], skincare: [] };
-  backlog.forEach(i => { if (groups[i.pillar]) groups[i.pillar].push(i); });
-
-  let html = '';
-  Object.keys(groups).forEach(pillar => {
-    const ideas = groups[pillar];
-    if (ideas.length === 0) return;
-    if (filter !== 'all' && filter !== pillar) return;
-    html += `<div class="prod-pillar-group">
-      <div class="prod-pillar-group-title">// ${pillarLabels[pillar]} · ${ideas.length}</div>`;
-    ideas.forEach(idea => {
-      const sub = idea.hook || idea.desc || '';
-      html += `<div class="prod-backlog-card">
-        <div class="prod-backlog-card-content" onclick="openIdeaModal('${idea.id}')">
-          <div class="prod-backlog-card-title">${escapeHtml(idea.title)}</div>
-          ${sub ? `<div class="prod-backlog-card-meta">${escapeHtml(sub.slice(0, 80))}</div>` : ''}
-        </div>
-        <button class="prod-schedule-btn" onclick="scheduleIdeaToShootDay('${idea.id}')">جدول</button>
-      </div>`;
-    });
-    html += `</div>`;
-  });
-
-  list.innerHTML = html || `<div class="prod-empty-state">∅ ما فيه أفكار في هذا التصنيف</div>`;
-}
-
-// Schedule an idea to its pillar's shoot day (next available)
-function scheduleIdeaToShootDay(ideaId) {
-  const idea = state.ideas.find(i => i.id === ideaId);
-  if (!idea) return;
-  const sched = prefs.prodSchedule || DEFAULT_PROD_SCHEDULE;
-  const conf = sched[idea.pillar];
-  if (!conf) {
-    showToast('اختر محور للفكرة أولاً');
-    openIdeaModal(ideaId);
-    return;
-  }
-
-  // Find the next shoot day for this pillar
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-  const totalCap = conf.capacity + conf.backup;
-
-  // Look forward up to 8 weeks
-  for (let w = 0; w < 8; w++) {
-    const weekStart = new Date(today.getTime() - today.getDay() * 86400000 + w * 7 * 86400000);
-    const date = new Date(weekStart.getTime() + conf.day * 86400000);
-    if (date < today) continue;
-    const dateStr = formatDate(date.getFullYear(), date.getMonth(), date.getDate());
-    const existing = getIdeasForShootDate(dateStr).filter(i => i.pillar === idea.pillar);
-    if (existing.length < totalCap) {
-      idea.shootDate = dateStr;
-      save();
-      renderProductionView();
-      haptic('success');
-      const labelsAr = ['الأحد','الإثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
-      showToast(`✓ تم جدولتها · ${labelsAr[conf.day]} ${date.getDate()}/${date.getMonth() + 1}`);
-      return;
-    }
-  }
-  showToast('كل أيام التصوير ممتلئة لهذا المحور');
-}
-
-
 function renderAnalytics() {
   const total = state.ideas.length;
   const published = state.ideas.filter(i => i.status === 'published').length;
@@ -5640,581 +5561,21 @@ function startVoiceInput(fieldId, btn) {
   try { recognition.start(); } catch(e) { showToast('فيه مشكلة في الإملاء'); }
 }
 
-// ================================================================
-// AI FUNCTIONS — using Anthropic API directly (or window.claude fallback)
-// ================================================================
-async function callClaude(prompt, expectJson = false) {
-  // Inject identity context into every prompt
-  const identity = getIdentityPrompt();
-  const fullPrompt = identity + '\n\n' + prompt;
-
-  const sysPrompt = expectJson
-    ? fullPrompt + '\n\nالرد لازم يكون JSON صحيح بدون أي نص قبل أو بعد. JSON only.'
-    : fullPrompt;
-
-  // Try Anthropic API first if key is set
-  const apiKey = prefs.apiKey;
-  if (apiKey && apiKey.startsWith('sk-ant-')) {
-    try {
-      const response = await fetch('https://api.anthropic.com/v1/messages', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'x-api-key': apiKey,
-          'anthropic-version': '2023-06-01',
-          'anthropic-dangerous-direct-browser-access': 'true'
-        },
-        body: JSON.stringify({
-          model: prefs.model || 'claude-sonnet-4-5',
-          max_tokens: 2000,
-          messages: [{ role: 'user', content: sysPrompt }]
-        })
-      });
-
-      if (!response.ok) {
-        const err = await response.text();
-        console.error('API error:', err);
-        if (response.status === 401) {
-          showToast('الـ API Key غير صحيح');
-        } else if (response.status === 429) {
-          showToast('تجاوزت الحد — جرب بعد شوي');
-        } else if (response.status === 400 && err.includes('credit')) {
-          showToast('رصيدك انتهى — اشحن من Anthropic Console');
-        } else {
-          showToast('فيه مشكلة في الاتصال بـ AI');
-        }
-        return null;
-      }
-
-      const data = await response.json();
-      const text = data.content[0].text;
-
-      if (expectJson) {
-        let cleaned = text.trim();
-        cleaned = cleaned.replace(/^```json\s*/i, '').replace(/^```\s*/, '').replace(/```\s*$/, '');
-        const jsonMatch = cleaned.match(/[\[\{][\s\S]*[\]\}]/);
-        if (jsonMatch) cleaned = jsonMatch[0];
-        return JSON.parse(cleaned);
-      }
-      return text;
-    } catch(err) {
-      console.error('Network error:', err);
-      showToast('فيه مشكلة في الشبكة — جرب مرة ثانية');
-      return null;
-    }
-  }
-
-  // Fallback to window.claude (only works inside Claude.ai artifact)
-  if (window.claude && window.claude.complete) {
-    try {
-      const response = await window.claude.complete(sysPrompt);
-      if (expectJson) {
-        let cleaned = response.trim();
-        cleaned = cleaned.replace(/^```json\s*/i, '').replace(/^```\s*/, '').replace(/```\s*$/, '');
-        const jsonMatch = cleaned.match(/[\[\{][\s\S]*[\]\}]/);
-        if (jsonMatch) cleaned = jsonMatch[0];
-        return JSON.parse(cleaned);
-      }
-      return response;
-    } catch(err) {
-      console.error('AI error:', err);
-      showToast('AI ما اشتغل — جرب مرة ثانية');
-      return null;
-    }
-  }
-
-  // No API key and no window.claude
-  showToast('ضيف Anthropic API Key من الإعدادات أولاً');
-  setTimeout(() => openSettingsPanel(), 800);
-  return null;
-}
-
-// Build identity prompt from saved settings
-function getIdentityPrompt() {
-  const id = prefs.identity || {};
-  const parts = [];
-  parts.push('أنت مساعد محتوى لـ "موها" (Moha) — كريتور سوشيال ميديا.');
-  if (id.bio) parts.push('من أنا: ' + id.bio);
-  if (id.location) parts.push('الموقع: ' + id.location);
-  if (id.goal) parts.push('الهدف: ' + id.goal);
-  if (id.audience) parts.push('الجمهور المستهدف: ' + id.audience);
-  if (id.tone) parts.push('اللهجة: ' + id.tone);
-  if (id.style) parts.push('الأسلوب: ' + id.style);
-  if (id.pillars) parts.push('محاور المحتوى: ' + id.pillars);
-  if (id.brands) parts.push('البراندات النشطة: ' + id.brands);
-  if (id.dontUse) parts.push('ممنوع تستخدم هذي العبارات/الكلمات: ' + id.dontUse);
-  if (id.extra) parts.push('ملاحظات إضافية: ' + id.extra);
-  return parts.join('\n');
-}
-
-function showAILoading(show) {
-  document.getElementById('aiLoading').style.display = show ? 'inline-flex' : 'none';
-}
-function showAIResults(items, useFn) {
-  const wrap = document.getElementById('aiResults');
-  if (!items || items.length === 0) { wrap.innerHTML = ''; return; }
-  wrap.innerHTML = items.map((item, i) => `
-    <div class="ai-result">
-      <div class="ai-result-text">${escapeHtml(item)}</div>
-      <button class="ai-use-btn" onclick="${useFn}(${i})">USE</button>
-    </div>
-  `).join('');
-  state.lastAIResults = items;
-}
-function clearAIResults() { document.getElementById('aiResults').innerHTML = ''; state.lastAIResults = []; }
-
-async function aiGenerateHooks() {
-  const title = document.getElementById('f-title').value.trim();
-  const platform = getActiveTag('platform') || 'tiktok';
-  const pillar = getActiveTag('pillar') || 'style';
-  if (!title) { showToast('اكتب العنوان الأول'); return; }
-  showAILoading(true); clearAIResults();
-  const prompt = `أنت كاتب محتوى عربي خبير في ${platform}. اكتب ٤ Hooks (الجملة الافتتاحية للفيديو) لمحتوى عن: "${title}" — المحور: ${pillar}.
-
-كل Hook لازم يكون:
-- قصير (أقل من ١٢ كلمة)
-- يشد الانتباه في أول ثانية
-- باللهجة الخليجية الطبيعية (مو فصحى، مو مبالغ فيها)
-- مختلف عن الباقي (POV، سؤال صادم، رقم، تحدي، مفاجأة...)
-
-أرجع JSON: {"hooks": ["hook 1", "hook 2", "hook 3", "hook 4"]}`;
-  const result = await callClaude(prompt, true);
-  showAILoading(false);
-  if (result && result.hooks) {
-    showAIResults(result.hooks, 'useAIHook');
-    haptic('success');
-  }
-}
-function useAIHook(idx) {
-  const hook = state.lastAIResults[idx];
-  if (!hook) return;
-  document.getElementById('f-hook').value = hook;
-  clearAIResults();
-  showToast('تم اعتماد الـ Hook');
-  haptic('success');
-}
-
-async function aiGenerateScript() {
-  const title = document.getElementById('f-title').value.trim();
-  const hook = document.getElementById('f-hook').value.trim();
-  const platform = getActiveTag('platform') || 'tiktok';
-  const pillar = getActiveTag('pillar') || 'style';
-  if (!title) { showToast('اكتب العنوان الأول'); return; }
-  showAILoading(true); clearAIResults();
-  const platformLength = { tiktok: '٣٠-٤٥ ثانية', insta: '١٥-٢٥ ثانية', youtube: '٤-٨ دقايق' };
-  const prompt = `أنت كاتب سكريبت عربي محترف في ${platform}. اكتب سكريبت كامل لفيديو عن: "${title}".
-${hook ? `الـ Hook: "${hook}"` : ''}
-المحور: ${pillar}
-المدة المتوقعة: ${platformLength[platform]}
-
-السكريبت لازم:
-- يبدأ بالـ Hook قوي
-- يطور القصة (problem → insight → payoff)
-- ينتهي بـ CTA أو خاتمة قوية
-- باللهجة الخليجية الطبيعية، صادقة، مو رسمية
-- مقسم على scenes/segments
-
-أرجع نص السكريبت مباشرة بدون JSON، بصيغة واضحة مع أسطر فاصلة.`;
-  const result = await callClaude(prompt, false);
-  showAILoading(false);
-  if (result) {
-    document.getElementById('f-script').value = result.trim();
-    showToast('✓ تم كتابة السكريبت');
-    haptic('success');
-  }
-}
-
-async function aiGenerateCaption() {
-  const title = document.getElementById('f-title').value.trim();
-  const desc = document.getElementById('f-desc').value.trim();
-  const platform = getActiveTag('platform') || 'tiktok';
-  if (!title) { showToast('اكتب العنوان الأول'); return; }
-  showAILoading(true); clearAIResults();
-  const prompt = `أنت كاتب كابشن عربي محترف. اكتب ٣ كابشنز لمنشور ${platform} عن: "${title}".
-${desc ? `التفاصيل: ${desc}` : ''}
-
-كل كابشن:
-- لهجة خليجية طبيعية (مو فصحى)
-- قصير وقوي (٢-٤ أسطر)
-- بأسلوب مختلف (واحد سؤال، واحد declarative، واحد قصة قصيرة)
-- بدون hashtags
-- لا تستخدم عبارة "بدون فلسفة"
-
-أرجع JSON: {"captions": ["caption 1", "caption 2", "caption 3"]}`;
-  const result = await callClaude(prompt, true);
-  showAILoading(false);
-  if (result && result.captions) {
-    showAIResults(result.captions, 'useAICaption');
-    haptic('success');
-  }
-}
-function useAICaption(idx) {
-  const cap = state.lastAIResults[idx];
-  if (!cap) return;
-  document.getElementById('f-caption').value = cap;
-  clearAIResults();
-  switchPane('caption');
-  showToast('تم اعتماد الكابشن');
-  haptic('success');
-}
-
-async function aiSmartHashtags() {
-  const title = document.getElementById('f-title').value.trim();
-  const platform = getActiveTag('platform') || 'tiktok';
-  const pillar = getActiveTag('pillar') || 'style';
-  if (!title) { showToast('اكتب العنوان الأول'); return; }
-  showAILoading(true); clearAIResults();
-  const prompt = `Generate hashtags for ${platform} content from a UAE/Gulf creator.
-Title: "${title}"
-Pillar: ${pillar}
-
-Return 15-20 mixed hashtags:
-- Mix of large (1M+), medium (100K-1M), and niche tags
-- Mix English + Arabic where natural
-- Include UAE/Gulf-specific tags (#abudhabi #uae #dubai)
-- Relevant to the pillar
-
-Return JSON: {"hashtags": "#tag1 #tag2 #tag3..."} (single string with spaces)`;
-  const result = await callClaude(prompt, true);
-  showAILoading(false);
-  if (result && result.hashtags) {
-    document.getElementById('f-hashtags').value = result.hashtags;
-    switchPane('caption');
-    showToast('✓ تم اقتراح الهاشتاقات');
-    haptic('success');
-  }
-}
 
 // ================================================================
-// AI BATCH CREATE
-// ================================================================
-async function openAIBatch() {
-  closeSettings();
-  const html = `
-    <div class="ai-panel">
-      <div class="ai-panel-title">✦ AI BATCH GENERATOR</div>
-      <div style="font-size:13px;color:var(--ink2);margin-bottom:14px;line-height:1.6">
-        خلني أنشئ لك أفكار جاهزة للأسبوع. اختار التفاصيل وراح أبني هيكل ٤ أفكار كاملة.
-      </div>
-    </div>
-    <div class="field-group">
-      <div class="field-label">// PLATFORM</div>
-      <div class="tag-picker" id="batch-platform">
-        <div class="tag-pick active" data-val="tiktok" onclick="batchPick('platform','tiktok')">TikTok</div>
-        <div class="tag-pick" data-val="insta" onclick="batchPick('platform','insta')">Instagram</div>
-        <div class="tag-pick" data-val="youtube" onclick="batchPick('platform','youtube')">YouTube</div>
-      </div>
-    </div>
-    <div class="field-group">
-      <div class="field-label">// PILLAR</div>
-      <div class="tag-picker" id="batch-pillar">
-        <div class="tag-pick pillar-style active" data-val="style" onclick="batchPick('pillar','style')">Style</div>
-        <div class="tag-pick pillar-food" data-val="food" onclick="batchPick('pillar','food')">Food</div>
-        <div class="tag-pick pillar-fitness" data-val="fitness" onclick="batchPick('pillar','fitness')">Fitness</div>
-        <div class="tag-pick pillar-skincare" data-val="skincare" onclick="batchPick('pillar','skincare')">Skincare</div>
-      </div>
-    </div>
-    <div class="field-group">
-      <div class="field-label">// COUNT</div>
-      <div class="tag-picker" id="batch-count">
-        <div class="tag-pick" data-val="3" onclick="batchPick('count','3')">3</div>
-        <div class="tag-pick active" data-val="4" onclick="batchPick('count','4')">4</div>
-        <div class="tag-pick" data-val="6" onclick="batchPick('count','6')">6</div>
-        <div class="tag-pick" data-val="8" onclick="batchPick('count','8')">8</div>
-      </div>
-    </div>
-    <div class="field-group">
-      <div class="field-label">// THEME (اختياري)</div>
-      <input type="text" class="field-input" id="batch-theme" placeholder="مثلاً: God Mission، Style basics، minimal living...">
-    </div>
-    <button class="btn" onclick="runAIBatch()" id="batchRunBtn">✦ ابني الأفكار</button>
-    <div id="batchResults" style="margin-top:16px"></div>
-  `;
-  openLibModal('AI BATCH GENERATOR', html);
-  state.batchSettings = { platform:'tiktok', pillar:'style', count:'4' };
-}
-
-function batchPick(group, val) {
-  state.batchSettings = state.batchSettings || {};
-  state.batchSettings[group] = val;
-  document.querySelectorAll(`#batch-${group} .tag-pick`).forEach(el => el.classList.toggle('active', el.dataset.val === val));
-  haptic('light');
-}
-
-async function runAIBatch() {
-  const settings = state.batchSettings;
-  const theme = document.getElementById('batch-theme').value.trim();
-  const btn = document.getElementById('batchRunBtn');
-  const results = document.getElementById('batchResults');
-  btn.disabled = true;
-  btn.innerHTML = '<span class="spark">✦</span> جاري التفكير...';
-  results.innerHTML = '<div class="ai-loading" style="margin-top:10px"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span>الـ AI يبني الأفكار</span></div>';
-
-  const platformLabels = { tiktok:'TikTok (٣٠-٤٥ ثانية)', insta:'Instagram Reel/Carousel (١٥-٢٥ ثانية)', youtube:'YouTube' };
-  const pillarLabels = { style:'الستايل والموضة الرجالية', food:'الأكل الصحي والوصفات', fitness:'اللياقة وكمال الأجسام', skincare:'العناية بالبشرة الرجالية' };
-
-  const prompt = `أنت كاتب محتوى عربي خبير. أنشئ ${settings.count} أفكار محتوى لـ ${platformLabels[settings.platform]} في محور ${pillarLabels[settings.pillar]}.
-${theme ? `الموضوع/الثيمة: ${theme}` : ''}
-الكريتور رجل من الإمارات/الخليج، أسلوبه: سينمائي، ناضج، صادق، باللهجة الخليجية الطبيعية.
-
-كل فكرة لازم تحتوي على:
-- title (عنوان قصير وواضح، أقل من ١٠ كلمات، عربي)
-- hook (الجملة الافتتاحية، أقل من ١٢ كلمة، شيقة)
-- desc (وصف مختصر للفيديو، ٢-٣ جمل)
-- difficulty (واحد من: easy / medium / hard)
-- location (واحد من: indoor / outdoor / both)
-
-الأفكار لازم تكون مختلفة (مو متشابهة)، وكل واحدة لها زاوية فريدة.
-
-أرجع JSON: {"ideas": [{"title":"...","hook":"...","desc":"...","difficulty":"...","location":"..."}, ...]}`;
-
-  const result = await callClaude(prompt, true);
-  btn.disabled = false;
-  btn.innerHTML = '✦ ابني الأفكار';
-
-  if (!result || !result.ideas) {
-    results.innerHTML = '<div style="color:var(--danger);padding:10px">ما اشتغل — جرب مرة ثانية</div>';
-    return;
-  }
-
-  // Show preview
-  let html = '<div class="field-label" style="margin-top:10px">// PREVIEW · اعتمد كل واحدة</div>';
-  result.ideas.forEach((idea, idx) => {
-    html += `<div class="lib-item" style="margin-bottom:8px;flex-direction:column;align-items:stretch;gap:6px">
-      <div style="font-family:'Fraunces',serif;font-weight:600;font-size:15px;color:var(--ink);line-height:1.4">${escapeHtml(idea.title)}</div>
-      <div style="font-size:12px;color:var(--muted);font-style:italic;line-height:1.5">${escapeHtml(idea.hook)}</div>
-      <div style="font-size:11px;color:var(--ink2);line-height:1.5">${escapeHtml(idea.desc)}</div>
-      <div style="display:flex;justify-content:flex-end;margin-top:4px">
-        <button class="lib-copy-btn" onclick="acceptBatchIdea(${idx})">+ ADD</button>
-      </div>
-    </div>`;
-  });
-  html += `<button class="btn" style="margin-top:12px" onclick="acceptAllBatch()">+ اعتمد الكل (${result.ideas.length})</button>`;
-  results.innerHTML = html;
-  state.lastBatch = { ideas: result.ideas, settings };
-  haptic('success');
-}
-
-function acceptBatchIdea(idx) {
-  const idea = state.lastBatch.ideas[idx];
-  const s = state.lastBatch.settings;
-  state.ideas.push({
-    id: 'idea_' + Date.now() + '_' + idx,
-    platform: s.platform, pillar: s.pillar,
-    title: idea.title, hook: idea.hook, desc: idea.desc,
-    difficulty: idea.difficulty || 'medium', location: idea.location || '',
-    script:'', shoot:'', status:'idea',
-    shootDate:'', shootTime:'', pubDate:'', pubTime:'',
-    caption:'', hashtags:'', brand:'', revenue:0, deadline:'', tier:'',
-    brandNotes:'', recurring:'', mood:'',
-    checklist:{}, views:0, likes:0, saves:0, shares:0, comments:0, followers:0, learnings:'',
-    refs:[], notes:[], createdAt: Date.now()
-  });
-  save(); render();
-  showToast('تم الإضافة');
-  haptic('success');
-}
-
-function acceptAllBatch() {
-  const s = state.lastBatch.settings;
-  state.lastBatch.ideas.forEach((idea, idx) => {
-    state.ideas.push({
-      id: 'idea_' + Date.now() + '_' + idx,
-      platform: s.platform, pillar: s.pillar,
-      title: idea.title, hook: idea.hook, desc: idea.desc,
-      difficulty: idea.difficulty || 'medium', location: idea.location || '',
-      script:'', shoot:'', status:'idea',
-      shootDate:'', shootTime:'', pubDate:'', pubTime:'',
-      caption:'', hashtags:'', brand:'', revenue:0, deadline:'', tier:'',
-      brandNotes:'', recurring:'', mood:'',
-      checklist:{}, views:0, likes:0, saves:0, shares:0, comments:0, followers:0, learnings:'',
-      refs:[], notes:[], createdAt: Date.now() + idx
-    });
-  });
-  save(); closeLibModal(); render();
-  showToast(`✓ تم إضافة ${state.lastBatch.ideas.length} فكرة`);
-  haptic('success');
-}
-
-// ================================================================
-// BRAND PIPELINE VIEW
-// ================================================================
-function openBrandPipeline() {
-  closeSettings();
-  const stages = [
-    { key:'inquiry', label:'تواصل أولي' },
-    { key:'negotiating', label:'تفاوض' },
-    { key:'production', label:'إنتاج' },
-    { key:'review', label:'مراجعة' },
-    { key:'paid', label:'مدفوع' }
-  ];
-  const brandIdeas = state.ideas.filter(i => i.brand);
-  let totalRevenue = 0, paidRevenue = 0, pipelineRevenue = 0;
-  brandIdeas.forEach(i => {
-    totalRevenue += (i.revenue || 0);
-    if (i.brandStage === 'paid') paidRevenue += (i.revenue || 0);
-    else pipelineRevenue += (i.revenue || 0);
-  });
-  let cols = '';
-  stages.forEach(stage => {
-    const ideas = brandIdeas.filter(i => (i.brandStage || 'inquiry') === stage.key);
-    const sum = ideas.reduce((s, i) => s + (i.revenue || 0), 0);
-    let cards = '';
-    ideas.forEach(i => {
-      cards += `<div class="pipe-card" onclick="closeLibModal();openIdeaModal('${i.id}')">
-        <div style="font-weight:600;margin-bottom:3px">${escapeHtml(i.brand)}</div>
-        <div style="color:var(--muted);font-size:10px;line-height:1.4">${escapeHtml(i.title.slice(0,40))}${i.title.length > 40 ? '...' : ''}</div>
-        <div style="font-family:'Bebas Neue';font-size:14px;letter-spacing:0.04em;margin-top:4px;color:var(--ink)">${(i.revenue||0).toLocaleString()} AED</div>
-      </div>`;
-    });
-    if (!cards) cards = '<div style="color:var(--muted);font-size:11px;text-align:center;padding:20px 0">—</div>';
-    cols += `<div class="pipe-col">
-      <div class="pipe-col-title">${stage.label}<br><span style="color:var(--ink);font-family:'Bebas Neue';font-size:13px">${ideas.length} · ${sum.toLocaleString()}</span></div>
-      ${cards}
-    </div>`;
-  });
-  const html = `
-    <div style="margin-bottom:16px">
-      <div class="metric-grid">
-        <div class="metric-card">
-          <div class="metric-label">// PIPELINE</div>
-          <div style="font-family:'Bebas Neue';font-size:28px;letter-spacing:0.04em">${pipelineRevenue.toLocaleString()} AED</div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-label">// PAID</div>
-          <div style="font-family:'Bebas Neue';font-size:28px;letter-spacing:0.04em;color:var(--success)">${paidRevenue.toLocaleString()} AED</div>
-        </div>
-      </div>
-    </div>
-    <div style="font-size:12px;color:var(--muted);margin-bottom:8px">عدّل البراند Stage من شاشة الفكرة → تاب Brand</div>
-    <div class="pipeline-cols">${cols}</div>
-  `;
-  openLibModal('BRAND PIPELINE', html);
-}
-
-// ================================================================
-// SETTINGS PANEL · API · IDENTITY · GENERAL
+// SETTINGS PANEL · GENERAL ONLY
 // ================================================================
 function openSettingsPanel() {
   closeSettings();
-  // Load current values
-  document.getElementById('settings-apikey').value = prefs.apiKey || '';
-  document.querySelectorAll('#settingsPanel [data-val]').forEach(el => el.classList.remove('active'));
-  const currentModel = prefs.model || 'claude-sonnet-4-5';
-  const modelEl = document.querySelector(`#settingsPanel .tag-pick[data-val="${currentModel}"]`);
-  if (modelEl) modelEl.classList.add('active');
-
-  // Identity
-  const id = prefs.identity || {};
-  document.getElementById('id-bio').value = id.bio || '';
-  document.getElementById('id-location').value = id.location || '';
-  document.getElementById('id-goal').value = id.goal || '';
-  document.getElementById('id-audience').value = id.audience || '';
-  document.getElementById('id-tone').value = id.tone || '';
-  document.getElementById('id-style').value = id.style || '';
-  document.getElementById('id-pillars').value = id.pillars || '';
-  document.getElementById('id-brands').value = id.brands || '';
-  document.getElementById('id-dontuse').value = id.dontUse || '';
-  document.getElementById('id-extra').value = id.extra || '';
-
-  // General
   document.getElementById('settings-goal').value = prefs.weeklyGoal || 10;
   document.getElementById('theme-dark').classList.toggle('active', prefs.theme === 'dark');
   document.getElementById('theme-light').classList.toggle('active', prefs.theme === 'light');
-  const advT = document.getElementById('advancedToggle');
-  if (advT) advT.classList.toggle('on', !!prefs.advancedMode);
-
-  document.getElementById('apiTestResult').innerHTML = '';
   document.getElementById('settingsPanelOverlay').classList.add('show');
   haptic('light');
 }
 
 function closeSettingsPanel() {
   document.getElementById('settingsPanelOverlay').classList.remove('show');
-}
-
-function switchSettingsPane(name) {
-  document.querySelectorAll('#settingsPanel .modal-tab').forEach(t => t.classList.toggle('active', t.dataset.spane === name));
-  document.querySelectorAll('#settingsPanel .modal-pane').forEach(p => p.classList.toggle('active', p.dataset.spane === name));
-  haptic('light');
-}
-
-function pickModel(model) {
-  document.querySelectorAll('#settingsPanel .tag-pick[data-val^="claude"]').forEach(el => el.classList.toggle('active', el.dataset.val === model));
-  haptic('light');
-}
-
-async function saveAISettings() {
-  const apiKey = document.getElementById('settings-apikey').value.trim();
-  const modelEl = document.querySelector('#settingsPanel .tag-pick.active[data-val^="claude"]');
-  const model = modelEl ? modelEl.dataset.val : 'claude-sonnet-4-5';
-  const resultDiv = document.getElementById('apiTestResult');
-
-  if (!apiKey) {
-    resultDiv.innerHTML = '<div style="color:var(--danger);font-size:13px;padding:10px 0">⚠️ ضيف الـ API Key أولاً</div>';
-    return;
-  }
-  if (!apiKey.startsWith('sk-ant-')) {
-    resultDiv.innerHTML = '<div style="color:var(--danger);font-size:13px;padding:10px 0">⚠️ الـ Key لازم يبدأ بـ sk-ant-</div>';
-    return;
-  }
-
-  // Test the key with a minimal call
-  resultDiv.innerHTML = '<div style="color:var(--muted);font-size:13px;padding:10px 0">جاري اختبار الاتصال...</div>';
-
-  try {
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': apiKey,
-        'anthropic-version': '2023-06-01',
-        'anthropic-dangerous-direct-browser-access': 'true'
-      },
-      body: JSON.stringify({
-        model: model,
-        max_tokens: 50,
-        messages: [{ role: 'user', content: 'قول "تمام" بكلمة واحدة فقط' }]
-      })
-    });
-
-    if (response.ok) {
-      const data = await response.json();
-      prefs.apiKey = apiKey;
-      prefs.model = model;
-      savePrefs();
-      resultDiv.innerHTML = '<div style="color:var(--success);font-size:13px;padding:10px 0;font-weight:600">✓ تم الاتصال بنجاح! الـ AI شغال الحين</div>';
-      showToast('✓ AI متصل');
-      haptic('success');
-    } else {
-      const err = await response.text();
-      let msg = 'فيه مشكلة';
-      if (response.status === 401) msg = 'الـ API Key غير صحيح';
-      else if (response.status === 429) msg = 'تجاوزت الحد المسموح';
-      else if (err.includes('credit')) msg = 'رصيدك انتهى — اشحن من Anthropic Console';
-      resultDiv.innerHTML = `<div style="color:var(--danger);font-size:13px;padding:10px 0">⚠️ ${msg}</div>`;
-    }
-  } catch(err) {
-    resultDiv.innerHTML = '<div style="color:var(--danger);font-size:13px;padding:10px 0">⚠️ فيه مشكلة في الشبكة. تأكد من الإنترنت.</div>';
-  }
-}
-
-function saveIdentity() {
-  prefs.identity = {
-    bio: document.getElementById('id-bio').value.trim(),
-    location: document.getElementById('id-location').value.trim(),
-    goal: document.getElementById('id-goal').value.trim(),
-    audience: document.getElementById('id-audience').value.trim(),
-    tone: document.getElementById('id-tone').value.trim(),
-    style: document.getElementById('id-style').value.trim(),
-    pillars: document.getElementById('id-pillars').value.trim(),
-    brands: document.getElementById('id-brands').value.trim(),
-    dontUse: document.getElementById('id-dontuse').value.trim(),
-    extra: document.getElementById('id-extra').value.trim()
-  };
-  savePrefs();
-  showToast('✓ تم حفظ الهوية');
-  haptic('success');
 }
 
 function setTheme(theme) {
@@ -6243,6 +5604,7 @@ document.addEventListener('keydown', (e) => {
 
   // Esc closes modals
   if (e.key === 'Escape') {
+    if (document.getElementById('schedulePickerOverlay').classList.contains('show')) { closeSchedulePicker(); return; }
     if (document.getElementById('settingsPanelOverlay').classList.contains('show')) { closeSettingsPanel(); return; }
     if (document.getElementById('modalOverlay').classList.contains('show')) { closeModal(); return; }
     if (document.getElementById('libModalOverlay').classList.contains('show')) { closeLibModal(); return; }
@@ -6296,9 +5658,381 @@ window.addEventListener('scroll', () => {
 // ================================================================
 // RENDER
 // ================================================================
+// ================================================================
+// PRODUCTION SECTION (inline in Home)
+// ================================================================
+function setProdView(view) {
+  // 'week' = production days, 'month' = calendar
+  document.body.classList.remove('prod-view-week', 'prod-view-cal');
+  document.body.classList.add(view === 'month' ? 'prod-view-cal' : 'prod-view-week');
+  document.querySelectorAll('.prod-toggle-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.prodView === view);
+  });
+  haptic('light');
+  // Smooth scroll to top of section
+  setTimeout(() => {
+    const target = view === 'month' ? document.querySelector('.cal-section') : document.querySelector('.prod-section');
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 50);
+}
+
+function toggleProdDay(pillar) {
+  // Toggle: if same pillar clicked, close. Otherwise, open this one.
+  if (state.prodExpandedDay === pillar) {
+    state.prodExpandedDay = null;
+  } else {
+    state.prodExpandedDay = pillar;
+  }
+  // Just toggle classes without re-rendering everything
+  document.querySelectorAll('.prod-day').forEach(el => {
+    const isThis = el.dataset.pillar === pillar && state.prodExpandedDay === pillar;
+    el.classList.toggle('expanded', isThis);
+  });
+  haptic('light');
+}
+
+function getISOWeek(date) {
+  const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+  const dayNum = d.getUTCDay() || 7;
+  d.setUTCDate(d.getUTCDate() + 4 - dayNum);
+  const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+  return Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
+}
+
+function changeProdWeek(delta) {
+  state.prodWeekOffset += delta;
+  renderProductionView();
+  haptic('light');
+}
+
+function getProdWeekStart() {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const dayOfWeek = today.getDay();
+  const sunday = new Date(today.getTime() - dayOfWeek * 86400000);
+  sunday.setDate(sunday.getDate() + state.prodWeekOffset * 7);
+  return sunday;
+}
+
+function getPillarForDay(dayOfWeek) {
+  const sched = prefs.prodSchedule || DEFAULT_PROD_SCHEDULE;
+  for (const pillar of Object.keys(sched)) {
+    if (sched[pillar].day === dayOfWeek) return pillar;
+  }
+  return null;
+}
+
+function getIdeasForShootDate(dateStr) {
+  return state.ideas.filter(i => i.shootDate === dateStr && i.status !== 'published');
+}
+
+function renderProductionView() {
+  const sched = prefs.prodSchedule || DEFAULT_PROD_SCHEDULE;
+  const weekStart = getProdWeekStart();
+  const labels = ['SUN','MON','TUE','WED','THU','FRI','SAT'];
+  const labelsAr = ['الأحد','الإثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
+
+  let weekLabel;
+  if (state.prodWeekOffset === 0) weekLabel = 'هذا الأسبوع';
+  else if (state.prodWeekOffset === 1) weekLabel = 'الأسبوع الجاي';
+  else if (state.prodWeekOffset === -1) weekLabel = 'الأسبوع اللي راح';
+  else if (state.prodWeekOffset > 0) weekLabel = `بعد ${state.prodWeekOffset} أسابيع`;
+  else weekLabel = `قبل ${Math.abs(state.prodWeekOffset)} أسابيع`;
+  document.getElementById('prodWeekLabel').textContent = weekLabel;
+
+  // Week number
+  const wkNumEl = document.getElementById('prodWeekNum');
+  if (wkNumEl) {
+    const weekNum = getISOWeek(weekStart);
+    wkNumEl.textContent = 'W' + String(weekNum).padStart(2, '0');
+  }
+
+  let totalReady = 0, totalPending = 0, totalCap = 0;
+  Object.keys(sched).forEach(pillar => {
+    const cap = sched[pillar].capacity;
+    totalCap += cap;
+    const dayOfPillar = sched[pillar].day;
+    const date = new Date(weekStart.getTime() + dayOfPillar * 86400000);
+    const dateStr = formatDate(date.getFullYear(), date.getMonth(), date.getDate());
+    const ideas = getIdeasForShootDate(dateStr).filter(i => i.pillar === pillar);
+    if (ideas.length >= cap) totalReady += cap;
+    else { totalReady += ideas.length; totalPending += (cap - ideas.length); }
+  });
+  const backlogCount = state.ideas.filter(i => !i.shootDate && i.status !== 'published').length;
+  document.getElementById('prodReady').textContent = totalReady;
+  document.getElementById('prodPending').textContent = totalPending;
+  document.getElementById('prodBacklog').textContent = backlogCount;
+
+  // Animate progress bars
+  const readyPct = totalCap > 0 ? (totalReady / totalCap) * 100 : 0;
+  const pendingPct = totalCap > 0 ? (totalPending / totalCap) * 100 : 0;
+  const readyBar = document.getElementById('prodReadyBar');
+  const pendingBar = document.getElementById('prodPendingBar');
+  if (readyBar) readyBar.style.width = readyPct + '%';
+  if (pendingBar) pendingBar.style.width = pendingPct + '%';
+
+  const container = document.getElementById('prodDays');
+  container.innerHTML = '';
+
+  for (let i = 0; i < 7; i++) {
+    const date = new Date(weekStart.getTime() + i * 86400000);
+    const dateStr = formatDate(date.getFullYear(), date.getMonth(), date.getDate());
+    const dayOfWeek = date.getDay();
+    const pillar = getPillarForDay(dayOfWeek);
+    const dayIdeas = getIdeasForShootDate(dateStr).filter(idea => !pillar || idea.pillar === pillar);
+
+    const dayEl = document.createElement('div');
+    dayEl.className = 'prod-day';
+
+    if (!pillar) {
+      dayEl.classList.add('empty-day');
+      dayEl.innerHTML = `
+        <div class="prod-day-header">
+          <div class="prod-day-left">
+            <div class="prod-day-num">${date.getDate()}</div>
+            <div class="prod-day-info">
+              <div class="prod-day-name">${labels[dayOfWeek]} · ${labelsAr[dayOfWeek]}</div>
+              <div class="prod-day-pillar">REST · راحة</div>
+            </div>
+          </div>
+          <div class="prod-day-status rest">راحة</div>
+        </div>
+        <div class="prod-day-rest">// no shoot today</div>
+      `;
+      container.appendChild(dayEl);
+      continue;
+    }
+
+    const conf = sched[pillar];
+    const cap = conf.capacity;
+    const backupCap = conf.backup;
+    const filled = dayIdeas.length;
+    const mainFilled = Math.min(filled, cap);
+    const backupFilled = Math.max(0, filled - cap);
+    const pctMain = Math.min(100, (mainFilled / cap) * 100);
+    dayEl.classList.add('c-' + conf.color);
+    dayEl.dataset.pillar = pillar;
+
+    let statusClass = 'empty';
+    let statusText = 'فاضي';
+    if (mainFilled >= cap) { statusClass = 'ready'; statusText = '✓ جاهز'; dayEl.classList.add('full-day'); }
+    else if (mainFilled > 0) { statusClass = 'partial'; statusText = `${mainFilled}/${cap}`; }
+    else { dayEl.classList.add('empty-pillar'); }
+
+    let mainHtml = '';
+    for (let s = 0; s < cap; s++) {
+      if (s < mainFilled) {
+        const idea = dayIdeas[s];
+        mainHtml += `<div class="prod-mini-card" onclick="event.stopPropagation();openIdeaModal('${idea.id}')">
+          <div class="prod-mini-card-num">${String(s + 1).padStart(2, '0')}</div>
+          <div class="prod-mini-card-title">${escapeHtml(idea.title)}</div>
+        </div>`;
+      } else {
+        mainHtml += `<div class="prod-empty-slot">slot ${String(s + 1).padStart(2, '0')} · فاضي</div>`;
+      }
+    }
+
+    let backupHtml = '';
+    if (backupCap > 0) {
+      backupHtml = `<div class="prod-backup-divider">
+        <div class="prod-backup-divider-line"></div>
+        <div class="prod-backup-divider-text">// احتياط · ${backupFilled}/${backupCap}</div>
+        <div class="prod-backup-divider-line"></div>
+      </div>`;
+      for (let s = 0; s < backupCap; s++) {
+        if (s < backupFilled) {
+          const idea = dayIdeas[cap + s];
+          backupHtml += `<div class="prod-mini-card backup" onclick="event.stopPropagation();openIdeaModal('${idea.id}')">
+            <div class="prod-mini-card-num">B${String(s + 1).padStart(2, '0')}</div>
+            <div class="prod-mini-card-title">${escapeHtml(idea.title)}</div>
+          </div>`;
+        } else {
+          backupHtml += `<div class="prod-empty-slot">backup ${String(s + 1).padStart(2, '0')} · فاضي</div>`;
+        }
+      }
+    }
+
+    dayEl.innerHTML = `
+      <div class="prod-day-header" onclick="toggleProdDay('${pillar}')">
+        <div class="prod-day-left">
+          <div class="prod-day-num">${date.getDate()}</div>
+          <div class="prod-day-info">
+            <div class="prod-day-name">${labels[dayOfWeek]} · ${labelsAr[dayOfWeek]}</div>
+            <div class="prod-day-pillar">${conf.label} · ${conf.ar}</div>
+          </div>
+        </div>
+        <div class="prod-day-header-right">
+          <div class="prod-day-status ${statusClass}">${statusText}</div>
+          <div class="prod-day-chevron">⌄</div>
+        </div>
+      </div>
+      <div class="prod-progress-bar"><div class="prod-progress-fill" style="width:${pctMain}%"></div></div>
+      <div class="prod-day-summary">
+        <span class="prod-day-summary-text">${mainFilled}/${cap} أساسي${backupCap > 0 ? ` · ${backupFilled}/${backupCap} احتياط` : ''}</span>
+      </div>
+      <div class="prod-day-body">
+        <div class="prod-progress-text">// main · ${mainFilled}/${cap}</div>
+        <div class="prod-day-ideas">${mainHtml}${backupHtml}</div>
+      </div>
+    `;
+
+    if (state.prodExpandedDay === pillar) {
+      dayEl.classList.add('expanded');
+    }
+
+    container.appendChild(dayEl);
+  }
+
+  renderProdBacklog();
+}
+
+function setProdBacklogFilter(p) {
+  state.prodBacklogFilter = p;
+  document.querySelectorAll('.prod-backlog-tabs .filter-pill').forEach(el => el.classList.toggle('active', el.dataset.prodPillar === p));
+  renderProdBacklog();
+}
+
+function renderProdBacklog() {
+  const list = document.getElementById('prodBacklogList');
+  const filter = state.prodBacklogFilter || 'all';
+  let backlog = state.ideas.filter(i => !i.shootDate && i.status !== 'published');
+  if (filter !== 'all') backlog = backlog.filter(i => i.pillar === filter);
+
+  if (backlog.length === 0) {
+    list.innerHTML = `<div class="prod-empty-state">∅ ما فيه أفكار بدون يوم تصوير</div>`;
+    return;
+  }
+
+  const pillarLabels = { style:'STYLE · ملابس', food:'FOOD · طبخ', fitness:'FITNESS · فتنس', skincare:'SKINCARE · سكن كير' };
+  const groups = { style: [], food: [], fitness: [], skincare: [] };
+  backlog.forEach(i => { if (groups[i.pillar]) groups[i.pillar].push(i); });
+
+  let html = '';
+  Object.keys(groups).forEach(pillar => {
+    const ideas = groups[pillar];
+    if (ideas.length === 0) return;
+    if (filter !== 'all' && filter !== pillar) return;
+    html += `<div class="prod-pillar-group">
+      <div class="prod-pillar-group-title">// ${pillarLabels[pillar]} · ${ideas.length}</div>`;
+    ideas.forEach(idea => {
+      const sub = idea.hook || idea.desc || '';
+      html += `<div class="prod-backlog-card">
+        <div class="prod-backlog-card-content" onclick="openIdeaModal('${idea.id}')">
+          <div class="prod-backlog-card-title">${escapeHtml(idea.title)}</div>
+          ${sub ? `<div class="prod-backlog-card-meta">${escapeHtml(sub.slice(0, 80))}</div>` : ''}
+        </div>
+        <button class="prod-schedule-btn" onclick="openSchedulePicker('${idea.id}')">جدول</button>
+      </div>`;
+    });
+    html += `</div>`;
+  });
+
+  list.innerHTML = html || `<div class="prod-empty-state">∅ ما فيه أفكار في هذا التصنيف</div>`;
+}
+
+// Show schedule picker modal with next 4 available shoot days for the pillar
+function openSchedulePicker(ideaId) {
+  const idea = state.ideas.find(i => i.id === ideaId);
+  if (!idea) return;
+  const sched = prefs.prodSchedule || DEFAULT_PROD_SCHEDULE;
+  const conf = sched[idea.pillar];
+  if (!conf) {
+    showToast('اختر محور للفكرة أولاً');
+    openIdeaModal(ideaId);
+    return;
+  }
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const totalCap = conf.capacity + conf.backup;
+  const labelsAr = ['الأحد','الإثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
+  const monthsAr = ['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
+
+  const options = [];
+  for (let w = 0; w < 8 && options.length < 4; w++) {
+    const sundayThisWeek = new Date(today.getTime() - today.getDay() * 86400000);
+    const weekStart = new Date(sundayThisWeek.getTime() + w * 7 * 86400000);
+    const date = new Date(weekStart.getTime() + conf.day * 86400000);
+    if (date < today) continue;
+    const dateStr = formatDate(date.getFullYear(), date.getMonth(), date.getDate());
+    const existing = getIdeasForShootDate(dateStr).filter(i => i.pillar === idea.pillar);
+    options.push({
+      dateStr,
+      date,
+      filled: existing.length,
+      cap: conf.capacity,
+      total: totalCap,
+      isFull: existing.length >= totalCap
+    });
+  }
+
+  const overlay = document.getElementById('schedulePickerOverlay');
+  document.getElementById('schedulePickerTitle').textContent = idea.title.slice(0, 40) + (idea.title.length > 40 ? '...' : '');
+  document.getElementById('schedulePickerSub').textContent = `// ${conf.label} · ${conf.ar} — اختر يوم التصوير`;
+
+  let html = '';
+  options.forEach((opt) => {
+    const dayName = labelsAr[opt.date.getDay()];
+    const monthName = monthsAr[opt.date.getMonth()];
+    const dayNum = opt.date.getDate();
+    let statusText, statusClass;
+    if (opt.isFull) { statusText = 'ممتلئ'; statusClass = 'full'; }
+    else if (opt.filled >= opt.cap) { statusText = `احتياط · ${opt.filled - opt.cap}/${opt.total - opt.cap}`; statusClass = 'backup'; }
+    else if (opt.filled === 0) { statusText = 'فاضي'; statusClass = 'empty'; }
+    else { statusText = `${opt.filled}/${opt.cap}`; statusClass = 'partial'; }
+
+    html += `<div class="sp-option ${opt.isFull ? 'disabled' : ''}" ${opt.isFull ? '' : `onclick="confirmSchedule('${ideaId}','${opt.dateStr}')"`}>
+      <div class="sp-option-left">
+        <div class="sp-option-day">${dayName}</div>
+        <div class="sp-option-date">${dayNum} ${monthName}</div>
+      </div>
+      <div class="sp-option-status ${statusClass}">${statusText}</div>
+    </div>`;
+  });
+
+  if (options.length === 0) {
+    html = '<div class="prod-empty-state">ما فيه أيام متاحة</div>';
+  }
+
+  document.getElementById('schedulePickerList').innerHTML = html;
+  overlay.classList.add('show');
+  haptic('light');
+}
+
+function closeSchedulePicker() {
+  document.getElementById('schedulePickerOverlay').classList.remove('show');
+}
+
+function confirmSchedule(ideaId, dateStr) {
+  const idea = state.ideas.find(i => i.id === ideaId);
+  if (!idea) return;
+  idea.shootDate = dateStr;
+  save();
+  closeSchedulePicker();
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const sunday = new Date(today.getTime() - today.getDay() * 86400000);
+  const [y, m, d] = dateStr.split('-').map(Number);
+  const targetDate = new Date(y, m - 1, d);
+  const targetSunday = new Date(targetDate.getTime() - targetDate.getDay() * 86400000);
+  const diffWeeks = Math.round((targetSunday - sunday) / (7 * 86400000));
+  state.prodWeekOffset = diffWeeks;
+
+  renderProductionView();
+  haptic('success');
+  const labelsAr = ['الأحد','الإثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
+  showToast(`✓ ${labelsAr[targetDate.getDay()]} ${targetDate.getDate()}/${targetDate.getMonth() + 1}`);
+  // Scroll up to show the day with the new idea
+  setTimeout(() => {
+    const prodSection = document.querySelector('.prod-section');
+    if (prodSection) prodSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 200);
+}
+
 function render() {
   if (state.view.name === 'home') {
-    renderHome(); renderCalendar();
+    renderHome(); renderCalendar(); renderProductionView();
     updateStreakBadge();
     updateProgressRing();
     renderSmartBanner();
@@ -6307,8 +6041,6 @@ function render() {
     renderPlatformView();
   } else if (state.view.name === 'analytics') {
     renderAnalytics();
-  } else if (state.view.name === 'production') {
-    renderProductionView();
   }
 }
 
@@ -6317,8 +6049,8 @@ function render() {
 // ================================================================
 load();
 applyTheme();
-applyAdvancedMode();
 seedIfEmpty();
+document.body.classList.add('prod-view-week');
 render();
 setTimeout(observeReveal, 100);
 </script>
