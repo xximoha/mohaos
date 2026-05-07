@@ -1305,6 +1305,17 @@ body::before {
 .tag-pick.diff-medium.active { background: var(--p-style); border-color: var(--p-style); color: white; }
 .tag-pick.diff-hard.active { background: var(--p-fitness); border-color: var(--p-fitness); color: white; }
 
+/* Difficulty filter pills (platform view) */
+.filter-pill.diff-pill-easy::before { content: '●'; color: var(--p-food); margin-left: 6px; font-size: 8px; }
+.filter-pill.diff-pill-medium::before { content: '●'; color: var(--p-style); margin-left: 6px; font-size: 8px; }
+.filter-pill.diff-pill-hard::before { content: '●'; color: var(--p-fitness); margin-left: 6px; font-size: 8px; }
+.filter-pill.diff-pill-easy.active { background: var(--p-food); border-color: var(--p-food); color: white; }
+.filter-pill.diff-pill-medium.active { background: var(--p-style); border-color: var(--p-style); color: white; }
+.filter-pill.diff-pill-hard.active { background: var(--p-fitness); border-color: var(--p-fitness); color: white; }
+.filter-pill.diff-pill-easy.active::before,
+.filter-pill.diff-pill-medium.active::before,
+.filter-pill.diff-pill-hard.active::before { color: white; }
+
 .btn {
   width: 100%;
   padding: 14px;
@@ -2830,6 +2841,13 @@ body::before {
   </div>
 
   <div class="filter-row">
+    <div class="filter-pill active" data-difficulty="all" onclick="setDifficultyFilter('all')">كل الصعوبات</div>
+    <div class="filter-pill diff-pill-easy" data-difficulty="easy" onclick="setDifficultyFilter('easy')">سهل</div>
+    <div class="filter-pill diff-pill-medium" data-difficulty="medium" onclick="setDifficultyFilter('medium')">متوسط</div>
+    <div class="filter-pill diff-pill-hard" data-difficulty="hard" onclick="setDifficultyFilter('hard')">يحتاج وقت</div>
+  </div>
+
+  <div class="filter-row">
     <div class="filter-pill active" data-pillar="all" onclick="setPillarFilter('all')">All</div>
     <div class="filter-pill" data-pillar="style" onclick="setPillarFilter('style')">Style</div>
     <div class="filter-pill" data-pillar="food" onclick="setPillarFilter('food')">Food</div>
@@ -3358,6 +3376,7 @@ let state = {
   homeTab: 'today',
   timeTab: 'today',
   pillarFilter: 'all',
+  difficultyFilter: 'all',
   calMonth: new Date(2026, 4, 1),
   calView: 'month',
   selectedDay: null,
@@ -3939,6 +3958,12 @@ function setPillarFilter(p) {
   document.querySelectorAll('.filter-pill[data-pillar]').forEach(t => t.classList.toggle('active', t.dataset.pillar === p));
   renderPlatformList();
 }
+function setDifficultyFilter(d) {
+  state.difficultyFilter = d;
+  document.querySelectorAll('.filter-pill[data-difficulty]').forEach(t => t.classList.toggle('active', t.dataset.difficulty === d));
+  renderPlatformList();
+  haptic('light');
+}
 function renderPlatformView() {
   const p = state.platform;
   const titles = { tiktok:'TIKTOK', insta:'INSTAGRAM', youtube:'YOUTUBE' };
@@ -3955,6 +3980,7 @@ function renderPlatformList() {
   const list = document.getElementById('platformList');
   let ideas = state.ideas.filter(i => i.platform === state.platform);
   if (state.pillarFilter !== 'all') ideas = ideas.filter(i => i.pillar === state.pillarFilter);
+  if (state.difficultyFilter !== 'all') ideas = ideas.filter(i => i.difficulty === state.difficultyFilter);
   const today = new Date();
   const todayStr = formatDate(today.getFullYear(), today.getMonth(), today.getDate());
   const tomorrow = new Date(today.getTime() + 86400000);
