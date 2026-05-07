@@ -617,6 +617,38 @@ body::before {
   font-style: italic;
 }
 
+.repost-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255,255,255,0.22);
+  border: 1px solid rgba(255,255,255,0.35);
+  color: inherit;
+  font-family: 'Cairo', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 7px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+  margin-top: 10px;
+  align-self: flex-start;
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.repost-btn:hover {
+  background: rgba(255,255,255,0.35);
+  transform: translateY(-1px);
+}
+.repost-btn:active { transform: translateY(0) scale(0.97); }
+.repost-btn.done {
+  background: rgba(0,0,0,0.22);
+  border-color: rgba(0,0,0,0.15);
+  cursor: default;
+}
+.idea-card.c-green .repost-btn,
+.idea-card.c-yellow .repost-btn { background: rgba(0,0,0,0.12); border-color: rgba(0,0,0,0.18); }
+.idea-card.c-green .repost-btn:hover,
+.idea-card.c-yellow .repost-btn:hover { background: rgba(0,0,0,0.22); }
+
 .idea-row-bottom {
   display: flex;
   justify-content: space-between;
@@ -991,6 +1023,11 @@ body::before {
 .platform-pill.tiktok::before { background: var(--c-maroon); }
 .platform-pill.insta::before { background: var(--c-lavender); }
 .platform-pill.youtube::before { background: var(--c-orange); }
+.platform-pill.reels::before { background: linear-gradient(180deg, var(--c-maroon) 0%, var(--c-lavender) 100%); width: 6px; }
+.platform-pill.reels {
+  background: linear-gradient(135deg, color-mix(in srgb, var(--c-maroon) 8%, var(--surface)) 0%, color-mix(in srgb, var(--c-lavender) 8%, var(--surface)) 100%);
+  border-color: color-mix(in srgb, var(--c-maroon) 25%, var(--line));
+}
 .platform-pill:hover {
   transform: translateY(-3px);
   box-shadow: 0 14px 32px var(--shadow);
@@ -2792,16 +2829,23 @@ body::before {
   <div class="platforms-row">
     <div class="platforms-row-title reveal">PLATFORMS</div>
     <div class="platforms-grid">
-      <div class="platform-pill tiktok reveal d1" onclick="navigate('platform','tiktok')">
+      <div class="platform-pill reels reveal d1" onclick="navigate('platform','reels')">
         <div class="pp-left">
-          <div class="pp-name">TIKTOK</div>
+          <div class="pp-name">REELS</div>
+          <div class="pp-stats"><span id="ct-reels">0</span> IDEAS · TIKTOK + INSTAGRAM</div>
+        </div>
+        <div class="pp-arrow">‹</div>
+      </div>
+      <div class="platform-pill tiktok reveal d2" onclick="navigate('platform','tiktok')">
+        <div class="pp-left">
+          <div class="pp-name">TIKTOK ONLY</div>
           <div class="pp-stats"><span id="ct-tiktok">0</span> IDEAS</div>
         </div>
         <div class="pp-arrow">‹</div>
       </div>
-      <div class="platform-pill insta reveal d2" onclick="navigate('platform','insta')">
+      <div class="platform-pill insta reveal d3" onclick="navigate('platform','insta')">
         <div class="pp-left">
-          <div class="pp-name">INSTAGRAM</div>
+          <div class="pp-name">INSTAGRAM ONLY</div>
           <div class="pp-stats"><span id="ct-insta">0</span> IDEAS</div>
         </div>
         <div class="pp-arrow">‹</div>
@@ -2809,7 +2853,7 @@ body::before {
       <div class="platform-pill youtube reveal d3" onclick="navigate('platform','youtube')">
         <div class="pp-left">
           <div class="pp-name">YOUTUBE</div>
-          <div class="pp-stats"><span id="ct-youtube">0</span> IDEAS</div>
+          <div class="pp-stats"><span id="ct-youtube">0</span> IDEAS · LONG-FORM</div>
         </div>
         <div class="pp-arrow">‹</div>
       </div>
@@ -3463,7 +3507,151 @@ const SEED_IDEAS = [
   { platform:'youtube', pillar:'fitness', title:'Long-form: God Mission Explained', hook:'كل اللي تعلمته', desc:'فيديو ٣٠-٤٠ دقيقة.', location:'both', difficulty:'hard' },
   { platform:'youtube', pillar:'fitness', title:'Short: 3 Bench Mistakes', hook:'ريبوست تيك توك', desc:'YouTube Short.', location:'indoor', difficulty:'easy' },
   { platform:'youtube', pillar:'skincare', title:'Long-form: My Skin Story', hook:'كيف بنيت بشرتي', desc:'فيديو ٢٠-٢٥ دقيقة.', location:'indoor', difficulty:'hard' },
-  { platform:'youtube', pillar:'style', title:'سوالف Episode 01 — البداية', hook:'حلقة بودكاست أولى', desc:'فيديو ٤٥-٦٠ دقيقة في مكان طبيعي.', location:'outdoor', difficulty:'hard' }
+  { platform:'youtube', pillar:'style', title:'سوالف Episode 01 — البداية', hook:'حلقة بودكاست أولى', desc:'فيديو ٤٥-٦٠ دقيقة في مكان طبيعي.', location:'outdoor', difficulty:'hard' },
+  // ============ NEW SEED IDEAS — 120 (10 per platform per pillar) ============
+  // TikTok · Style (10)
+  { platform:'tiktok', pillar:'style', title:'وش يلبس الرجل الناضج بعد الـ ٢٥', hook:'الفرق بين شاب وزلمة', desc:'٣ قطع تفرق العمر في اللبس.', location:'indoor', difficulty:'easy' },
+  { platform:'tiktok', pillar:'style', title:'فيت كامل بـ ٣٠٠ درهم', hook:'تحدي ميزانية', desc:'تنزل ثرفت ستور وتنسق فيت كامل.', location:'outdoor', difficulty:'medium' },
+  { platform:'tiktok', pillar:'style', title:'لماذا اللون البيج هو ملك الخليج', hook:'يناسب البشرة، يناسب الجو', desc:'تحليل سريع للون البيج.', location:'indoor', difficulty:'easy' },
+  { platform:'tiktok', pillar:'style', title:'٣ ساعات تطلع بـ ٣ شخصيات مختلفة', hook:'الساعة = هوية', desc:'نفس الفيت + ٣ ساعات مختلفة.', location:'indoor', difficulty:'medium' },
+  { platform:'tiktok', pillar:'style', title:'ايش الفرق بين Smart Casual و Business Casual', hook:'٩٩٪ ما يعرفون الفرق', desc:'مقارنة بصرية.', location:'indoor', difficulty:'medium' },
+  { platform:'tiktok', pillar:'style', title:'كيف تختار البنطلون الصح', hook:'الطول، القصة، اللون', desc:'٣ قواعد للبنطلون.', location:'indoor', difficulty:'easy' },
+  { platform:'tiktok', pillar:'style', title:'الجاكيت اللي يكسر كل فيت', hook:'قطعة واحدة تخرب كل شي', desc:'أخطاء في اختيار الجاكيت.', location:'indoor', difficulty:'medium' },
+  { platform:'tiktok', pillar:'style', title:'ستايل الصيف الخليجي ما له دخل بأوروبا', hook:'الجو يفرض اللبس', desc:'نسج طبيعية، ألوان فاتحة.', location:'outdoor', difficulty:'medium' },
+  { platform:'tiktok', pillar:'style', title:'الحذاء يفضح كل واحد', hook:'الحذاء = درجة الذوق', desc:'٣ أحذية تطلع كل فيت.', location:'indoor', difficulty:'easy' },
+  { platform:'tiktok', pillar:'style', title:'ليش العطر جزء من الستايل', hook:'الناس تتذكرك بالعطر', desc:'العطر = طبقة لبس.', location:'indoor', difficulty:'easy' },
+
+  // TikTok · Food (10)
+  { platform:'tiktok', pillar:'food', title:'فطور بـ ٢ درهم يطعم نص النهار', hook:'بيض + خبز + زبدة فول', desc:'فطور رخيص وقوي.', location:'indoor', difficulty:'easy' },
+  { platform:'tiktok', pillar:'food', title:'كل واحد يستشهد بالكينوا — مالها فايدة فعلية', hook:'الأرز يكفي', desc:'مقارنة بين الأرز والكينوا.', location:'indoor', difficulty:'easy' },
+  { platform:'tiktok', pillar:'food', title:'وش أكل لاعبي كرة القدم في رمضان', hook:'٨ ساعات بدون أكل', desc:'الفطور والسحور المثالي.', location:'indoor', difficulty:'medium' },
+  { platform:'tiktok', pillar:'food', title:'أحلى آيس كريم بدون آلة', hook:'موز + بروتين + فريز', desc:'وصفة آيس كريم بروتين.', location:'indoor', difficulty:'easy' },
+  { platform:'tiktok', pillar:'food', title:'٣ أكلات خليجية فيها بروتين أكثر من الستيك', hook:'مرقة + هريس + ثريد', desc:'تحليل الأكلات التقليدية.', location:'indoor', difficulty:'medium' },
+  { platform:'tiktok', pillar:'food', title:'صحة الأمعاء = صحة عقلك', hook:'٧٠٪ من المناعة في الأمعاء', desc:'أكلات تحسن الهضم.', location:'indoor', difficulty:'medium' },
+  { platform:'tiktok', pillar:'food', title:'حقيقة الـ Diet Coke', hook:'صفر سعرات لكن', desc:'الأضرار المخفية.', location:'indoor', difficulty:'easy' },
+  { platform:'tiktok', pillar:'food', title:'تجربة ٧ أيام بدون قهوة', hook:'وش صار في طاقتي', desc:'تجربة شخصية موثقة.', location:'both', difficulty:'medium' },
+  { platform:'tiktok', pillar:'food', title:'أكلت في ١٠ مطاعم أبوظبي خلال يوم', hook:'تحدي مطاعم', desc:'جولة سريعة على ١٠ أماكن.', location:'outdoor', difficulty:'hard' },
+  { platform:'tiktok', pillar:'food', title:'ساندوتش بروتين خمس دقايق', hook:'٤٠ غرام بروتين', desc:'وصفة سريعة.', location:'indoor', difficulty:'easy' },
+
+  // TikTok · Fitness (10)
+  { platform:'tiktok', pillar:'fitness', title:'تمرين سكوات الصح', hook:'٩٠٪ يسوونه غلط', desc:'الـ Form الصحيح.', location:'indoor', difficulty:'medium' },
+  { platform:'tiktok', pillar:'fitness', title:'ليش رفع الأثقال أهم من الكارديو', hook:'بعد ٣٠ بدأ يبان الفرق', desc:'العضلة = حماية للمستقبل.', location:'indoor', difficulty:'easy' },
+  { platform:'tiktok', pillar:'fitness', title:'الإفطار قبل التمرين ولا بعده؟', hook:'الجواب يعتمد على هدفك', desc:'فرق بين Fasted و Fed.', location:'indoor', difficulty:'easy' },
+  { platform:'tiktok', pillar:'fitness', title:'تمرين البطن اللي يخرب ظهرك', hook:'Crunches = خطر', desc:'تمارين بديلة آمنة.', location:'indoor', difficulty:'medium' },
+  { platform:'tiktok', pillar:'fitness', title:'كم مرة تمرن العضلة في الأسبوع؟', hook:'مرة وحدة ما تكفي', desc:'٢-٣ مرات للعضلة.', location:'indoor', difficulty:'easy' },
+  { platform:'tiktok', pillar:'fitness', title:'٣ تمارين تكبر الكتف بسرعة', hook:'كتف عريض = شخصية كبيرة', desc:'٣ تمارين أساسية.', location:'indoor', difficulty:'medium' },
+  { platform:'tiktok', pillar:'fitness', title:'ليش انت ما تكبر — ٣ أسباب', hook:'الجيم بدون نوم = صفر', desc:'النوم، البروتين، التكرار.', location:'indoor', difficulty:'easy' },
+  { platform:'tiktok', pillar:'fitness', title:'مشي ١٠ آلاف خطوة — حقيقة ولا وهم؟', hook:'رقم اخترع للتسويق', desc:'الحقيقة العلمية.', location:'outdoor', difficulty:'medium' },
+  { platform:'tiktok', pillar:'fitness', title:'الديدليفت — التمرين اللي يبني كل شي', hook:'تمرين واحد = جسم كامل', desc:'فوائد الديدليفت.', location:'indoor', difficulty:'medium' },
+  { platform:'tiktok', pillar:'fitness', title:'وش أسوي لو ما عندي وقت للجيم؟', hook:'٢٠ دقيقة في البيت', desc:'تمرين سريع كامل.', location:'indoor', difficulty:'easy' },
+
+  // TikTok · Skincare (10)
+  { platform:'tiktok', pillar:'skincare', title:'الفرق بين Cleanser و Face Wash', hook:'٩٥٪ ما يعرفون الفرق', desc:'شرح بصري سريع.', location:'indoor', difficulty:'easy' },
+  { platform:'tiktok', pillar:'skincare', title:'متى تستخدم Retinol وكيف', hook:'القاعدة الذهبية', desc:'مساء فقط، تدريجي.', location:'indoor', difficulty:'medium' },
+  { platform:'tiktok', pillar:'skincare', title:'بشرة الرجل تختلف عن المرأة', hook:'٣٠٪ أكثر سماكة', desc:'منتجات خاصة بالرجل.', location:'indoor', difficulty:'easy' },
+  { platform:'tiktok', pillar:'skincare', title:'حقن البوتوكس للرجال — رأيي الصريح', hook:'فيها صح وفيها غلط', desc:'تحليل غير منحاز.', location:'indoor', difficulty:'medium' },
+  { platform:'tiktok', pillar:'skincare', title:'أفضل غسول لـ ٢٠٠ درهم', hook:'مو دائماً الأغلى أحسن', desc:'مقارنة بين منتجات.', location:'indoor', difficulty:'easy' },
+  { platform:'tiktok', pillar:'skincare', title:'تحت العين — الهالات السوداء', hook:'٣ أسباب و٣ حلول', desc:'الجينات، النوم، الترطيب.', location:'indoor', difficulty:'medium' },
+  { platform:'tiktok', pillar:'skincare', title:'ايش الفرق بين Niacinamide و Vitamin C', hook:'الاثنين Active Ingredients', desc:'متى تستخدم كل واحد.', location:'indoor', difficulty:'medium' },
+  { platform:'tiktok', pillar:'skincare', title:'الـ Skincare Order الصح', hook:'الخفيف للثقيل', desc:'ترتيب تطبيق المنتجات.', location:'indoor', difficulty:'easy' },
+  { platform:'tiktok', pillar:'skincare', title:'الحمام البارد — يفيد البشرة فعلاً؟', hook:'تجربة ٣٠ يوم', desc:'تجربة شخصية.', location:'indoor', difficulty:'medium' },
+  { platform:'tiktok', pillar:'skincare', title:'منتج واحد لو تختار، اختار هذا', hook:'الـ sunscreen', desc:'لماذا الـ SPF أهم من الكل.', location:'indoor', difficulty:'easy' },
+
+  // Instagram · Style (10)
+  { platform:'insta', pillar:'style', title:'Editorial: Black & Beige Story', hook:'لونين بس، عشر صور', desc:'كاروسيل ١٠ صور.', location:'both', difficulty:'hard' },
+  { platform:'insta', pillar:'style', title:'Reel: Closet Tour', hook:'جولة في خزانتي', desc:'Reel ٣٠ ثانية.', location:'indoor', difficulty:'medium' },
+  { platform:'insta', pillar:'style', title:'Photo: Watch & Wrist', hook:'ساعة + كم القميص', desc:'صورة Macro.', location:'indoor', difficulty:'easy' },
+  { platform:'insta', pillar:'style', title:'Carousel: ٧ كتب غيرت ذوقي', hook:'الستايل يبدأ من القراءة', desc:'٧ سلايدات.', location:'indoor', difficulty:'medium' },
+  { platform:'insta', pillar:'style', title:'Reel: Get Ready With Me', hook:'الفيت من البداية', desc:'Reel ٤٠ ثانية.', location:'indoor', difficulty:'medium' },
+  { platform:'insta', pillar:'style', title:'Editorial: Desert Fit', hook:'فيت في الصحراء', desc:'صورة سينمائية.', location:'outdoor', difficulty:'hard' },
+  { platform:'insta', pillar:'style', title:'Carousel: Fit Inspiration ٢٠٢٦', hook:'٨ مراجع للسنة', desc:'٨ صور مرجعية.', location:'indoor', difficulty:'easy' },
+  { platform:'insta', pillar:'style', title:'Reel: Jacket Layering', hook:'٣ طبقات، فيت واحد', desc:'Reel سريع.', location:'indoor', difficulty:'medium' },
+  { platform:'insta', pillar:'style', title:'Photo: Suit Detail', hook:'البدلة في التفاصيل', desc:'صورة Detail Shot.', location:'indoor', difficulty:'easy' },
+  { platform:'insta', pillar:'style', title:'Carousel: Style Heroes', hook:'٥ أشخاص ألهموني', desc:'٥ سلايدات.', location:'indoor', difficulty:'easy' },
+
+  // Instagram · Food (10)
+  { platform:'insta', pillar:'food', title:'Reel: Coffee Ritual', hook:'القهوة كبداية لليوم', desc:'Reel ٢٠ ثانية slow-mo.', location:'indoor', difficulty:'medium' },
+  { platform:'insta', pillar:'food', title:'Carousel: ٥ مطاعم أبوظبي خفية', hook:'مطاعم ما يعرفها السياح', desc:'٥ سلايدات بصور.', location:'outdoor', difficulty:'hard' },
+  { platform:'insta', pillar:'food', title:'Editorial: Plate Composition', hook:'الصحن كلوحة', desc:'صورة Top View.', location:'indoor', difficulty:'medium' },
+  { platform:'insta', pillar:'food', title:'Reel: Smoothie Bowl Aesthetic', hook:'بول صحي + جمالي', desc:'Reel ١٥ ثانية.', location:'indoor', difficulty:'medium' },
+  { platform:'insta', pillar:'food', title:'Carousel: Macros Visualized', hook:'بصرياً بدل أرقام', desc:'٦ سلايدات تعليمية.', location:'indoor', difficulty:'medium' },
+  { platform:'insta', pillar:'food', title:'Photo: Morning Eggs', hook:'٤ بيضات + سبانخ', desc:'صورة Macro للفطور.', location:'indoor', difficulty:'easy' },
+  { platform:'insta', pillar:'food', title:'Reel: 60-Second Recipe', hook:'وصفة كاملة في دقيقة', desc:'Reel سريع.', location:'indoor', difficulty:'medium' },
+  { platform:'insta', pillar:'food', title:'Carousel: Pantry Essentials', hook:'٨ أساسيات في خزانتي', desc:'كاروسيل ٨ صور.', location:'indoor', difficulty:'easy' },
+  { platform:'insta', pillar:'food', title:'Photo: Restaurant Editorial', hook:'لقطة Cinematic للمطعم', desc:'صورة في مطعم محلي.', location:'outdoor', difficulty:'medium' },
+  { platform:'insta', pillar:'food', title:'Reel: Dessert Without Sugar', hook:'حلى بدون سكر', desc:'Reel ٢٠ ثانية.', location:'indoor', difficulty:'medium' },
+
+  // Instagram · Fitness (10)
+  { platform:'insta', pillar:'fitness', title:'Reel: Heavy Squat Day', hook:'يوم الأرجل الثقيل', desc:'Reel ٣٠ ثانية.', location:'indoor', difficulty:'hard' },
+  { platform:'insta', pillar:'fitness', title:'Carousel: My Training Split', hook:'الـ ٤ أيام اللي بنوني', desc:'كاروسيل ٤ سلايدات.', location:'indoor', difficulty:'medium' },
+  { platform:'insta', pillar:'fitness', title:'Photo: Pre-Workout Setup', hook:'الجاهزية قبل التمرين', desc:'صورة flat lay للأدوات.', location:'indoor', difficulty:'easy' },
+  { platform:'insta', pillar:'fitness', title:'Reel: Sunrise Run', hook:'الجري قبل الشروق', desc:'Reel سينمائي.', location:'outdoor', difficulty:'hard' },
+  { platform:'insta', pillar:'fitness', title:'Editorial: Gym Aesthetic', hook:'الجيم كستوديو', desc:'صورة Cinematic.', location:'indoor', difficulty:'medium' },
+  { platform:'insta', pillar:'fitness', title:'Carousel: Strength Numbers', hook:'وين كنت ووين أنا الحين', desc:'٥ سلايدات بأرقام.', location:'indoor', difficulty:'easy' },
+  { platform:'insta', pillar:'fitness', title:'Reel: Mobility Routine', hook:'٥ دقائق ضرورية', desc:'Reel تعليمي.', location:'indoor', difficulty:'medium' },
+  { platform:'insta', pillar:'fitness', title:'Photo: Recovery Day', hook:'النوم = جزء من التمرين', desc:'صورة هادئة.', location:'indoor', difficulty:'easy' },
+  { platform:'insta', pillar:'fitness', title:'Carousel: Meal Prep Sunday', hook:'تجهيز الأسبوع', desc:'٧ سلايدات.', location:'indoor', difficulty:'medium' },
+  { platform:'insta', pillar:'fitness', title:'Reel: PR Attempt', hook:'محاولة رقم شخصي جديد', desc:'Reel مع صوت Real.', location:'indoor', difficulty:'hard' },
+
+  // Instagram · Skincare (10)
+  { platform:'insta', pillar:'skincare', title:'Reel: Night Routine ASMR', hook:'روتين المساء بـ ASMR', desc:'Reel هادئ ٣٠ ثانية.', location:'indoor', difficulty:'medium' },
+  { platform:'insta', pillar:'skincare', title:'Carousel: Skincare 101', hook:'البداية للمبتدئين', desc:'٧ سلايدات تعليمية.', location:'indoor', difficulty:'medium' },
+  { platform:'insta', pillar:'skincare', title:'Photo: Product Flat Lay', hook:'منتجاتي الأساسية', desc:'صورة Editorial.', location:'indoor', difficulty:'easy' },
+  { platform:'insta', pillar:'skincare', title:'Reel: SPF Application', hook:'كيف تحط الـ SPF صح', desc:'Reel تعليمي ٢٠ ثانية.', location:'indoor', difficulty:'easy' },
+  { platform:'insta', pillar:'skincare', title:'Carousel: Active Ingredients', hook:'دليل المكونات الفعالة', desc:'٨ سلايدات.', location:'indoor', difficulty:'medium' },
+  { platform:'insta', pillar:'skincare', title:'Photo: Beard Grooming Kit', hook:'أدوات اللحية', desc:'صورة Macro.', location:'indoor', difficulty:'easy' },
+  { platform:'insta', pillar:'skincare', title:'Reel: Cold Plunge', hook:'الماء البارد للوجه', desc:'Reel ١٥ ثانية.', location:'indoor', difficulty:'medium' },
+  { platform:'insta', pillar:'skincare', title:'Editorial: Texture Close-Up', hook:'تكستشر منتج Premium', desc:'صورة Macro سينمائية.', location:'indoor', difficulty:'medium' },
+  { platform:'insta', pillar:'skincare', title:'Carousel: Before & After 30 Days', hook:'تجربة ٣٠ يوم', desc:'كاروسيل قبل وبعد.', location:'indoor', difficulty:'hard' },
+  { platform:'insta', pillar:'skincare', title:'Reel: Travel Skincare', hook:'منتجاتي في السفر', desc:'Reel سريع.', location:'both', difficulty:'easy' },
+
+  // YouTube · Style (10) — ALL LONG-FORM (15+ min)
+  { platform:'youtube', pillar:'style', title:'٣٠ دقيقة في خزانتي — كل قطعة وقصتها', hook:'الستايل = ذاكرة', desc:'فيديو ٢٥-٣٠ دقيقة. جولة في الخزانة مع شرح كل قطعة.', location:'indoor', difficulty:'hard' },
+  { platform:'youtube', pillar:'style', title:'كيف بنيت ذوقي — ١٠ سنوات في ٢٠ دقيقة', hook:'البداية كانت غلط', desc:'فيديو ٢٠ دقيقة. سرد قصصي.', location:'indoor', difficulty:'hard' },
+  { platform:'youtube', pillar:'style', title:'تسوق معي ليوم كامل في دبي', hook:'٧ محلات، ٤ ساعات', desc:'فيديو ٢٥ دقيقة. Vlog تسوق.', location:'outdoor', difficulty:'hard' },
+  { platform:'youtube', pillar:'style', title:'فلسفة Capsule Wardrobe — كل اللي تحتاجه ٣٠ قطعة', hook:'القليل أفضل من الكثير', desc:'فيديو ٢٠ دقيقة. شرح المنهج.', location:'indoor', difficulty:'hard' },
+  { platform:'youtube', pillar:'style', title:'الستايل الخليجي عبر العصور — وثائقي قصير', hook:'من الثوب إلى Smart Casual', desc:'فيديو ٣٠-٤٠ دقيقة. وثائقي.', location:'both', difficulty:'hard' },
+  { platform:'youtube', pillar:'style', title:'يوم في حياتي — أسبوع موضة باريس', hook:'وراء الكواليس', desc:'فيديو ٢٠-٢٥ دقيقة Vlog.', location:'outdoor', difficulty:'hard' },
+  { platform:'youtube', pillar:'style', title:'مقابلة مع مصمم خليجي', hook:'كيف يفكر المصمم', desc:'فيديو ٤٠-٥٠ دقيقة بودكاست.', location:'indoor', difficulty:'hard' },
+  { platform:'youtube', pillar:'style', title:'تحدي ٣٠ يوم بـ ٧ قطع فقط', hook:'هل أنت محتاج كل هذا اللبس؟', desc:'فيديو ١٥-٢٠ دقيقة تجربة.', location:'both', difficulty:'hard' },
+  { platform:'youtube', pillar:'style', title:'جولة في ثرفت ستورات أوروبا', hook:'كيف توصل لقطع نادرة', desc:'فيديو ٢٥ دقيقة Vlog سفر.', location:'outdoor', difficulty:'hard' },
+  { platform:'youtube', pillar:'style', title:'تطور الأسلوب — قبل وبعد ١٠ سنين', hook:'كل صورة فيها درس', desc:'فيديو ١٥ دقيقة سرد شخصي.', location:'indoor', difficulty:'medium' },
+
+  // YouTube · Food (10) — ALL LONG-FORM
+  { platform:'youtube', pillar:'food', title:'God Mission — السنة كاملة في ٣٠ دقيقة', hook:'كيف تغير جسمي', desc:'فيديو ٣٠-٤٠ دقيقة وثائقي شخصي.', location:'both', difficulty:'hard' },
+  { platform:'youtube', pillar:'food', title:'٧ مطاعم في الإمارات تستحق التجربة', hook:'مطاعم محلية مخفية', desc:'فيديو ٢٥-٣٠ دقيقة جولة طعام.', location:'outdoor', difficulty:'hard' },
+  { platform:'youtube', pillar:'food', title:'كل ما تعلمته عن البروتين في ٢٠ دقيقة', hook:'العلم المبسط', desc:'فيديو ٢٠ دقيقة تعليمي.', location:'indoor', difficulty:'hard' },
+  { platform:'youtube', pillar:'food', title:'يوم كامل من الأكل بـ ٤٠٠٠ سعرة', hook:'تحدي بناء العضلة', desc:'فيديو ١٥-٢٠ دقيقة Vlog.', location:'both', difficulty:'medium' },
+  { platform:'youtube', pillar:'food', title:'الطعام التقليدي الخليجي وقيمته الغذائية', hook:'أكلات أجدادنا كانت أصح', desc:'فيديو ٢٥ دقيقة وثائقي.', location:'indoor', difficulty:'hard' },
+  { platform:'youtube', pillar:'food', title:'تجربة كيتو ٣٠ يوم — النتائج الحقيقية', hook:'بدون Bias', desc:'فيديو ٢٠-٢٥ دقيقة تجربة.', location:'both', difficulty:'hard' },
+  { platform:'youtube', pillar:'food', title:'كتاب الطبخ — ١٠ وصفات بنيت عليها سنة', hook:'وصفات اعتمدت عليها', desc:'فيديو ٤٠-٥٠ دقيقة كوكينج.', location:'indoor', difficulty:'hard' },
+  { platform:'youtube', pillar:'food', title:'مقابلة مع طبيب تغذية', hook:'الحقائق العلمية', desc:'فيديو ٤٥-٦٠ دقيقة بودكاست.', location:'indoor', difficulty:'hard' },
+  { platform:'youtube', pillar:'food', title:'يوم في الكورنيش — أكل صحي على الخارج', hook:'٣ مطاعم على الكورنيش', desc:'فيديو ١٥ دقيقة Vlog.', location:'outdoor', difficulty:'medium' },
+  { platform:'youtube', pillar:'food', title:'وش أكل لما أسافر — استراتيجيتي', hook:'السفر بدون ما تخرب', desc:'فيديو ٢٠ دقيقة شرح + Vlog.', location:'both', difficulty:'medium' },
+
+  // YouTube · Fitness (10) — ALL LONG-FORM
+  { platform:'youtube', pillar:'fitness', title:'برنامجي الكامل — Push/Pull/Legs', hook:'٤ سنين من التجربة', desc:'فيديو ٣٠-٤٠ دقيقة شرح كامل.', location:'indoor', difficulty:'hard' },
+  { platform:'youtube', pillar:'fitness', title:'أسبوع في حياة Powerlifter', hook:'٧ أيام، ٧ تمارين', desc:'فيديو ٢٥-٣٠ دقيقة Vlog.', location:'indoor', difficulty:'hard' },
+  { platform:'youtube', pillar:'fitness', title:'الجيم في أبوظبي — أحسن ٥ خيارات', hook:'مقارنة مفصلة', desc:'فيديو ٢٠ دقيقة جولة.', location:'outdoor', difficulty:'hard' },
+  { platform:'youtube', pillar:'fitness', title:'كل ما تعلمته في ١٠ سنين من التمرين', hook:'الأخطاء قبل الإنجازات', desc:'فيديو ٣٠ دقيقة سرد شخصي.', location:'indoor', difficulty:'hard' },
+  { platform:'youtube', pillar:'fitness', title:'تحدي ١٠٠ يوم تمرين بدون انقطاع', hook:'ايش تعلمت', desc:'فيديو ٢٥ دقيقة وثائقي شخصي.', location:'both', difficulty:'hard' },
+  { platform:'youtube', pillar:'fitness', title:'مقابلة مع مدرب أبطال', hook:'كيف يدرب البطل', desc:'فيديو ٤٥-٦٠ دقيقة بودكاست.', location:'indoor', difficulty:'hard' },
+  { platform:'youtube', pillar:'fitness', title:'علم النوم وعلاقته بالعضلة', hook:'النوم = نصف العضلة', desc:'فيديو ٢٠ دقيقة تعليمي.', location:'indoor', difficulty:'hard' },
+  { platform:'youtube', pillar:'fitness', title:'جولة في صالة مارفل أبوظبي', hook:'أحسن جيم في المنطقة', desc:'فيديو ١٥ دقيقة جولة.', location:'outdoor', difficulty:'medium' },
+  { platform:'youtube', pillar:'fitness', title:'برنامج ١٢ أسبوع — قبل وبعد كامل', hook:'النتائج الموثقة', desc:'فيديو ٢٥-٣٠ دقيقة وثائقي.', location:'indoor', difficulty:'hard' },
+  { platform:'youtube', pillar:'fitness', title:'لماذا كل شخص يجب أن يرفع الأثقال', hook:'الصحة طويلة المدى', desc:'فيديو ٢٠ دقيقة شرح.', location:'indoor', difficulty:'hard' },
+
+  // YouTube · Skincare (10) — ALL LONG-FORM
+  { platform:'youtube', pillar:'skincare', title:'كل اللي تعلمته عن البشرة الخليجية', hook:'الجو الخليجي يفرض روتين خاص', desc:'فيديو ٢٥-٣٠ دقيقة تعليمي.', location:'indoor', difficulty:'hard' },
+  { platform:'youtube', pillar:'skincare', title:'تجربة ٦٠ يوم على Retinol', hook:'النتائج الحقيقية', desc:'فيديو ٢٠ دقيقة تجربة.', location:'indoor', difficulty:'hard' },
+  { platform:'youtube', pillar:'skincare', title:'مقابلة مع طبيب جلدية', hook:'أسئلة كل رجل يحتاج جوابها', desc:'فيديو ٤٥-٦٠ دقيقة بودكاست.', location:'indoor', difficulty:'hard' },
+  { platform:'youtube', pillar:'skincare', title:'روتيني الكامل من A-Z', hook:'كل منتج، كل خطوة', desc:'فيديو ٢٠ دقيقة شرح مفصل.', location:'indoor', difficulty:'medium' },
+  { platform:'youtube', pillar:'skincare', title:'صالات اللحية في أبوظبي — جولة', hook:'٥ صالات، ٥ تجارب', desc:'فيديو ٢٥ دقيقة Vlog.', location:'outdoor', difficulty:'hard' },
+  { platform:'youtube', pillar:'skincare', title:'قصة بشرتي — قبل وبعد ٥ سنين', hook:'كنت أعاني من حب الشباب', desc:'فيديو ١٨ دقيقة سرد شخصي.', location:'indoor', difficulty:'hard' },
+  { platform:'youtube', pillar:'skincare', title:'علم البشرة المبسط', hook:'٤ طبقات، كل واحدة وظيفة', desc:'فيديو ٢٠ دقيقة تعليمي بصري.', location:'indoor', difficulty:'hard' },
+  { platform:'youtube', pillar:'skincare', title:'منتجات بـ ١٠٠ درهم vs ١٠٠٠ درهم', hook:'هل الأغلى أحسن فعلاً؟', desc:'فيديو ٢٠ دقيقة مقارنة.', location:'indoor', difficulty:'hard' },
+  { platform:'youtube', pillar:'skincare', title:'يوم كامل من بداية الروتين للعشاء', hook:'كيف بشرتي تتغير خلال اليوم', desc:'فيديو ١٥-٢٠ دقيقة Vlog.', location:'both', difficulty:'medium' },
+  { platform:'youtube', pillar:'skincare', title:'تجربة كل منتجات إيرث روتس', hook:'تجربة شخصية موثقة', desc:'فيديو ٢٠ دقيقة Review.', location:'indoor', difficulty:'medium' }
 ];
 
 const SEED_TEMPLATES = [
@@ -3875,6 +4063,8 @@ function renderHome() {
   document.getElementById('ct-tiktok').textContent = state.ideas.filter(i => i.platform === 'tiktok').length;
   document.getElementById('ct-insta').textContent = state.ideas.filter(i => i.platform === 'insta').length;
   document.getElementById('ct-youtube').textContent = state.ideas.filter(i => i.platform === 'youtube').length;
+  const reelsEl = document.getElementById('ct-reels');
+  if (reelsEl) reelsEl.textContent = state.ideas.filter(i => i.platform === 'tiktok' || i.platform === 'insta').length;
   renderHomeCards();
 }
 function renderHomeCards() {
@@ -3966,11 +4156,18 @@ function setDifficultyFilter(d) {
 }
 function renderPlatformView() {
   const p = state.platform;
-  const titles = { tiktok:'TIKTOK', insta:'INSTAGRAM', youtube:'YOUTUBE' };
-  const tags = { tiktok:'// PLATFORM 01 · DISCOVERY', insta:'// PLATFORM 02 · BRAND SHOWROOM', youtube:'// PLATFORM 03 · LONG-FORM' };
+  const titles = { tiktok:'TIKTOK', insta:'INSTAGRAM', youtube:'YOUTUBE', reels:'REELS' };
+  const tags = {
+    tiktok:'// PLATFORM 02 · TIKTOK ONLY',
+    insta:'// PLATFORM 03 · INSTAGRAM ONLY',
+    youtube:'// PLATFORM 04 · YOUTUBE LONG-FORM',
+    reels:'// PLATFORM 01 · TIKTOK + INSTAGRAM'
+  };
   document.getElementById('phTitle').textContent = titles[p];
   document.getElementById('phTag').textContent = tags[p];
-  const list = state.ideas.filter(i => i.platform === p);
+  const list = p === 'reels'
+    ? state.ideas.filter(i => i.platform === 'tiktok' || i.platform === 'insta')
+    : state.ideas.filter(i => i.platform === p);
   document.getElementById('phTotal').textContent = list.length;
   document.getElementById('phDone').textContent = list.filter(i => i.status === 'published').length;
   document.getElementById('phScheduled').textContent = list.filter(i => i.pubDate).length;
@@ -3978,7 +4175,9 @@ function renderPlatformView() {
 }
 function renderPlatformList() {
   const list = document.getElementById('platformList');
-  let ideas = state.ideas.filter(i => i.platform === state.platform);
+  let ideas = state.platform === 'reels'
+    ? state.ideas.filter(i => i.platform === 'tiktok' || i.platform === 'insta')
+    : state.ideas.filter(i => i.platform === state.platform);
   if (state.pillarFilter !== 'all') ideas = ideas.filter(i => i.pillar === state.pillarFilter);
   if (state.difficultyFilter !== 'all') ideas = ideas.filter(i => i.difficulty === state.difficultyFilter);
   const today = new Date();
@@ -4044,6 +4243,23 @@ function buildIdeaCard(idea) {
   if (idea.brand) metaPills += `<span class="meta-pill ar">★ ${escapeHtml(idea.brand.slice(0,12))}</span>`;
   if (idea.status && idea.status !== 'idea') metaPills += `<span class="meta-pill ar">${statusLabels[idea.status]}</span>`;
 
+  // Repost indicator (Reels view only): show if a sibling exists on the other platform
+  let repostHtml = '';
+  if (state.platform === 'reels' && (idea.platform === 'tiktok' || idea.platform === 'insta')) {
+    const otherPlatform = idea.platform === 'tiktok' ? 'insta' : 'tiktok';
+    const hasSibling = state.ideas.some(x =>
+      x.id !== idea.id &&
+      x.platform === otherPlatform &&
+      (x.repostOf === idea.id || idea.repostOf === x.id || x.title === idea.title)
+    );
+    if (hasSibling) {
+      repostHtml = `<button class="repost-btn done" onclick="event.stopPropagation()" title="منشور على المنصتين">⇄ على المنصتين</button>`;
+    } else {
+      const target = otherPlatform === 'tiktok' ? 'TikTok' : 'Instagram';
+      repostHtml = `<button class="repost-btn" onclick="event.stopPropagation();repostIdea('${idea.id}')" title="ريبوست على ${target}">⇄ ريبوست على ${target}</button>`;
+    }
+  }
+
   const checked = idea.status === 'published' ? 'checked' : '';
   const score = computeIdeaScore(idea);
   const scoreClass = score >= 75 ? 'high' : '';
@@ -4057,6 +4273,7 @@ function buildIdeaCard(idea) {
     </div>
     <div class="idea-title">${escapeHtml(idea.title)}</div>
     ${idea.hook ? `<div class="idea-hook">${escapeHtml(idea.hook)}</div>` : ''}
+    ${repostHtml}
     <div class="idea-row-bottom">
       <div class="idea-meta-row">${metaPills}</div>
       <div class="idea-check ${checked}" onclick="event.stopPropagation();toggleStatus('${idea.id}', event)">${idea.status === 'published' ? '✓' : ''}</div>
@@ -4076,6 +4293,45 @@ function buildIdeaCard(idea) {
     card.addEventListener('dragend', () => { card.style.opacity = '1'; });
   }
   return card;
+}
+
+// Repost an idea to the other platform (TikTok ↔ Instagram)
+function repostIdea(ideaId) {
+  const orig = state.ideas.find(i => i.id === ideaId);
+  if (!orig) return;
+  if (orig.platform !== 'tiktok' && orig.platform !== 'insta') return;
+  const targetPlatform = orig.platform === 'tiktok' ? 'insta' : 'tiktok';
+  // Check if already reposted
+  const exists = state.ideas.some(x =>
+    x.id !== orig.id &&
+    x.platform === targetPlatform &&
+    (x.repostOf === orig.id || orig.repostOf === x.id || x.title === orig.title)
+  );
+  if (exists) {
+    showToast('الفكرة موجودة على المنصتين');
+    return;
+  }
+  const copy = {
+    ...orig,
+    id: 'idea_' + Date.now(),
+    platform: targetPlatform,
+    repostOf: orig.id,
+    status: 'idea',
+    pubDate: '',
+    pubTime: '',
+    shootDate: orig.shootDate,
+    shootTime: orig.shootTime,
+    views: 0, likes: 0, saves: 0, shares: 0, comments: 0, followers: 0,
+    learnings: '',
+    checklist: {},
+    createdAt: Date.now()
+  };
+  state.ideas.push(copy);
+  save();
+  render();
+  haptic('success');
+  const targetLabel = targetPlatform === 'tiktok' ? 'TikTok' : 'Instagram';
+  showToast(`✓ تم النسخ على ${targetLabel}`);
 }
 
 // Idea Score: 0-100 based on completeness + content quality signals
@@ -4237,6 +4493,8 @@ function switchPane(name) {
 function openIdeaModal(id, defaultPlatform) {
   state.modal.editing = id;
   const isNew = !id;
+  // Reels is a virtual view — actual platform is tiktok by default
+  if (defaultPlatform === 'reels') defaultPlatform = 'tiktok';
   let idea;
   if (isNew) {
     idea = { id:'idea_' + Date.now(), platform: defaultPlatform || 'tiktok', pillar:'style',
