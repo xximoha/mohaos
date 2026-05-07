@@ -764,422 +764,6 @@ body::before {
   color: var(--bg);
 }
 
-/* ================================================================
-   CALENDAR MODE SWITCHER (Publishing / Production)
-================================================================ */
-.cal-mode-switcher {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
-  margin: 18px 0 8px;
-  padding: 4px;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: 16px;
-}
-.cal-mode-btn {
-  background: transparent;
-  border: none;
-  border-radius: 12px;
-  padding: 14px 12px;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-.cal-mode-btn .cal-mode-label {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 18px;
-  letter-spacing: 0.1em;
-  color: var(--ink2);
-  direction: ltr;
-}
-.cal-mode-btn .cal-mode-sub {
-  font-family: 'Cairo', sans-serif;
-  font-size: 11px;
-  color: var(--muted);
-  font-weight: 500;
-}
-.cal-mode-btn:hover { background: var(--surface2); }
-.cal-mode-btn.active {
-  background: var(--ink);
-}
-.cal-mode-btn.active .cal-mode-label,
-.cal-mode-btn.active .cal-mode-sub {
-  color: var(--bg);
-}
-
-/* ================================================================
-   PRODUCTION VIEW
-================================================================ */
-.prod-header {
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: 18px;
-  padding: 16px 18px;
-  margin-bottom: 16px;
-}
-.prod-header-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
-}
-.prod-header-label {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 11px;
-  letter-spacing: 0.22em;
-  color: var(--muted);
-  font-weight: 600;
-  direction: ltr;
-}
-.prod-settings-btn {
-  width: 34px; height: 34px;
-  background: var(--bg);
-  border: 1px solid var(--line);
-  border-radius: 50%;
-  color: var(--ink2);
-  font-size: 16px;
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-.prod-settings-btn:hover {
-  background: var(--ink);
-  color: var(--bg);
-  transform: rotate(90deg);
-}
-.prod-header-stats {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 0.12em;
-  color: var(--ink2);
-  direction: ltr;
-  font-weight: 600;
-}
-.prod-stat-pill {
-  padding: 6px 12px;
-  background: var(--bg);
-  border: 1px solid var(--line);
-  border-radius: 999px;
-}
-.prod-stat-pill.success {
-  background: var(--success);
-  color: white;
-  border-color: var(--success);
-}
-.prod-stat-pill.warn {
-  color: var(--warn);
-  border-color: var(--warn);
-}
-
-.prod-week {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-.prod-day {
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: 16px;
-  overflow: hidden;
-  transition: all 0.3s;
-}
-.prod-day.is-today {
-  border-color: var(--ink);
-  box-shadow: 0 0 0 2px var(--ink);
-}
-.prod-day.rest-day {
-  opacity: 0.55;
-}
-.prod-day-header {
-  padding: 14px 16px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
-  border-bottom: 1px solid var(--line);
-  background: var(--surface);
-  transition: background 0.2s;
-}
-.prod-day-header:hover { background: var(--surface2); }
-.prod-day-header-left {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-.prod-day-name {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 22px;
-  letter-spacing: 0.06em;
-  color: var(--ink);
-  direction: ltr;
-  min-width: 56px;
-}
-.prod-day-num {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 10px;
-  color: var(--muted);
-  direction: ltr;
-  margin-top: 2px;
-}
-.prod-day-pillar {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 12px;
-  border-radius: 999px;
-  font-family: 'Cairo', sans-serif;
-  font-size: 12px;
-  font-weight: 600;
-  background: var(--bg);
-  border: 1px solid var(--line);
-}
-.prod-day-pillar.style    { background: rgba(122,40,40,0.14); color: var(--c-maroon); border-color: rgba(122,40,40,0.3); }
-.prod-day-pillar.food     { background: rgba(112,135,93,0.14); color: var(--c-green); border-color: rgba(112,135,93,0.3); }
-.prod-day-pillar.fitness  { background: rgba(216,124,84,0.16); color: var(--c-orange); border-color: rgba(216,124,84,0.3); }
-.prod-day-pillar.skincare { background: rgba(186,167,212,0.22); color: #6f5fa0; border-color: rgba(186,167,212,0.4); }
-[data-theme="dark"] .prod-day-pillar.skincare { color: #b388ff; }
-.prod-day-status {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.prod-day-fill {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--ink2);
-  direction: ltr;
-}
-.prod-day-fill.full { color: var(--success); }
-.prod-day-fill.empty { color: var(--muted); }
-.prod-day-bar {
-  width: 60px;
-  height: 6px;
-  background: var(--line);
-  border-radius: 999px;
-  overflow: hidden;
-}
-.prod-day-bar-fill {
-  height: 100%;
-  background: var(--ink);
-  border-radius: 999px;
-  transition: width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-.prod-day-bar-fill.full { background: var(--success); }
-.prod-day-chevron {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 14px;
-  color: var(--muted);
-  transition: transform 0.3s;
-}
-.prod-day.expanded .prod-day-chevron { transform: rotate(90deg); }
-
-.prod-day-body {
-  display: none;
-  padding: 12px 14px 16px;
-}
-.prod-day.expanded .prod-day-body { display: block; }
-
-.prod-slots-section {
-  margin-bottom: 12px;
-}
-.prod-slots-label {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 9px;
-  letter-spacing: 0.2em;
-  color: var(--muted);
-  font-weight: 600;
-  margin-bottom: 8px;
-  text-transform: uppercase;
-  direction: ltr;
-}
-.prod-slot {
-  background: var(--bg);
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  padding: 12px 14px;
-  margin-bottom: 6px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
-  cursor: pointer;
-  transition: all 0.25s;
-}
-.prod-slot:hover {
-  border-color: var(--ink);
-  transform: translateX(-3px);
-}
-.prod-slot.empty {
-  border-style: dashed;
-  background: transparent;
-  color: var(--muted);
-  cursor: pointer;
-}
-.prod-slot.empty:hover {
-  background: var(--surface2);
-  color: var(--ink);
-  border-color: var(--ink);
-}
-.prod-slot.shot {
-  background: rgba(40,140,80,0.08);
-  border-color: rgba(40,140,80,0.3);
-}
-.prod-slot-num {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 10px;
-  color: var(--muted);
-  font-weight: 600;
-  min-width: 28px;
-  direction: ltr;
-}
-.prod-slot-content {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-  min-width: 0;
-}
-.prod-slot-title {
-  font-family: 'Cairo', sans-serif;
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--ink);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.prod-slot-hook {
-  font-family: 'Cairo', sans-serif;
-  font-size: 11px;
-  color: var(--muted);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.prod-slot-status {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 9px;
-  letter-spacing: 0.1em;
-  padding: 4px 8px;
-  border-radius: 999px;
-  background: var(--surface2);
-  color: var(--ink2);
-  font-weight: 600;
-  flex-shrink: 0;
-  direction: ltr;
-}
-.prod-slot-status.shot { background: var(--success); color: white; }
-.prod-slot-add-icon {
-  width: 22px; height: 22px;
-  border: 1px dashed currentColor;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
-  flex-shrink: 0;
-}
-
-.prod-day-rest {
-  text-align: center;
-  padding: 18px;
-  font-family: 'Cairo', sans-serif;
-  font-size: 12px;
-  color: var(--muted);
-}
-
-.prod-backlog {
-  margin-top: 24px;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: 18px;
-  padding: 16px;
-}
-.prod-backlog-title {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 18px;
-  letter-spacing: 0.1em;
-  color: var(--ink);
-  margin-bottom: 4px;
-  direction: ltr;
-}
-.prod-backlog-sub {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 0.18em;
-  color: var(--muted);
-  margin-bottom: 12px;
-  direction: ltr;
-}
-.prod-backlog-list {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-/* Production Settings Modal */
-.prod-settings-pane {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-.prod-day-config {
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: 14px;
-  padding: 12px 14px;
-}
-.prod-day-config-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 8px;
-}
-.prod-day-config-name {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 18px;
-  letter-spacing: 0.05em;
-  direction: ltr;
-  color: var(--ink);
-  min-width: 56px;
-}
-.prod-day-config-fields {
-  display: grid;
-  grid-template-columns: 1fr 70px 70px;
-  gap: 8px;
-  align-items: center;
-}
-.prod-day-config-fields select,
-.prod-day-config-fields input {
-  background: var(--bg);
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  padding: 8px 10px;
-  color: var(--ink);
-  font-family: 'Cairo', sans-serif;
-  font-size: 12px;
-  direction: rtl;
-  width: 100%;
-}
-.prod-day-config-fields input { direction: ltr; text-align: center; }
-.prod-day-config-mini {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 8px;
-  letter-spacing: 0.15em;
-  color: var(--muted);
-  margin-bottom: 3px;
-  direction: ltr;
-  font-weight: 600;
-}
-
 .cal-weekdays {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
@@ -1616,6 +1200,306 @@ body::before {
   transform: scale(1.08) rotate(90deg);
 }
 
+/* ================================================================
+   PRODUCTION VIEW
+================================================================ */
+.prod-week-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px 12px;
+  gap: 12px;
+}
+.prod-week-label {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  flex: 1;
+  text-align: center;
+}
+.prod-days {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 8px 20px 24px;
+}
+.prod-day {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 16px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.prod-day:hover {
+  border-color: var(--line2);
+  transform: translateY(-1px);
+}
+.prod-day.empty-day {
+  opacity: 0.55;
+}
+.prod-day.full-day {
+  border-color: var(--success);
+  background: linear-gradient(145deg, var(--surface), var(--surface2));
+}
+.prod-day.empty-pillar {
+  border-style: dashed;
+  opacity: 0.65;
+}
+.prod-day-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  gap: 10px;
+}
+.prod-day-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.prod-day-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 36px;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  color: var(--ink);
+  min-width: 50px;
+}
+.prod-day-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.prod-day-name {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--muted);
+  font-weight: 600;
+}
+.prod-day-pillar {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 18px;
+  letter-spacing: 0.06em;
+  color: var(--ink);
+}
+.prod-day-status {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 999px;
+  text-transform: uppercase;
+}
+.prod-day-status.ready {
+  background: rgba(102, 187, 106, 0.18);
+  color: var(--success);
+}
+.prod-day-status.partial {
+  background: rgba(255, 167, 38, 0.18);
+  color: var(--c-orange, #ffa726);
+}
+.prod-day-status.empty {
+  background: var(--surface2);
+  color: var(--muted);
+}
+.prod-day-status.rest {
+  background: var(--surface2);
+  color: var(--muted);
+}
+.prod-progress-bar {
+  height: 6px;
+  background: var(--surface2);
+  border-radius: 999px;
+  overflow: hidden;
+  margin-bottom: 4px;
+}
+.prod-progress-fill {
+  height: 100%;
+  background: var(--ink);
+  border-radius: 999px;
+  transition: width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.prod-day.c-maroon .prod-progress-fill { background: var(--c-maroon, #8b3a4a); }
+.prod-day.c-green .prod-progress-fill { background: var(--c-green, #6b8a4a); }
+.prod-day.c-orange .prod-progress-fill { background: var(--c-orange, #d68b3a); }
+.prod-day.c-lavender .prod-progress-fill { background: var(--c-lavender, #9886b8); }
+.prod-progress-text {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.prod-day-ideas {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 10px;
+}
+.prod-mini-card {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 8px 10px;
+  font-size: 12px;
+  color: var(--ink);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.prod-mini-card:hover {
+  background: var(--surface2);
+  border-color: var(--line2);
+}
+.prod-mini-card.backup {
+  opacity: 0.7;
+  border-style: dashed;
+}
+.prod-mini-card-num {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  font-weight: 600;
+  min-width: 22px;
+}
+.prod-mini-card-title {
+  flex: 1;
+  font-size: 12px;
+  line-height: 1.3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.prod-empty-slot {
+  background: transparent;
+  border: 1px dashed var(--line2);
+  border-radius: 10px;
+  padding: 8px 10px;
+  font-size: 11px;
+  color: var(--muted);
+  text-align: center;
+  font-family: 'IBM Plex Mono', monospace;
+  letter-spacing: 0.12em;
+}
+.prod-day-rest {
+  text-align: center;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  color: var(--muted);
+  padding: 14px 0 4px;
+  font-weight: 600;
+}
+.prod-backlog-section {
+  border-top: 1px solid var(--line);
+  padding: 24px 20px 40px;
+  margin-top: 12px;
+}
+.prod-backlog-header {
+  margin-bottom: 16px;
+}
+.prod-backlog-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 32px;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+.prod-backlog-sub {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  color: var(--muted);
+  font-weight: 600;
+}
+.prod-backlog-tabs {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+.prod-pillar-group {
+  margin-bottom: 18px;
+}
+.prod-pillar-group-title {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--muted);
+  font-weight: 600;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+.prod-backlog-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 12px 14px;
+  margin-bottom: 8px;
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.prod-backlog-card:hover {
+  background: var(--surface2);
+  border-color: var(--line2);
+}
+.prod-backlog-card-content {
+  flex: 1;
+  cursor: pointer;
+  min-width: 0;
+}
+.prod-backlog-card-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.4;
+  margin-bottom: 3px;
+}
+.prod-backlog-card-meta {
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 1.4;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.prod-schedule-btn {
+  background: var(--ink);
+  color: var(--bg);
+  border: none;
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-family: 'Cairo', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.prod-schedule-btn:hover {
+  transform: scale(1.05);
+}
+.prod-schedule-btn:active {
+  transform: scale(0.95);
+}
+.prod-empty-state {
+  padding: 40px 20px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 13px;
+}
+
 /* Modal tabs */
 .modal-tabs {
   display: flex;
@@ -1626,6 +1510,11 @@ body::before {
   border-bottom: 1px solid var(--line);
 }
 .modal-tabs::-webkit-scrollbar { display: none; }
+
+/* Advanced mode toggle — when body lacks .advanced-on, hide everything tagged .advanced-only */
+body:not(.advanced-on) .advanced-only {
+  display: none !important;
+}
 .modal-tab {
   background: transparent;
   border: none;
@@ -3073,16 +2962,18 @@ body::before {
   </div>
 
   <div class="settings-menu" id="settingsMenu">
+    <div class="menu-item" onclick="openProductionView()" style="font-weight:700">⚿ Production · جدول التصوير</div>
+    <div class="menu-divider"></div>
     <div class="menu-item" onclick="openSettingsPanel()" style="font-weight:700">⚙ الإعدادات + AI</div>
     <div class="menu-divider"></div>
-    <div class="menu-item" onclick="openAIBatch()">✦ AI · أنشئ ٤ أفكار للأسبوع</div>
-    <div class="menu-item" onclick="openBrandPipeline()">⚏ Brand Pipeline</div>
-    <div class="menu-divider"></div>
+    <div class="menu-item advanced-only" onclick="openAIBatch()">✦ AI · أنشئ ٤ أفكار للأسبوع</div>
+    <div class="menu-item advanced-only" onclick="openBrandPipeline()">⚏ Brand Pipeline</div>
+    <div class="menu-divider advanced-only"></div>
     <div class="menu-item" onclick="toggleBulkMode()">☷ Bulk Mode (تحديد متعدد)</div>
-    <div class="menu-item" onclick="openTemplatesBank()">⊕ مكتبة التمبلتات</div>
-    <div class="menu-item" onclick="openCaptionLib()">✎ مكتبة الكابشنز</div>
-    <div class="menu-item" onclick="openHashtagSets()"># مجموعات الهاشتاقات</div>
-    <div class="menu-item" onclick="openBrandsLib()">★ البراندات</div>
+    <div class="menu-item advanced-only" onclick="openTemplatesBank()">⊕ مكتبة التمبلتات</div>
+    <div class="menu-item advanced-only" onclick="openCaptionLib()">✎ مكتبة الكابشنز</div>
+    <div class="menu-item advanced-only" onclick="openHashtagSets()"># مجموعات الهاشتاقات</div>
+    <div class="menu-item advanced-only" onclick="openBrandsLib()">★ البراندات</div>
     <div class="menu-divider"></div>
     <div class="menu-item" onclick="exportData()">↓ تصدير البيانات</div>
     <div class="menu-item" onclick="document.getElementById('importFile').click()">↑ استيراد</div>
@@ -3150,22 +3041,10 @@ body::before {
 
   <!-- Calendar -->
   <div class="cal-section">
-    <div class="cal-section-sub reveal" id="calSectionSub">// MONTHLY OVERVIEW</div>
-    <div class="cal-section-title reveal d1" id="calSectionTitle">CALENDAR</div>
+    <div class="cal-section-sub reveal">// MONTHLY OVERVIEW</div>
+    <div class="cal-section-title reveal d1">CALENDAR</div>
 
-    <!-- Mode toggle: Publishing vs Production -->
-    <div class="cal-mode-switcher reveal d2">
-      <button class="cal-mode-btn active" data-mode="publishing" onclick="setCalMode('publishing')">
-        <span class="cal-mode-label">PUBLISHING</span>
-        <span class="cal-mode-sub">جدول النشر</span>
-      </button>
-      <button class="cal-mode-btn" data-mode="production" onclick="setCalMode('production')">
-        <span class="cal-mode-label">PRODUCTION</span>
-        <span class="cal-mode-sub">جدول التصوير</span>
-      </button>
-    </div>
-
-    <div class="cal-nav-row reveal d2" id="calNavRow">
+    <div class="cal-nav-row reveal d2">
       <div class="cal-month-pill" id="calMonthLabel">MAY 2026</div>
       <div style="display:flex;gap:8px;align-items:center">
         <div class="cal-view-switcher">
@@ -3194,19 +3073,6 @@ body::before {
 
     <div id="calWeekView" class="reveal d3" style="display:none">
       <div class="cal-week" id="calWeek"></div>
-    </div>
-
-    <!-- Production Mode View -->
-    <div id="calProductionView" class="reveal d3" style="display:none">
-      <div class="prod-header">
-        <div class="prod-header-row">
-          <div class="prod-header-label" id="prodWeekLabel">WEEK 1</div>
-          <button class="prod-settings-btn" onclick="openProductionSettings()" title="إعدادات الجدول">⚙</button>
-        </div>
-        <div class="prod-header-stats" id="prodHeaderStats"></div>
-      </div>
-      <div class="prod-week" id="prodWeek"></div>
-      <div class="prod-backlog" id="prodBacklog"></div>
     </div>
 
     <div class="day-detail" id="dayDetail">
@@ -3282,6 +3148,45 @@ body::before {
 </div>
 
 <!-- ============ ANALYTICS VIEW ============ -->
+<!-- ============ PRODUCTION VIEW ============ -->
+<div class="view" id="view-production">
+  <div class="platform-hero">
+    <div class="ph-left">
+      <div class="ph-tag">// PRODUCTION CALENDAR</div>
+      <h2 class="ph-title">PRODUCTION</h2>
+      <div class="ph-stats">
+        <span><span class="num" id="prodReady">0</span> جاهز</span>
+        <span><span class="num" id="prodPending">0</span> ناقص</span>
+        <span><span class="num" id="prodBacklog">0</span> BACKLOG</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="prod-week-nav">
+    <button class="cal-nav-btn" onclick="changeProdWeek(-1)">‹</button>
+    <div class="prod-week-label" id="prodWeekLabel">هذا الأسبوع</div>
+    <button class="cal-nav-btn" onclick="changeProdWeek(1)">›</button>
+  </div>
+
+  <div class="prod-days" id="prodDays"></div>
+
+  <div class="prod-backlog-section">
+    <div class="prod-backlog-header">
+      <div class="prod-backlog-title">BACKLOG</div>
+      <div class="prod-backlog-sub">// أفكار بلا يوم تصوير — اضغط لجدولتها</div>
+    </div>
+    <div class="prod-backlog-tabs">
+      <div class="filter-pill active" data-pillar="all" onclick="setProdBacklogFilter('all')">All</div>
+      <div class="filter-pill" data-pillar="style" onclick="setProdBacklogFilter('style')">Style</div>
+      <div class="filter-pill" data-pillar="food" onclick="setProdBacklogFilter('food')">Food</div>
+      <div class="filter-pill" data-pillar="fitness" onclick="setProdBacklogFilter('fitness')">Fitness</div>
+      <div class="filter-pill" data-pillar="skincare" onclick="setProdBacklogFilter('skincare')">Skincare</div>
+    </div>
+    <div id="prodBacklogList"></div>
+  </div>
+</div>
+
+<!-- ============ ANALYTICS VIEW ============ -->
 <div class="view" id="view-analytics">
   <div class="platform-hero">
     <div class="ph-left">
@@ -3312,10 +3217,10 @@ body::before {
       <button class="modal-tab active" data-pane="content" onclick="switchPane('content')">Content</button>
       <button class="modal-tab" data-pane="schedule" onclick="switchPane('schedule')">Schedule</button>
       <button class="modal-tab" data-pane="production" onclick="switchPane('production')">Production</button>
-      <button class="modal-tab" data-pane="caption" onclick="switchPane('caption')">Caption</button>
-      <button class="modal-tab" data-pane="brand" onclick="switchPane('brand')">Brand</button>
-      <button class="modal-tab" data-pane="analytics" onclick="switchPane('analytics')">Stats</button>
-      <button class="modal-tab" data-pane="refs" onclick="switchPane('refs')">Refs</button>
+      <button class="modal-tab advanced-only" data-pane="caption" onclick="switchPane('caption')">Caption</button>
+      <button class="modal-tab advanced-only" data-pane="brand" onclick="switchPane('brand')">Brand</button>
+      <button class="modal-tab advanced-only" data-pane="analytics" onclick="switchPane('analytics')">Stats</button>
+      <button class="modal-tab advanced-only" data-pane="refs" onclick="switchPane('refs')">Refs</button>
       <button class="modal-tab" data-pane="notes" onclick="switchPane('notes')">Notes</button>
     </div>
 
@@ -3324,7 +3229,7 @@ body::before {
 
       <!-- PANE: Content -->
       <div class="modal-pane active" data-pane="content">
-        <div class="ai-panel">
+        <div class="ai-panel advanced-only">
           <div class="ai-panel-title">✦ AI ASSISTANT</div>
           <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
             <button class="ai-btn" onclick="aiGenerateHooks()">
@@ -3371,7 +3276,7 @@ body::before {
             <textarea class="field-textarea" id="f-desc" placeholder="وش يصير في الفيديو من البداية للنهاية"></textarea>
           </div>
         </div>
-        <div class="field-group">
+        <div class="field-group advanced-only">
           <div class="field-label">// SCRIPT / النص</div>
           <textarea class="field-textarea" id="f-script" placeholder="النص اللي راح تقوله أو يطلع على الشاشة"></textarea>
         </div>
@@ -3747,6 +3652,18 @@ body::before {
           </div>
         </div>
         <div class="field-group">
+          <div class="field-label">// ADVANCED MODE · الوضع المتقدم</div>
+          <div class="recurring-row">
+            <div class="toggle-row">
+              <div>
+                <div style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 2px;">إظهار AI و التابات الإضافية</div>
+                <div style="font-size: 12px; color: var(--muted); line-height: 1.5">يفعّل: AI Assistant، Caption، Brand، Stats، Refs، Templates، Hashtag Sets</div>
+              </div>
+              <div class="toggle-switch" id="advancedToggle" onclick="toggleAdvancedMode()"></div>
+            </div>
+          </div>
+        </div>
+        <div class="field-group">
           <div class="field-label">// WEEKLY GOAL · هدف النشر الأسبوعي</div>
           <input type="number" class="field-input" id="settings-goal" placeholder="10" min="1" max="50" style="text-align:left;direction:ltr">
           <div style="font-size:11px;color:var(--muted);margin-top:6px">
@@ -3788,17 +3705,15 @@ const PROD_STEPS = [
   { key: 'published', label: 'منشور' }
 ];
 
-// Production Plan: weekly schedule (which pillar to shoot which day + slots)
-// dayOfWeek: 0=Sunday → 6=Saturday
-const DEFAULT_PRODUCTION_PLAN = [
-  { dayOfWeek: 0, pillar: '',         label: 'راحة',   slots: 0, backup: 0 }, // Sunday
-  { dayOfWeek: 1, pillar: 'food',     label: 'طبخ',    slots: 4, backup: 2 }, // Monday
-  { dayOfWeek: 2, pillar: 'style',    label: 'ملابس',  slots: 5, backup: 2 }, // Tuesday
-  { dayOfWeek: 3, pillar: 'skincare', label: 'سكن كير',slots: 6, backup: 2 }, // Wednesday
-  { dayOfWeek: 4, pillar: 'fitness',  label: 'فتنس',   slots: 5, backup: 2 }, // Thursday
-  { dayOfWeek: 5, pillar: '',         label: 'Brand',  slots: 0, backup: 0 }, // Friday
-  { dayOfWeek: 6, pillar: '',         label: 'Buffer', slots: 0, backup: 0 }  // Saturday
-];
+// Default Production Schedule — Theme Days
+// Each pillar has a fixed weekday + capacity (main + backup)
+// Day numbers: 0=Sunday, 1=Monday, 2=Tuesday, 3=Wednesday, 4=Thursday, 5=Friday, 6=Saturday
+const DEFAULT_PROD_SCHEDULE = {
+  food:     { day: 1, capacity: 4, backup: 2, label: 'FOOD',     ar: 'طبخ',      color: 'green'    }, // Monday
+  style:    { day: 2, capacity: 5, backup: 2, label: 'STYLE',    ar: 'ملابس',    color: 'maroon'   }, // Tuesday
+  skincare: { day: 3, capacity: 6, backup: 2, label: 'SKINCARE', ar: 'سكن كير',  color: 'lavender' }, // Wednesday
+  fitness:  { day: 4, capacity: 5, backup: 2, label: 'FITNESS',  ar: 'فتنس',     color: 'orange'   }  // Thursday
+};
 
 let state = {
   ideas: [],
@@ -3813,14 +3728,14 @@ let state = {
   pillarFilter: 'all',
   calMonth: new Date(2026, 4, 1),
   calView: 'month',
-  calMode: 'publishing',
   selectedDay: null,
   search: '',
   bulkMode: false,
   bulkSelected: new Set(),
-  modal: { editing: null, refs: [], notes: [], checklist: {} }
+  modal: { editing: null, refs: [], notes: [], checklist: {} },
+  prodWeekOffset: 0  // 0 = current week, 1 = next week, -1 = previous
 };
-let prefs = { theme: 'dark' };
+let prefs = { theme: 'dark', advancedMode: false };
 let currentPlatform = 'tiktok';
 
 const PILLAR_COLOR = { style:'maroon', food:'green', fitness:'orange', skincare:'lavender' };
@@ -3989,9 +3904,8 @@ function load() {
       };
     }
     if (!prefs.weeklyGoal) prefs.weeklyGoal = 10;
-    if (!prefs.productionPlan || !Array.isArray(prefs.productionPlan) || prefs.productionPlan.length !== 7) {
-      prefs.productionPlan = JSON.parse(JSON.stringify(DEFAULT_PRODUCTION_PLAN));
-    }
+    if (typeof prefs.advancedMode === 'undefined') prefs.advancedMode = false;
+    if (!prefs.prodSchedule) prefs.prodSchedule = JSON.parse(JSON.stringify(DEFAULT_PROD_SCHEDULE));
   } catch(e) { console.error(e); }
 }
 function save() {
@@ -4062,6 +3976,20 @@ function toggleTheme() {
   applyTheme();
   savePrefs();
   haptic('light');
+}
+
+function applyAdvancedMode() {
+  document.body.classList.toggle('advanced-on', !!prefs.advancedMode);
+}
+function toggleAdvancedMode() {
+  prefs.advancedMode = !prefs.advancedMode;
+  applyAdvancedMode();
+  savePrefs();
+  // Update toggle UI if open
+  const t = document.getElementById('advancedToggle');
+  if (t) t.classList.toggle('on', prefs.advancedMode);
+  haptic('success');
+  showToast(prefs.advancedMode ? '✓ الوضع المتقدم مفعّل' : '✓ الوضع المبسط');
 }
 
 // ================================================================
@@ -4169,10 +4097,6 @@ function formatDate(y, m, d) {
   return y + '-' + String(m+1).padStart(2,'0') + '-' + String(d).padStart(2,'0');
 }
 function renderCalendar() {
-  if (state.calMode === 'production') {
-    renderProduction();
-    return;
-  }
   if (state.calView === 'month') renderCalendarMonth();
   else renderCalendarWeek();
 }
@@ -4258,341 +4182,6 @@ function renderCalendarWeek() {
     });
     wrap.appendChild(wd);
   }
-}
-
-// ================================================================
-// PRODUCTION MODE
-// ================================================================
-function setCalMode(mode) {
-  state.calMode = mode;
-  document.querySelectorAll('.cal-mode-btn').forEach(b => b.classList.toggle('active', b.dataset.mode === mode));
-
-  const isProd = mode === 'production';
-  // Hide publishing-only chrome when in production mode
-  document.getElementById('calMonthView').style.display = isProd ? 'none' : (state.calView === 'month' ? 'block' : 'none');
-  document.getElementById('calWeekView').style.display = isProd ? 'none' : (state.calView === 'week' ? 'block' : 'none');
-  document.getElementById('calProductionView').style.display = isProd ? 'block' : 'none';
-  document.getElementById('calNavRow').style.display = isProd ? 'none' : 'flex';
-  document.getElementById('dayDetail').style.display = isProd ? 'none' : '';
-
-  // Update section title
-  document.getElementById('calSectionSub').textContent = isProd ? '// WEEKLY PRODUCTION' : '// MONTHLY OVERVIEW';
-  document.getElementById('calSectionTitle').textContent = isProd ? 'PRODUCTION' : 'CALENDAR';
-
-  renderCalendar();
-  haptic('light');
-}
-
-// Get start of current week (Sunday)
-function getWeekStart(d) {
-  const date = new Date(d);
-  date.setHours(0,0,0,0);
-  date.setDate(date.getDate() - date.getDay());
-  return date;
-}
-
-// Get all ideas where shootDate matches given dateStr
-function getIdeasShotOnDate(dateStr) {
-  return state.ideas.filter(i => i.shootDate === dateStr);
-}
-
-// Get ideas in backlog for a given pillar (no shootDate, not published)
-function getBacklogForPillar(pillar) {
-  return state.ideas.filter(i =>
-    i.pillar === pillar &&
-    !i.shootDate &&
-    i.status !== 'published'
-  );
-}
-
-function renderProduction() {
-  const today = new Date();
-  today.setHours(0,0,0,0);
-  const weekStart = getWeekStart(today);
-  const todayStr = formatDate(today.getFullYear(), today.getMonth(), today.getDate());
-
-  // Header label
-  document.getElementById('prodWeekLabel').textContent =
-    'WEEK OF ' + MONTH_NAMES[weekStart.getMonth()] + ' ' + weekStart.getDate();
-
-  // Week-level stats
-  let totalShot = 0, totalSlots = 0;
-  for (let i = 0; i < 7; i++) {
-    const d = new Date(weekStart); d.setDate(weekStart.getDate() + i);
-    const dStr = formatDate(d.getFullYear(), d.getMonth(), d.getDate());
-    const plan = prefs.productionPlan[i];
-    if (!plan || !plan.pillar || plan.slots === 0) continue;
-    totalSlots += plan.slots;
-    totalShot += getIdeasShotOnDate(dStr).filter(x => x.status !== 'idea' || (x.script && x.script.length > 0)).length;
-  }
-  const totalIdeas = state.ideas.filter(i => i.shootDate >= formatDate(weekStart.getFullYear(), weekStart.getMonth(), weekStart.getDate()) && i.status !== 'published').length;
-  const statsEl = document.getElementById('prodHeaderStats');
-  statsEl.innerHTML = `
-    <div class="prod-stat-pill ${totalIdeas >= totalSlots ? 'success' : (totalIdeas > 0 ? '' : 'warn')}">${totalIdeas} / ${totalSlots} SLOTS</div>
-    <div class="prod-stat-pill">${state.ideas.filter(x => !x.shootDate && x.status !== 'published').length} في الباقلوق</div>
-  `;
-
-  // Build 7 days
-  const wrap = document.getElementById('prodWeek');
-  wrap.innerHTML = '';
-  for (let i = 0; i < 7; i++) {
-    const d = new Date(weekStart); d.setDate(weekStart.getDate() + i);
-    const dStr = formatDate(d.getFullYear(), d.getMonth(), d.getDate());
-    const isToday = dStr === todayStr;
-    const plan = prefs.productionPlan[i];
-    wrap.appendChild(buildProdDay(d, dStr, plan, isToday));
-  }
-
-  // Backlog section
-  renderProdBacklog();
-}
-
-function buildProdDay(date, dateStr, plan, isToday) {
-  const div = document.createElement('div');
-  div.className = 'prod-day';
-  if (isToday) div.classList.add('is-today');
-
-  const isRest = !plan || !plan.pillar || plan.slots === 0;
-  if (isRest) div.classList.add('rest-day');
-
-  const expandedKey = 'prodExpanded_' + plan.dayOfWeek;
-  const wasExpanded = state[expandedKey] || isToday;
-  if (wasExpanded) div.classList.add('expanded');
-
-  const dayName = DAY_NAMES[date.getDay()].slice(0,3).toUpperCase();
-  const dayNum = String(date.getDate()).padStart(2,'0');
-
-  let pillarBadge = '';
-  if (plan.pillar) {
-    const pillarLabels = { style:'ملابس', food:'طبخ', fitness:'فتنس', skincare:'سكن كير' };
-    pillarBadge = `<div class="prod-day-pillar ${plan.pillar}">${pillarLabels[plan.pillar] || plan.label}</div>`;
-  } else {
-    pillarBadge = `<div class="prod-day-pillar" style="color:var(--muted)">${plan.label || 'راحة'}</div>`;
-  }
-
-  // Get ideas shot on this date matching the day's pillar
-  const shotIdeas = getIdeasShotOnDate(dateStr);
-  const filled = shotIdeas.length;
-  const total = plan.slots + plan.backup;
-  const fillPct = total > 0 ? Math.min(100, (filled / total) * 100) : 0;
-  const isFull = filled >= plan.slots && plan.slots > 0;
-
-  let statusHtml = '';
-  if (!isRest) {
-    statusHtml = `
-      <div class="prod-day-bar"><div class="prod-day-bar-fill ${isFull ? 'full' : ''}" style="width:${fillPct}%"></div></div>
-      <div class="prod-day-fill ${isFull ? 'full' : (filled === 0 ? 'empty' : '')}">${filled}/${plan.slots}${plan.backup ? '+' + plan.backup : ''}</div>
-    `;
-  }
-
-  div.innerHTML = `
-    <div class="prod-day-header" onclick="toggleProdDay(${plan.dayOfWeek})">
-      <div class="prod-day-header-left">
-        <div>
-          <div class="prod-day-name">${dayName}</div>
-          <div class="prod-day-num">${dayNum}</div>
-        </div>
-        ${pillarBadge}
-      </div>
-      <div class="prod-day-status">
-        ${statusHtml}
-        <span class="prod-day-chevron">›</span>
-      </div>
-    </div>
-    <div class="prod-day-body" id="prodBody_${plan.dayOfWeek}"></div>
-  `;
-
-  // Body content
-  const body = div.querySelector('.prod-day-body');
-  if (isRest) {
-    body.innerHTML = `<div class="prod-day-rest">يوم راحة — استفد منه. ما فيه تصوير مجدول.</div>`;
-  } else {
-    body.appendChild(buildProdSlots(dateStr, plan));
-  }
-
-  return div;
-}
-
-function buildProdSlots(dateStr, plan) {
-  const wrap = document.createElement('div');
-  const shotIdeas = getIdeasShotOnDate(dateStr).slice().sort((a,b) => (a.createdAt || 0) - (b.createdAt || 0));
-
-  // Main slots
-  const mainSection = document.createElement('div');
-  mainSection.className = 'prod-slots-section';
-  mainSection.innerHTML = `<div class="prod-slots-label">// أفكار أساسية · ${plan.slots}</div>`;
-  for (let i = 0; i < plan.slots; i++) {
-    mainSection.appendChild(buildSlot(i + 1, shotIdeas[i], dateStr, plan.pillar, false));
-  }
-  wrap.appendChild(mainSection);
-
-  // Backup slots
-  if (plan.backup > 0) {
-    const backupSection = document.createElement('div');
-    backupSection.className = 'prod-slots-section';
-    backupSection.innerHTML = `<div class="prod-slots-label">// احتياط · ${plan.backup}</div>`;
-    for (let i = 0; i < plan.backup; i++) {
-      backupSection.appendChild(buildSlot(i + 1, shotIdeas[plan.slots + i], dateStr, plan.pillar, true));
-    }
-    wrap.appendChild(backupSection);
-  }
-
-  return wrap;
-}
-
-function buildSlot(num, idea, dateStr, pillar, isBackup) {
-  const slot = document.createElement('div');
-  if (idea) {
-    const shot = idea.status === 'shooting' || idea.status === 'editing' || idea.status === 'published';
-    slot.className = 'prod-slot' + (shot ? ' shot' : '');
-    slot.onclick = () => openIdeaModal(idea.id);
-    const statusLabels = { idea:'فكرة', shooting:'تصوير', editing:'مونتاج', published:'منشور' };
-    slot.innerHTML = `
-      <div class="prod-slot-num">${String(num).padStart(2,'0')}</div>
-      <div class="prod-slot-content">
-        <div class="prod-slot-title">${escapeHtml(idea.title || 'بدون عنوان')}</div>
-        ${idea.hook ? `<div class="prod-slot-hook">${escapeHtml(idea.hook)}</div>` : ''}
-      </div>
-      <div class="prod-slot-status ${shot ? 'shot' : ''}">${statusLabels[idea.status] || 'فكرة'}</div>
-    `;
-  } else {
-    slot.className = 'prod-slot empty';
-    slot.onclick = () => quickAddForProdSlot(dateStr, pillar);
-    slot.innerHTML = `
-      <div class="prod-slot-num">${String(num).padStart(2,'0')}</div>
-      <div class="prod-slot-content">
-        <div class="prod-slot-title" style="color:var(--muted);font-weight:500">+ ضيف فكرة ${isBackup ? 'احتياط' : ''}</div>
-      </div>
-      <div class="prod-slot-add-icon">+</div>
-    `;
-  }
-  return slot;
-}
-
-function toggleProdDay(dayOfWeek) {
-  const key = 'prodExpanded_' + dayOfWeek;
-  state[key] = !state[key];
-  renderProduction();
-  haptic('light');
-}
-
-function quickAddForProdSlot(shootDate, pillar) {
-  openIdeaModal(null);
-  // Pre-fill shootDate and pillar
-  document.getElementById('f-shoot-date').value = shootDate;
-  setTagPicker('pillar', pillar);
-  // Suggested pubDate = shoot day + 1
-  const [y,m,d] = shootDate.split('-').map(Number);
-  const pub = new Date(y, m-1, d+1);
-  const pubStr = formatDate(pub.getFullYear(), pub.getMonth(), pub.getDate());
-  document.getElementById('f-pub-date').value = pubStr;
-}
-
-function renderProdBacklog() {
-  const wrap = document.getElementById('prodBacklog');
-  const backlog = state.ideas.filter(i => !i.shootDate && i.status !== 'published');
-  if (backlog.length === 0) {
-    wrap.style.display = 'none';
-    return;
-  }
-  wrap.style.display = 'block';
-
-  // Group by pillar
-  const groups = { style:[], food:[], fitness:[], skincare:[] };
-  backlog.forEach(i => { if (groups[i.pillar]) groups[i.pillar].push(i); });
-
-  let html = `
-    <div class="prod-backlog-title">BACKLOG</div>
-    <div class="prod-backlog-sub">// ${backlog.length} أفكار بلا يوم تصوير — اضغط لجدولتها</div>
-    <div class="prod-backlog-list">
-  `;
-
-  const pillarLabels = { style:'ملابس', food:'طبخ', fitness:'فتنس', skincare:'سكن كير' };
-  Object.keys(groups).forEach(p => {
-    if (groups[p].length === 0) return;
-    html += `<div class="prod-slots-label" style="margin-top:10px">// ${pillarLabels[p]} · ${groups[p].length}</div>`;
-    groups[p].forEach(idea => {
-      html += `
-        <div class="prod-slot" onclick="openIdeaModal('${idea.id}')">
-          <div class="prod-slot-num">·</div>
-          <div class="prod-slot-content">
-            <div class="prod-slot-title">${escapeHtml(idea.title || 'بدون عنوان')}</div>
-            ${idea.hook ? `<div class="prod-slot-hook">${escapeHtml(idea.hook)}</div>` : ''}
-          </div>
-          <div class="prod-slot-status">جدول</div>
-        </div>
-      `;
-    });
-  });
-
-  html += `</div>`;
-  wrap.innerHTML = html;
-}
-
-// Production Settings Modal — reuse libModal
-function openProductionSettings() {
-  const dayLabels = ['SUN','MON','TUE','WED','THU','FRI','SAT'];
-  const dayLabelsAr = ['الأحد','الإثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
-  let html = `
-    <div class="prod-settings-pane">
-      <div class="cal-section-sub" style="margin-bottom:8px">// كل يوم: المحور + عدد الأفكار + الاحتياط</div>
-  `;
-  prefs.productionPlan.forEach((p, i) => {
-    html += `
-      <div class="prod-day-config">
-        <div class="prod-day-config-row">
-          <div class="prod-day-config-name">${dayLabels[i]}</div>
-          <div style="font-size:11px;color:var(--muted);font-family:'Cairo',sans-serif">${dayLabelsAr[i]}</div>
-        </div>
-        <div class="prod-day-config-fields">
-          <div>
-            <div class="prod-day-config-mini">PILLAR</div>
-            <select onchange="updateProdPlan(${i},'pillar',this.value)">
-              <option value="" ${p.pillar === '' ? 'selected' : ''}>راحة / Off</option>
-              <option value="style" ${p.pillar === 'style' ? 'selected' : ''}>ملابس / Style</option>
-              <option value="food" ${p.pillar === 'food' ? 'selected' : ''}>طبخ / Food</option>
-              <option value="fitness" ${p.pillar === 'fitness' ? 'selected' : ''}>فتنس / Fitness</option>
-              <option value="skincare" ${p.pillar === 'skincare' ? 'selected' : ''}>سكن كير / Skincare</option>
-            </select>
-          </div>
-          <div>
-            <div class="prod-day-config-mini">SLOTS</div>
-            <input type="number" min="0" max="20" value="${p.slots}" onchange="updateProdPlan(${i},'slots',parseInt(this.value)||0)">
-          </div>
-          <div>
-            <div class="prod-day-config-mini">BACKUP</div>
-            <input type="number" min="0" max="10" value="${p.backup}" onchange="updateProdPlan(${i},'backup',parseInt(this.value)||0)">
-          </div>
-        </div>
-      </div>
-    `;
-  });
-  html += `
-      <button class="btn secondary" onclick="resetProdPlan()" style="margin-top:8px">↺ ارجع للجدول الافتراضي</button>
-    </div>
-  `;
-
-  document.getElementById('libModalTitle').textContent = 'PRODUCTION PLAN';
-  document.getElementById('libModalBody').innerHTML = html;
-  document.getElementById('libModalOverlay').classList.add('show');
-  haptic('light');
-}
-
-function updateProdPlan(idx, field, val) {
-  prefs.productionPlan[idx][field] = val;
-  savePrefs();
-  renderProduction();
-  haptic('light');
-}
-
-function resetProdPlan() {
-  if (!confirm('ترجع للجدول الافتراضي؟')) return;
-  prefs.productionPlan = JSON.parse(JSON.stringify(DEFAULT_PRODUCTION_PLAN));
-  savePrefs();
-  closeLibModal();
-  renderProduction();
-  haptic('success');
-  showToast('تم الاسترجاع');
 }
 
 // Get ideas for date — including recurring
@@ -5201,7 +4790,23 @@ function saveIdea() {
   const existing = state.ideas.findIndex(i => i.id === id);
   if (existing >= 0) state.ideas[existing] = { ...state.ideas[existing], ...data };
   else { data.createdAt = Date.now(); state.ideas.push(data); }
-  save(); closeModal(); render();
+  save(); closeModal();
+
+  // If idea has a shoot date, jump to Production view to show it in its day
+  if (data.shootDate) {
+    // Jump to the week containing the shoot date
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const sunday = new Date(today.getTime() - today.getDay() * 86400000);
+    const [y, m, d] = data.shootDate.split('-').map(Number);
+    const shootDateObj = new Date(y, m - 1, d);
+    const shootSunday = new Date(shootDateObj.getTime() - shootDateObj.getDay() * 86400000);
+    const diffWeeks = Math.round((shootSunday - sunday) / (7 * 86400000));
+    state.prodWeekOffset = diffWeeks;
+    navigate('production');
+  } else {
+    render();
+  }
   haptic('success');
   showToast('تم الحفظ');
 }
@@ -5424,12 +5029,262 @@ function delBrand(id) {
 }
 
 // ================================================================
-// ANALYTICS
+// PRODUCTION VIEW
 // ================================================================
-function openAnalytics() {
-  navigate('analytics');
-  renderAnalytics();
+function openProductionView() {
+  closeSettings();
+  state.prodWeekOffset = 0;
+  navigate('production');
 }
+
+function changeProdWeek(delta) {
+  state.prodWeekOffset += delta;
+  renderProductionView();
+  haptic('light');
+}
+
+// Get the start of the week (Sunday) for current prodWeekOffset
+function getProdWeekStart() {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const dayOfWeek = today.getDay(); // 0 = Sunday
+  const sunday = new Date(today.getTime() - dayOfWeek * 86400000);
+  sunday.setDate(sunday.getDate() + state.prodWeekOffset * 7);
+  return sunday;
+}
+
+// Find which pillar is scheduled on a given day (0-6)
+function getPillarForDay(dayOfWeek) {
+  const sched = prefs.prodSchedule || DEFAULT_PROD_SCHEDULE;
+  for (const pillar of Object.keys(sched)) {
+    if (sched[pillar].day === dayOfWeek) return pillar;
+  }
+  return null;
+}
+
+// Get ideas scheduled to shoot on a specific date
+function getIdeasForShootDate(dateStr) {
+  return state.ideas.filter(i => i.shootDate === dateStr && i.status !== 'published');
+}
+
+function renderProductionView() {
+  const sched = prefs.prodSchedule || DEFAULT_PROD_SCHEDULE;
+  const weekStart = getProdWeekStart();
+  const labels = ['SUN','MON','TUE','WED','THU','FRI','SAT'];
+  const labelsAr = ['الأحد','الإثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
+  const pillarColors = { style:'maroon', food:'green', fitness:'orange', skincare:'lavender' };
+
+  // Week label
+  let weekLabel;
+  if (state.prodWeekOffset === 0) weekLabel = 'هذا الأسبوع';
+  else if (state.prodWeekOffset === 1) weekLabel = 'الأسبوع الجاي';
+  else if (state.prodWeekOffset === -1) weekLabel = 'الأسبوع اللي راح';
+  else if (state.prodWeekOffset > 0) weekLabel = `بعد ${state.prodWeekOffset} أسابيع`;
+  else weekLabel = `قبل ${Math.abs(state.prodWeekOffset)} أسابيع`;
+  document.getElementById('prodWeekLabel').textContent = weekLabel;
+
+  // Stats
+  let totalReady = 0, totalPending = 0;
+  Object.keys(sched).forEach(pillar => {
+    const cap = sched[pillar].capacity;
+    // Count for this week
+    const dayOfPillar = sched[pillar].day;
+    const date = new Date(weekStart.getTime() + dayOfPillar * 86400000);
+    const dateStr = formatDate(date.getFullYear(), date.getMonth(), date.getDate());
+    const ideas = getIdeasForShootDate(dateStr).filter(i => i.pillar === pillar);
+    if (ideas.length >= cap) totalReady += cap;
+    else { totalReady += ideas.length; totalPending += (cap - ideas.length); }
+  });
+  const backlogCount = state.ideas.filter(i => !i.shootDate && i.status !== 'published').length;
+  document.getElementById('prodReady').textContent = totalReady;
+  document.getElementById('prodPending').textContent = totalPending;
+  document.getElementById('prodBacklog').textContent = backlogCount;
+
+  // Render days
+  const container = document.getElementById('prodDays');
+  container.innerHTML = '';
+
+  for (let i = 0; i < 7; i++) {
+    const date = new Date(weekStart.getTime() + i * 86400000);
+    const dateStr = formatDate(date.getFullYear(), date.getMonth(), date.getDate());
+    const dayOfWeek = date.getDay();
+    const pillar = getPillarForDay(dayOfWeek);
+    const dayIdeas = getIdeasForShootDate(dateStr).filter(idea => !pillar || idea.pillar === pillar);
+
+    const dayEl = document.createElement('div');
+    dayEl.className = 'prod-day';
+
+    if (!pillar) {
+      // Rest day
+      dayEl.classList.add('empty-day');
+      dayEl.innerHTML = `
+        <div class="prod-day-header">
+          <div class="prod-day-left">
+            <div class="prod-day-num">${date.getDate()}</div>
+            <div class="prod-day-info">
+              <div class="prod-day-name">${labels[dayOfWeek]} · ${labelsAr[dayOfWeek]}</div>
+              <div class="prod-day-pillar">REST DAY</div>
+            </div>
+          </div>
+          <div class="prod-day-status rest">راحة</div>
+        </div>
+        <div class="prod-day-rest">// يوم راحة أو احتياط</div>
+      `;
+      container.appendChild(dayEl);
+      continue;
+    }
+
+    const conf = sched[pillar];
+    const cap = conf.capacity;
+    const backupCap = conf.backup;
+    const total = cap + backupCap;
+    const filled = dayIdeas.length;
+    const mainFilled = Math.min(filled, cap);
+    const backupFilled = Math.max(0, filled - cap);
+    const pctMain = Math.min(100, (mainFilled / cap) * 100);
+    const color = pillarColors[pillar];
+    dayEl.classList.add('c-' + color);
+
+    let statusClass = 'empty';
+    let statusText = 'فاضي';
+    if (mainFilled >= cap) { statusClass = 'ready'; statusText = '✓ جاهز'; dayEl.classList.add('full-day'); }
+    else if (mainFilled > 0) { statusClass = 'partial'; statusText = `${mainFilled}/${cap}`; }
+    else { dayEl.classList.add('empty-pillar'); }
+
+    let mainHtml = '';
+    for (let s = 0; s < cap; s++) {
+      if (s < mainFilled) {
+        const idea = dayIdeas[s];
+        mainHtml += `<div class="prod-mini-card" onclick="event.stopPropagation();openIdeaModal('${idea.id}')">
+          <div class="prod-mini-card-num">${s + 1}</div>
+          <div class="prod-mini-card-title">${escapeHtml(idea.title)}</div>
+        </div>`;
+      } else {
+        mainHtml += `<div class="prod-empty-slot">SLOT ${s + 1} · فاضي</div>`;
+      }
+    }
+
+    let backupHtml = '';
+    if (backupCap > 0) {
+      backupHtml = `<div class="prod-progress-text" style="margin-top:14px">// احتياط · ${backupFilled}/${backupCap}</div>`;
+      for (let s = 0; s < backupCap; s++) {
+        if (s < backupFilled) {
+          const idea = dayIdeas[cap + s];
+          backupHtml += `<div class="prod-mini-card backup" onclick="event.stopPropagation();openIdeaModal('${idea.id}')">
+            <div class="prod-mini-card-num">B${s + 1}</div>
+            <div class="prod-mini-card-title">${escapeHtml(idea.title)}</div>
+          </div>`;
+        } else {
+          backupHtml += `<div class="prod-empty-slot">BACKUP ${s + 1} · فاضي</div>`;
+        }
+      }
+    }
+
+    dayEl.innerHTML = `
+      <div class="prod-day-header">
+        <div class="prod-day-left">
+          <div class="prod-day-num">${date.getDate()}</div>
+          <div class="prod-day-info">
+            <div class="prod-day-name">${labels[dayOfWeek]} · ${labelsAr[dayOfWeek]}</div>
+            <div class="prod-day-pillar">${conf.label} · ${conf.ar}</div>
+          </div>
+        </div>
+        <div class="prod-day-status ${statusClass}">${statusText}</div>
+      </div>
+      <div class="prod-progress-bar"><div class="prod-progress-fill" style="width:${pctMain}%"></div></div>
+      <div class="prod-progress-text">// أساسي · ${mainFilled}/${cap}</div>
+      <div class="prod-day-ideas">${mainHtml}${backupHtml}</div>
+    `;
+
+    container.appendChild(dayEl);
+  }
+
+  renderProdBacklog();
+}
+
+function setProdBacklogFilter(p) {
+  state.prodBacklogFilter = p;
+  document.querySelectorAll('.prod-backlog-tabs .filter-pill').forEach(el => el.classList.toggle('active', el.dataset.pillar === p));
+  renderProdBacklog();
+}
+
+function renderProdBacklog() {
+  const list = document.getElementById('prodBacklogList');
+  const filter = state.prodBacklogFilter || 'all';
+  let backlog = state.ideas.filter(i => !i.shootDate && i.status !== 'published');
+  if (filter !== 'all') backlog = backlog.filter(i => i.pillar === filter);
+
+  if (backlog.length === 0) {
+    list.innerHTML = `<div class="prod-empty-state">∅ ما فيه أفكار بدون يوم تصوير</div>`;
+    return;
+  }
+
+  // Group by pillar
+  const pillarLabels = { style:'STYLE · ملابس', food:'FOOD · طبخ', fitness:'FITNESS · فتنس', skincare:'SKINCARE · سكن كير' };
+  const groups = { style: [], food: [], fitness: [], skincare: [] };
+  backlog.forEach(i => { if (groups[i.pillar]) groups[i.pillar].push(i); });
+
+  let html = '';
+  Object.keys(groups).forEach(pillar => {
+    const ideas = groups[pillar];
+    if (ideas.length === 0) return;
+    if (filter !== 'all' && filter !== pillar) return;
+    html += `<div class="prod-pillar-group">
+      <div class="prod-pillar-group-title">// ${pillarLabels[pillar]} · ${ideas.length}</div>`;
+    ideas.forEach(idea => {
+      const sub = idea.hook || idea.desc || '';
+      html += `<div class="prod-backlog-card">
+        <div class="prod-backlog-card-content" onclick="openIdeaModal('${idea.id}')">
+          <div class="prod-backlog-card-title">${escapeHtml(idea.title)}</div>
+          ${sub ? `<div class="prod-backlog-card-meta">${escapeHtml(sub.slice(0, 80))}</div>` : ''}
+        </div>
+        <button class="prod-schedule-btn" onclick="scheduleIdeaToShootDay('${idea.id}')">جدول</button>
+      </div>`;
+    });
+    html += `</div>`;
+  });
+
+  list.innerHTML = html || `<div class="prod-empty-state">∅ ما فيه أفكار في هذا التصنيف</div>`;
+}
+
+// Schedule an idea to its pillar's shoot day (next available)
+function scheduleIdeaToShootDay(ideaId) {
+  const idea = state.ideas.find(i => i.id === ideaId);
+  if (!idea) return;
+  const sched = prefs.prodSchedule || DEFAULT_PROD_SCHEDULE;
+  const conf = sched[idea.pillar];
+  if (!conf) {
+    showToast('اختر محور للفكرة أولاً');
+    openIdeaModal(ideaId);
+    return;
+  }
+
+  // Find the next shoot day for this pillar
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const totalCap = conf.capacity + conf.backup;
+
+  // Look forward up to 8 weeks
+  for (let w = 0; w < 8; w++) {
+    const weekStart = new Date(today.getTime() - today.getDay() * 86400000 + w * 7 * 86400000);
+    const date = new Date(weekStart.getTime() + conf.day * 86400000);
+    if (date < today) continue;
+    const dateStr = formatDate(date.getFullYear(), date.getMonth(), date.getDate());
+    const existing = getIdeasForShootDate(dateStr).filter(i => i.pillar === idea.pillar);
+    if (existing.length < totalCap) {
+      idea.shootDate = dateStr;
+      save();
+      renderProductionView();
+      haptic('success');
+      const labelsAr = ['الأحد','الإثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
+      showToast(`✓ تم جدولتها · ${labelsAr[conf.day]} ${date.getDate()}/${date.getMonth() + 1}`);
+      return;
+    }
+  }
+  showToast('كل أيام التصوير ممتلئة لهذا المحور');
+}
+
+
 function renderAnalytics() {
   const total = state.ideas.length;
   const published = state.ideas.filter(i => i.status === 'published').length;
@@ -6266,6 +6121,8 @@ function openSettingsPanel() {
   document.getElementById('settings-goal').value = prefs.weeklyGoal || 10;
   document.getElementById('theme-dark').classList.toggle('active', prefs.theme === 'dark');
   document.getElementById('theme-light').classList.toggle('active', prefs.theme === 'light');
+  const advT = document.getElementById('advancedToggle');
+  if (advT) advT.classList.toggle('on', !!prefs.advancedMode);
 
   document.getElementById('apiTestResult').innerHTML = '';
   document.getElementById('settingsPanelOverlay').classList.add('show');
@@ -6450,6 +6307,8 @@ function render() {
     renderPlatformView();
   } else if (state.view.name === 'analytics') {
     renderAnalytics();
+  } else if (state.view.name === 'production') {
+    renderProductionView();
   }
 }
 
@@ -6458,6 +6317,7 @@ function render() {
 // ================================================================
 load();
 applyTheme();
+applyAdvancedMode();
 seedIfEmpty();
 render();
 setTimeout(observeReveal, 100);
