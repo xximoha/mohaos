@@ -1476,10 +1476,10 @@ body::before {
   opacity: 0.92;
 }
 .prod-day.empty-day {
-  background: transparent;
+  background: var(--surface);
   border-style: dashed;
   border-color: var(--line);
-  opacity: 0.55;
+  opacity: 1;
 }
 .prod-day.empty-day::after { display: none; }
 .prod-day:not(.empty-day):hover {
@@ -3635,7 +3635,7 @@ body.prod-view-week .cal-section {
       <div class="prod-days reveal d2" id="prodDays"></div>
 
       <!-- Backlog -->
-      <div class="prod-backlog-section reveal d3">
+      <div class="prod-backlog-section">
         <div class="prod-backlog-header">
           <div>
             <div class="prod-backlog-sub">// IDEAS · UNSCHEDULED</div>
@@ -5808,6 +5808,11 @@ function observeReveal() {
     });
   }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
   document.querySelectorAll('.reveal:not(.visible)').forEach(el => revealObs.observe(el));
+  // Safety fallback: after 2s, force-show any reveal elements that haven't been triggered yet
+  // (handles tall pages on mobile where elements are below the fold)
+  setTimeout(() => {
+    document.querySelectorAll('.reveal:not(.visible)').forEach(el => el.classList.add('visible'));
+  }, 2000);
 }
 
 // Topbar shadow
