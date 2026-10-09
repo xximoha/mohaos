@@ -24,6 +24,9 @@ python3 .claude/skills/stamp-cover/scripts/make_cover.py CONFIG.json cover.png -
 - First run downloads Cairo from Google Fonts and caches it in `~/.cache/stamp-cover`. Needs Pillow and Chromium.
 - Always look at the PNG afterwards. Check that no line is clipped, lines do not touch, and the speckle is fine rather than blotchy. If the speckle eats whole letters, the `blot` threshold in `make_cover.py` is too low.
 
+## Logo
+Add the brand mark at the top as black ink with the same distress: `"images": [{"src": "../assets/logo-mushroom.webp", "x": 620, "top": 118, "width": 210}]` (path is relative to the config file). Transparent logos use their alpha as the shape; opaque logos on white use distance from white. It is always recoloured to the ink colour. The mushroom mark in `assets/` is the one the user supplied.
+
 ## Using it as the first page of a PDF
 Print from Chromium with a named page so the image is full-bleed and carries no header or page number:
 ```css
