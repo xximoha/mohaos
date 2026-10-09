@@ -1,11 +1,19 @@
 ---
 name: stamp-cover
-description: Make a cover page in the "rubber-stamp / studio label" style: light grey paper, grainy distressed black ink, extended and condensed lettering, all-English labels. Use when the user asks for a cover, title page, or poster in this style, or says "stamp cover", "the Synonime style", or "the cover style we saved". Cairo font only.
+description: Make a cover page in the "rubber-stamp / studio label" style (light grey paper, grainy distressed black ink, extended and condensed lettering, all-English labels, black mushroom logo). ALWAYS use this for any SHARPS (شارپس / شاربس) cover or any PDF made for SHARPS: the first page must be this cover. Also use when the user asks for a cover, title page or poster in this style, or says "stamp cover" or "the cover style we saved". Cairo font only.
 ---
 
 # Stamp cover
 
 Reference look: a studio stamp on grey paper. Wide flat headline, bracketed subtitle, tight condensed lines, one tall centred block, small flanking numbers (like `20` and `26`), and an info block at the bottom. Imperfect on purpose: speckled ink, rough edges, dust, hairline scratches, paper grain.
+
+## SHARPS rule (standing order)
+When the user asks for a **SHARPS cover** or **any PDF for SHARPS** (brief, deck, report, price list, anything), page 1 is always this cover, built from `examples/sharps.json`. Do not ask which style; just do it.
+1. Write or generate the body PDF as usual (body pages should be matte black `#0b0b0c`, Cairo text, Space Mono numbers).
+2. Copy `examples/sharps.json`, change only the tall title block (`LAUNCH` / `BRIEF`) and the info lines (`PREPARED FOR`, `INFO ID`) to fit the document. Keep the logo, the wide `SHARPS` headline, and `( DISCOVER · TRY · PROVE )`.
+3. Merge: `python3 scripts/add_cover.py BODY.pdf OUT.pdf CONFIG.json`.
+4. Look at page 1 of the result before sending it.
+5. **No health, medical or cognitive claims anywhere in a SHARPS document** (SFDA: SHARPS is a food supplement). Taste, ritual, routine, origin and story only. Product names (FOCUS, Lion's Mane, Nine Mushrooms) are fine as names.
 
 ## Rules (do not break)
 1. **Font: Cairo only** (weights 700, 800, 900). No second typeface. Width changes come from `textLength` and a vertical scale (`sy`), never from another font.
@@ -27,7 +35,10 @@ python3 .claude/skills/stamp-cover/scripts/make_cover.py CONFIG.json cover.png -
 ## Logo
 Add the brand mark at the top as black ink with the same distress: `"images": [{"src": "../assets/logo-mushroom.webp", "x": 620, "top": 118, "width": 210}]` (path is relative to the config file). Transparent logos use their alpha as the shape; opaque logos on white use distance from white. It is always recoloured to the ink colour. The mushroom mark in `assets/` is the one the user supplied.
 
-## Using it as the first page of a PDF
+## Putting the cover on an existing PDF
+`python3 scripts/add_cover.py BODY.pdf OUT.pdf CONFIG.json` builds the cover, makes it a full-bleed A4 page, and merges it in front (needs `pdfunite` from poppler, or the `pypdf` package).
+
+## Using it as the first page of a PDF you are building yourself
 Print from Chromium with a named page so the image is full-bleed and carries no header or page number:
 ```css
 @page{size:A4;margin:16mm 15mm 18mm}
